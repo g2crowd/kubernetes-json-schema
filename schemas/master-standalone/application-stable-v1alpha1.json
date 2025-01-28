@@ -307,6 +307,10 @@
                       "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                       "type": "boolean"
                     },
+                    "skipSchemaValidation": {
+                      "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                      "type": "boolean"
+                    },
                     "skipTests": {
                       "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                       "type": "boolean"
@@ -492,6 +496,10 @@
                   },
                   "type": "object",
                   "additionalProperties": false
+                },
+                "name": {
+                  "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                  "type": "string"
                 },
                 "path": {
                   "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -746,6 +754,10 @@
                         "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                         "type": "boolean"
                       },
+                      "skipSchemaValidation": {
+                        "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                        "type": "boolean"
+                      },
                       "skipTests": {
                         "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                         "type": "boolean"
@@ -931,6 +943,10 @@
                     },
                     "type": "object",
                     "additionalProperties": false
+                  },
+                  "name": {
+                    "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                    "type": "string"
                   },
                   "path": {
                     "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -1325,6 +1341,10 @@
                   "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                   "type": "boolean"
                 },
+                "skipSchemaValidation": {
+                  "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                  "type": "boolean"
+                },
                 "skipTests": {
                   "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                   "type": "boolean"
@@ -1511,6 +1531,10 @@
               "type": "object",
               "additionalProperties": false
             },
+            "name": {
+              "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+              "type": "string"
+            },
             "path": {
               "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
               "type": "string"
@@ -1594,6 +1618,74 @@
           },
           "required": [
             "repoURL"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "sourceHydrator": {
+          "description": "SourceHydrator provides a way to push hydrated manifests back to git before syncing them to the cluster.",
+          "properties": {
+            "drySource": {
+              "description": "DrySource specifies where the dry \"don't repeat yourself\" manifest source lives.",
+              "properties": {
+                "path": {
+                  "description": "Path is a directory path within the Git repository where the manifests are located",
+                  "type": "string"
+                },
+                "repoURL": {
+                  "description": "RepoURL is the URL to the git repository that contains the application manifests",
+                  "type": "string"
+                },
+                "targetRevision": {
+                  "description": "TargetRevision defines the revision of the source to hydrate",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "repoURL",
+                "targetRevision"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "hydrateTo": {
+              "description": "HydrateTo specifies an optional \"staging\" location to push hydrated manifests to. An external system would then\nhave to move manifests to the SyncSource, e.g. by pull request.",
+              "properties": {
+                "targetBranch": {
+                  "description": "TargetBranch is the branch to which hydrated manifests should be committed",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "targetBranch"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "syncSource": {
+              "description": "SyncSource specifies where to sync hydrated manifests from.",
+              "properties": {
+                "path": {
+                  "description": "Path is a directory path within the git repository where hydrated manifests should be committed to and synced\nfrom. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.",
+                  "type": "string"
+                },
+                "targetBranch": {
+                  "description": "TargetBranch is the branch to which hydrated manifests should be committed",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "targetBranch"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "drySource",
+            "syncSource"
           ],
           "type": "object",
           "additionalProperties": false
@@ -1762,6 +1854,10 @@
                   },
                   "skipCrds": {
                     "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
+                    "type": "boolean"
+                  },
+                  "skipSchemaValidation": {
+                    "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
                     "type": "boolean"
                   },
                   "skipTests": {
@@ -1949,6 +2045,10 @@
                 },
                 "type": "object",
                 "additionalProperties": false
+              },
+              "name": {
+                "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                "type": "string"
               },
               "path": {
                 "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -2169,6 +2269,11 @@
         "health": {
           "description": "Health contains information about the application's current health status",
           "properties": {
+            "lastTransitionTime": {
+              "description": "LastTransitionTime is the time the HealthStatus was set or updated",
+              "format": "date-time",
+              "type": "string"
+            },
             "message": {
               "description": "Message is a human-readable informational message describing the health status",
               "type": "string"
@@ -2391,6 +2496,10 @@
                         "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                         "type": "boolean"
                       },
+                      "skipSchemaValidation": {
+                        "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                        "type": "boolean"
+                      },
                       "skipTests": {
                         "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                         "type": "boolean"
@@ -2576,6 +2685,10 @@
                     },
                     "type": "object",
                     "additionalProperties": false
+                  },
+                  "name": {
+                    "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                    "type": "string"
                   },
                   "path": {
                     "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -2830,6 +2943,10 @@
                           "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                           "type": "boolean"
                         },
+                        "skipSchemaValidation": {
+                          "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                          "type": "boolean"
+                        },
                         "skipTests": {
                           "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                           "type": "boolean"
@@ -3015,6 +3132,10 @@
                       },
                       "type": "object",
                       "additionalProperties": false
+                    },
+                    "name": {
+                      "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                      "type": "string"
                     },
                     "path": {
                       "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -3427,6 +3548,10 @@
                               "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                               "type": "boolean"
                             },
+                            "skipSchemaValidation": {
+                              "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                              "type": "boolean"
+                            },
                             "skipTests": {
                               "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                               "type": "boolean"
@@ -3612,6 +3737,10 @@
                           },
                           "type": "object",
                           "additionalProperties": false
+                        },
+                        "name": {
+                          "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                          "type": "string"
                         },
                         "path": {
                           "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -3866,6 +3995,10 @@
                                 "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                                 "type": "boolean"
                               },
+                              "skipSchemaValidation": {
+                                "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                                "type": "boolean"
+                              },
                               "skipTests": {
                                 "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                                 "type": "boolean"
@@ -4051,6 +4184,10 @@
                             },
                             "type": "object",
                             "additionalProperties": false
+                          },
+                          "name": {
+                            "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                            "type": "string"
                           },
                           "path": {
                             "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -4454,6 +4591,10 @@
                           "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                           "type": "boolean"
                         },
+                        "skipSchemaValidation": {
+                          "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                          "type": "boolean"
+                        },
                         "skipTests": {
                           "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                           "type": "boolean"
@@ -4639,6 +4780,10 @@
                       },
                       "type": "object",
                       "additionalProperties": false
+                    },
+                    "name": {
+                      "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                      "type": "string"
                     },
                     "path": {
                       "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -4893,6 +5038,10 @@
                             "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                             "type": "boolean"
                           },
+                          "skipSchemaValidation": {
+                            "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                            "type": "boolean"
+                          },
                           "skipTests": {
                             "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                             "type": "boolean"
@@ -5079,6 +5228,10 @@
                         "type": "object",
                         "additionalProperties": false
                       },
+                      "name": {
+                        "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                        "type": "string"
+                      },
                       "path": {
                         "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
                         "type": "string"
@@ -5204,6 +5357,11 @@
               "health": {
                 "description": "HealthStatus contains information about the currently observed health state of an application or resource",
                 "properties": {
+                  "lastTransitionTime": {
+                    "description": "LastTransitionTime is the time the HealthStatus was set or updated",
+                    "format": "date-time",
+                    "type": "string"
+                  },
                   "message": {
                     "description": "Message is a human-readable informational message describing the health status",
                     "type": "string"
@@ -5250,6 +5408,206 @@
             "additionalProperties": false
           },
           "type": "array"
+        },
+        "sourceHydrator": {
+          "description": "SourceHydrator stores information about the current state of source hydration",
+          "properties": {
+            "currentOperation": {
+              "description": "CurrentOperation holds the status of the hydrate operation",
+              "properties": {
+                "drySHA": {
+                  "description": "DrySHA holds the resolved revision (sha) of the dry source as of the most recent reconciliation",
+                  "type": "string"
+                },
+                "finishedAt": {
+                  "description": "FinishedAt indicates when the hydrate operation finished",
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "hydratedSHA": {
+                  "description": "HydratedSHA holds the resolved revision (sha) of the hydrated source as of the most recent reconciliation",
+                  "type": "string"
+                },
+                "message": {
+                  "description": "Message contains a message describing the current status of the hydrate operation",
+                  "type": "string"
+                },
+                "phase": {
+                  "description": "Phase indicates the status of the hydrate operation",
+                  "enum": [
+                    "Hydrating",
+                    "Failed",
+                    "Hydrated"
+                  ],
+                  "type": "string"
+                },
+                "sourceHydrator": {
+                  "description": "SourceHydrator holds the hydrator config used for the hydrate operation",
+                  "properties": {
+                    "drySource": {
+                      "description": "DrySource specifies where the dry \"don't repeat yourself\" manifest source lives.",
+                      "properties": {
+                        "path": {
+                          "description": "Path is a directory path within the Git repository where the manifests are located",
+                          "type": "string"
+                        },
+                        "repoURL": {
+                          "description": "RepoURL is the URL to the git repository that contains the application manifests",
+                          "type": "string"
+                        },
+                        "targetRevision": {
+                          "description": "TargetRevision defines the revision of the source to hydrate",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "path",
+                        "repoURL",
+                        "targetRevision"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "hydrateTo": {
+                      "description": "HydrateTo specifies an optional \"staging\" location to push hydrated manifests to. An external system would then\nhave to move manifests to the SyncSource, e.g. by pull request.",
+                      "properties": {
+                        "targetBranch": {
+                          "description": "TargetBranch is the branch to which hydrated manifests should be committed",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "targetBranch"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "syncSource": {
+                      "description": "SyncSource specifies where to sync hydrated manifests from.",
+                      "properties": {
+                        "path": {
+                          "description": "Path is a directory path within the git repository where hydrated manifests should be committed to and synced\nfrom. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.",
+                          "type": "string"
+                        },
+                        "targetBranch": {
+                          "description": "TargetBranch is the branch to which hydrated manifests should be committed",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "path",
+                        "targetBranch"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "drySource",
+                    "syncSource"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "startedAt": {
+                  "description": "StartedAt indicates when the hydrate operation started",
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "phase"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "lastSuccessfulOperation": {
+              "description": "LastSuccessfulOperation holds info about the most recent successful hydration",
+              "properties": {
+                "drySHA": {
+                  "description": "DrySHA holds the resolved revision (sha) of the dry source as of the most recent reconciliation",
+                  "type": "string"
+                },
+                "hydratedSHA": {
+                  "description": "HydratedSHA holds the resolved revision (sha) of the hydrated source as of the most recent reconciliation",
+                  "type": "string"
+                },
+                "sourceHydrator": {
+                  "description": "SourceHydrator holds the hydrator config used for the hydrate operation",
+                  "properties": {
+                    "drySource": {
+                      "description": "DrySource specifies where the dry \"don't repeat yourself\" manifest source lives.",
+                      "properties": {
+                        "path": {
+                          "description": "Path is a directory path within the Git repository where the manifests are located",
+                          "type": "string"
+                        },
+                        "repoURL": {
+                          "description": "RepoURL is the URL to the git repository that contains the application manifests",
+                          "type": "string"
+                        },
+                        "targetRevision": {
+                          "description": "TargetRevision defines the revision of the source to hydrate",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "path",
+                        "repoURL",
+                        "targetRevision"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "hydrateTo": {
+                      "description": "HydrateTo specifies an optional \"staging\" location to push hydrated manifests to. An external system would then\nhave to move manifests to the SyncSource, e.g. by pull request.",
+                      "properties": {
+                        "targetBranch": {
+                          "description": "TargetBranch is the branch to which hydrated manifests should be committed",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "targetBranch"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "syncSource": {
+                      "description": "SyncSource specifies where to sync hydrated manifests from.",
+                      "properties": {
+                        "path": {
+                          "description": "Path is a directory path within the git repository where hydrated manifests should be committed to and synced\nfrom. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.",
+                          "type": "string"
+                        },
+                        "targetBranch": {
+                          "description": "TargetBranch is the branch to which hydrated manifests should be committed",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "path",
+                        "targetBranch"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "drySource",
+                    "syncSource"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
         },
         "sourceType": {
           "description": "SourceType specifies the type of this application",
@@ -5518,6 +5876,10 @@
                           "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                           "type": "boolean"
                         },
+                        "skipSchemaValidation": {
+                          "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                          "type": "boolean"
+                        },
                         "skipTests": {
                           "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                           "type": "boolean"
@@ -5703,6 +6065,10 @@
                       },
                       "type": "object",
                       "additionalProperties": false
+                    },
+                    "name": {
+                      "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                      "type": "string"
                     },
                     "path": {
                       "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
@@ -5957,6 +6323,10 @@
                             "description": "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
                             "type": "boolean"
                           },
+                          "skipSchemaValidation": {
+                            "description": "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+                            "type": "boolean"
+                          },
                           "skipTests": {
                             "description": "SkipTests skips test manifest installation step (Helm's --skip-tests).",
                             "type": "boolean"
@@ -6142,6 +6512,10 @@
                         },
                         "type": "object",
                         "additionalProperties": false
+                      },
+                      "name": {
+                        "description": "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+                        "type": "string"
                       },
                       "path": {
                         "description": "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",

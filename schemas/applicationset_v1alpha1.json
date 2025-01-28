@@ -321,6 +321,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -482,6 +485,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -552,6 +558,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -690,6 +754,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -852,6 +919,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -1326,6 +1396,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -1487,6 +1560,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -1557,6 +1633,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -1695,6 +1829,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -1857,6 +1994,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -2331,6 +2471,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -2492,6 +2635,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -2562,6 +2708,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -2700,6 +2904,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -2862,6 +3069,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -3303,6 +3513,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -3464,6 +3677,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -3534,6 +3750,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -3672,6 +3946,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -3834,6 +4111,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -4311,6 +4591,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -4472,6 +4755,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -4542,6 +4828,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -4680,6 +5024,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -4842,6 +5189,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -5316,6 +5666,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -5477,6 +5830,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -5547,6 +5903,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -5685,6 +6099,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -5847,6 +6264,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -6321,6 +6741,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -6482,6 +6905,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -6552,6 +6978,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -6690,6 +7174,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -6852,6 +7339,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -7293,6 +7783,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -7454,6 +7947,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -7524,6 +8020,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -7662,6 +8216,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -7824,6 +8381,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -8280,6 +8840,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -8441,6 +9004,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -8511,6 +9077,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -8649,6 +9273,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -8811,6 +9438,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -9614,6 +10244,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -9775,6 +10408,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -9845,6 +10481,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -9983,6 +10677,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -10145,6 +10842,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -10941,6 +11641,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -11102,6 +11805,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -11172,6 +11878,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -11310,6 +12074,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -11472,6 +12239,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -11944,6 +12714,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -12105,6 +12878,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -12175,6 +12951,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -12313,6 +13147,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -12475,6 +13312,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -12955,6 +13795,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -13116,6 +13959,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -13186,6 +14032,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -13324,6 +14228,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -13486,6 +14393,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -13960,6 +14870,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -14121,6 +15034,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -14191,6 +15107,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -14329,6 +15303,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -14491,6 +15468,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -14965,6 +15945,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -15126,6 +16109,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -15196,6 +16182,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -15334,6 +16378,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -15496,6 +16543,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -15937,6 +16987,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -16098,6 +17151,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -16168,6 +17224,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -16306,6 +17420,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -16468,6 +17585,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -16924,6 +18044,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -17085,6 +18208,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -17155,6 +18281,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -17293,6 +18477,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -17455,6 +18642,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -18258,6 +19448,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -18419,6 +19612,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -18489,6 +19685,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -18627,6 +19881,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -18789,6 +20046,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -19585,6 +20845,9 @@
                                             "skipCrds": {
                                               "type": "boolean"
                                             },
+                                            "skipSchemaValidation": {
+                                              "type": "boolean"
+                                            },
                                             "skipTests": {
                                               "type": "boolean"
                                             },
@@ -19746,6 +21009,9 @@
                                           "type": "object",
                                           "additionalProperties": false
                                         },
+                                        "name": {
+                                          "type": "string"
+                                        },
                                         "path": {
                                           "type": "string"
                                         },
@@ -19816,6 +21082,64 @@
                                       },
                                       "required": [
                                         "repoURL"
+                                      ],
+                                      "type": "object",
+                                      "additionalProperties": false
+                                    },
+                                    "sourceHydrator": {
+                                      "properties": {
+                                        "drySource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "repoURL": {
+                                              "type": "string"
+                                            },
+                                            "targetRevision": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "repoURL",
+                                            "targetRevision"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "hydrateTo": {
+                                          "properties": {
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        },
+                                        "syncSource": {
+                                          "properties": {
+                                            "path": {
+                                              "type": "string"
+                                            },
+                                            "targetBranch": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "path",
+                                            "targetBranch"
+                                          ],
+                                          "type": "object",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": [
+                                        "drySource",
+                                        "syncSource"
                                       ],
                                       "type": "object",
                                       "additionalProperties": false
@@ -19954,6 +21278,9 @@
                                                 "type": "string"
                                               },
                                               "skipCrds": {
+                                                "type": "boolean"
+                                              },
+                                              "skipSchemaValidation": {
                                                 "type": "boolean"
                                               },
                                               "skipTests": {
@@ -20116,6 +21443,9 @@
                                             },
                                             "type": "object",
                                             "additionalProperties": false
+                                          },
+                                          "name": {
+                                            "type": "string"
                                           },
                                           "path": {
                                             "type": "string"
@@ -20594,6 +21924,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -20755,6 +22088,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -20825,6 +22161,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -20963,6 +22357,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -21125,6 +22522,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -21579,6 +22979,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -21740,6 +23143,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -21810,6 +23216,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -21948,6 +23412,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -22110,6 +23577,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -22913,6 +24383,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -23074,6 +24547,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -23144,6 +24620,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -23282,6 +24816,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -23444,6 +24981,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -24240,6 +25780,9 @@
                                   "skipCrds": {
                                     "type": "boolean"
                                   },
+                                  "skipSchemaValidation": {
+                                    "type": "boolean"
+                                  },
                                   "skipTests": {
                                     "type": "boolean"
                                   },
@@ -24401,6 +25944,9 @@
                                 "type": "object",
                                 "additionalProperties": false
                               },
+                              "name": {
+                                "type": "string"
+                              },
                               "path": {
                                 "type": "string"
                               },
@@ -24471,6 +26017,64 @@
                             },
                             "required": [
                               "repoURL"
+                            ],
+                            "type": "object",
+                            "additionalProperties": false
+                          },
+                          "sourceHydrator": {
+                            "properties": {
+                              "drySource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "repoURL": {
+                                    "type": "string"
+                                  },
+                                  "targetRevision": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "repoURL",
+                                  "targetRevision"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "hydrateTo": {
+                                "properties": {
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              },
+                              "syncSource": {
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "targetBranch": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "targetBranch"
+                                ],
+                                "type": "object",
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "drySource",
+                              "syncSource"
                             ],
                             "type": "object",
                             "additionalProperties": false
@@ -24609,6 +26213,9 @@
                                       "type": "string"
                                     },
                                     "skipCrds": {
+                                      "type": "boolean"
+                                    },
+                                    "skipSchemaValidation": {
                                       "type": "boolean"
                                     },
                                     "skipTests": {
@@ -24771,6 +26378,9 @@
                                   },
                                   "type": "object",
                                   "additionalProperties": false
+                                },
+                                "name": {
+                                  "type": "string"
                                 },
                                 "path": {
                                   "type": "string"
@@ -25368,6 +26978,9 @@
                         "skipCrds": {
                           "type": "boolean"
                         },
+                        "skipSchemaValidation": {
+                          "type": "boolean"
+                        },
                         "skipTests": {
                           "type": "boolean"
                         },
@@ -25529,6 +27142,9 @@
                       "type": "object",
                       "additionalProperties": false
                     },
+                    "name": {
+                      "type": "string"
+                    },
                     "path": {
                       "type": "string"
                     },
@@ -25599,6 +27215,64 @@
                   },
                   "required": [
                     "repoURL"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "sourceHydrator": {
+                  "properties": {
+                    "drySource": {
+                      "properties": {
+                        "path": {
+                          "type": "string"
+                        },
+                        "repoURL": {
+                          "type": "string"
+                        },
+                        "targetRevision": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "path",
+                        "repoURL",
+                        "targetRevision"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "hydrateTo": {
+                      "properties": {
+                        "targetBranch": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "targetBranch"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "syncSource": {
+                      "properties": {
+                        "path": {
+                          "type": "string"
+                        },
+                        "targetBranch": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "path",
+                        "targetBranch"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "drySource",
+                    "syncSource"
                   ],
                   "type": "object",
                   "additionalProperties": false
@@ -25737,6 +27411,9 @@
                             "type": "string"
                           },
                           "skipCrds": {
+                            "type": "boolean"
+                          },
+                          "skipSchemaValidation": {
                             "type": "boolean"
                           },
                           "skipTests": {
@@ -25899,6 +27576,9 @@
                         },
                         "type": "object",
                         "additionalProperties": false
+                      },
+                      "name": {
+                        "type": "string"
                       },
                       "path": {
                         "type": "string"
@@ -26153,6 +27833,10 @@
               },
               "health": {
                 "properties": {
+                  "lastTransitionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
                   "message": {
                     "type": "string"
                   },
