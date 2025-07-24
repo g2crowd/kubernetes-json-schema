@@ -1,5 +1,5 @@
 {
-  "description": "Configuration is the Schema for the Configurations API",
+  "description": "Configuration is the Schema for the MSK Configurations API",
   "properties": {
     "apiVersion": {
       "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -38,8 +38,12 @@
               },
               "type": "array"
             },
+            "name": {
+              "description": "The name of the configuration. Configuration names are strings that match the regex \"^[0-9A-Za-z-]+$\".",
+              "type": "string"
+            },
             "properties": {
-              "description": "kafka server configurations",
+              "description": "Contents of the server.properties file. When using the API, you must ensure that the contents of the file are base64 encoded. Alternatively, you can use serverProperties.",
               "items": {
                 "type": "string"
               },
@@ -49,14 +53,24 @@
               "description": "Region is which region the Configuration will be created.",
               "type": "string"
             },
-            "additionalProperties": false
+            "serverProperties": {
+              "description": "Contents of the server.properties file as a string. Use this or properties, but not both.",
+              "type": "string"
+            },
+            "tags": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "A map of tags to assign to the resource.",
+              "type": "object"
+            }
           },
           "required": [
-            "properties",
+            "kafkaVersions",
             "region"
           ],
           "type": "object",
-          "additionalProperties": false
+          "additionalProperties": true
         },
         "managementPolicies": {
           "default": [
@@ -319,5 +333,6 @@
   "required": [
     "spec"
   ],
-  "type": "object"
+  "type": "object",
+  "additionalProperties": true
 }
