@@ -124,6 +124,7 @@
               "enum": [
                 "None",
                 "Secret",
+                "InjectedIdentity",
                 "IRSA",
                 "WebIdentity",
                 "Upbound"
