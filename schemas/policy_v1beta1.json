@@ -44,11 +44,23 @@
               "type": "string"
             },
             "tags": {
-              "additionalProperties": {
-                "type": "string"
-              },
               "description": "Tags. For more information about tagging, see Tagging IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User Guide.",
-              "type": "object"
+              "items": {
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key",
+                  "value"
+                ],
+                "type": "object"
+              },
+              "type": "array"
             }
           },
           "required": [
