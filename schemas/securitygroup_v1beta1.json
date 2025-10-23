@@ -626,11 +626,23 @@
               "type": "string"
             },
             "tags": {
-              "additionalProperties": {
-                "type": "string"
-              },
               "description": "Tags represents to current ec2 tags.",
-              "type": "object"
+              "items": {
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key",
+                  "value"
+                ],
+                "type": "object"
+              },
+              "type": "array"
             },
             "vpcId": {
               "description": "VPCID is the ID of the VPC.",
