@@ -1136,13 +1136,12 @@
               "type": "string"
             },
             "namespace": {
-              "description": "Namespace of the secret.",
+              "description": "Namespace of the secret. Optional for Upbound managed resources where namespace is inherited from metadata.namespace.",
               "type": "string"
             }
           },
           "required": [
-            "name",
-            "namespace"
+            "name"
           ],
           "type": "object",
           "additionalProperties": false
