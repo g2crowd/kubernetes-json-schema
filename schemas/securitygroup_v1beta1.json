@@ -1,5 +1,5 @@
 {
-  "description": "A SecurityGroup is a managed resource that represents an AWS VPC Security Group via Upbound provider-aws-ec2.",
+  "description": "A SecurityGroup is a managed resource that represents an AWS VPC Security Group. Supports both Crossplane and Upbound provider formats.",
   "properties": {
     "apiVersion": {
       "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -626,23 +626,35 @@
               "type": "string"
             },
             "tags": {
-              "description": "Tags represents to current ec2 tags.",
-              "items": {
-                "properties": {
-                  "key": {
+              "description": "Tags for the security group. Supports both Crossplane array format (key/value objects) and Upbound object format (key-value map).",
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": {
                     "type": "string"
                   },
-                  "value": {
-                    "type": "string"
-                  }
+                  "description": "Upbound format: Key-value map"
                 },
-                "required": [
-                  "key",
-                  "value"
-                ],
-                "type": "object"
-              },
-              "type": "array"
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "key",
+                      "value"
+                    ]
+                  },
+                  "description": "Crossplane format: Array of key/value objects"
+                }
+              ]
             },
             "vpcId": {
               "description": "VPCID is the ID of the VPC.",
