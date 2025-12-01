@@ -1,5 +1,5 @@
 {
-  "description": "A SecurityGroup is a managed resource that represents an AWS VPC Security Group.",
+  "description": "A SecurityGroup is a managed resource that represents an AWS VPC Security Group via Upbound provider-aws-ec2.",
   "properties": {
     "apiVersion": {
       "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -730,8 +730,6 @@
             }
           },
           "required": [
-            "description",
-            "groupName",
             "region"
           ],
           "type": "object",
