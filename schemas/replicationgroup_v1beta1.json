@@ -995,6 +995,10 @@
           },
           "description": "ProviderConfigReference specifies how the provider that will be used to\ncreate, observe, update, and delete this managed resource should be\nconfigured.",
           "properties": {
+            "kind": {
+              "description": "Kind of the referenced object.",
+              "type": "string"
+            },
             "name": {
               "description": "Name of the referenced object.",
               "type": "string"
