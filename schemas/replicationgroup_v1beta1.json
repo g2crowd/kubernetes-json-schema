@@ -259,7 +259,7 @@
               "type": "string"
             },
             "port": {
-              "description": "\u2013  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
+              "description": "–  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
               "type": "number"
             },
             "preferredCacheClusterAzs": {
@@ -382,7 +382,7 @@
               "x-kubernetes-list-type": "set"
             },
             "snapshotArns": {
-              "description": "\u2013  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
+              "description": "–  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
               "items": {
                 "type": "string"
               },
@@ -724,7 +724,7 @@
               "type": "string"
             },
             "port": {
-              "description": "\u2013  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
+              "description": "–  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
               "type": "number"
             },
             "preferredCacheClusterAzs": {
@@ -843,7 +843,7 @@
               "x-kubernetes-list-type": "set"
             },
             "snapshotArns": {
-              "description": "\u2013  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
+              "description": "–  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
               "items": {
                 "type": "string"
               },
@@ -1123,8 +1123,7 @@
             }
           },
           "required": [
-            "name",
-            "namespace"
+            "name"
           ],
           "type": "object",
           "additionalProperties": false
@@ -1298,7 +1297,7 @@
               "type": "string"
             },
             "port": {
-              "description": "\u2013  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
+              "description": "–  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
               "type": "number"
             },
             "preferredCacheClusterAzs": {
@@ -1341,7 +1340,7 @@
               "x-kubernetes-list-type": "set"
             },
             "snapshotArns": {
-              "description": "\u2013  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
+              "description": "–  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
               "items": {
                 "type": "string"
               },
