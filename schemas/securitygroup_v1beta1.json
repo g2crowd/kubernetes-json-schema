@@ -626,33 +626,7 @@
               "type": "string"
             },
             "tags": {
-              "description": "Key-value map of resource tags. Supports both object format (Upbound provider) and array format (crossplane-contrib provider).",
-              "oneOf": [
-                {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "type": "string"
-                      },
-                      "value": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "key",
-                      "value"
-                    ]
-                  }
-                }
-              ]
+              "description": "Resource tags. Accepts both object map (Upbound) and array of {key, value} (crossplane-contrib) formats."
             },
             "vpcId": {
               "description": "VPCID is the ID of the VPC.",
