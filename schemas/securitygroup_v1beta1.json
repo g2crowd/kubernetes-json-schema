@@ -715,7 +715,6 @@
           },
           "required": [
             "description",
-            "groupName",
             "region"
           ],
           "type": "object",
