@@ -772,6 +772,10 @@
               },
               "type": "object",
               "additionalProperties": false
+            },
+            "kind": {
+              "description": "Kind of the referenced object.",
+              "type": "string"
             }
           },
           "required": [
