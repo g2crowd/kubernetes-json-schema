@@ -2,11 +2,11 @@
   "description": "A Queue is a managed resource that represents a AWS Simple Queue",
   "properties": {
     "apiVersion": {
-      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
       "type": "string"
     },
     "kind": {
-      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
       "type": "string"
     },
     "metadata": {
@@ -17,7 +17,7 @@
       "properties": {
         "deletionPolicy": {
           "default": "Delete",
-          "description": "DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either \"Delete\" or \"Orphan\" the external resource. This field is planned to be deprecated in favor of the ManagementPolicies field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
+          "description": "DeletionPolicy specifies what will happen to the underlying external\nwhen this managed resource is deleted - either \"Delete\" or \"Orphan\" the\nexternal resource.\nThis field is planned to be deprecated in favor of the ManagementPolicies\nfield in a future release. Currently, both could be set independently and\nnon-default values would be honored if the feature flag is enabled.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
           "enum": [
             "Orphan",
             "Delete"
@@ -28,25 +28,25 @@
           "description": "QueueParameters define the desired state of an AWS Queue",
           "properties": {
             "contentBasedDeduplication": {
-              "description": "ContentBasedDeduplication - Enables content-based deduplication. Valid values: true, false. For more information, see Exactly-Once Processing (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing) in the Amazon Simple Queue Service Developer Guide. Every message must have a unique MessageDeduplicationId, You may provide a MessageDeduplicationId explicitly. If you aren't able to provide a MessageDeduplicationId and you enable ContentBasedDeduplication for your queue, Amazon SQS uses a SHA-256 hash to generate the MessageDeduplicationId using the body of the message (but not the attributes of the message). If you don't provide a MessageDeduplicationId and the queue doesn't have ContentBasedDeduplication set, the action fails with an error. If the queue has ContentBasedDeduplication set, your MessageDeduplicationId overrides the generated one. When ContentBasedDeduplication is in effect, messages with identical content sent within the deduplication interval are treated as duplicates and only one copy of the message is delivered. If you send one message with ContentBasedDeduplication enabled and then another message with a MessageDeduplicationId that is the same as the one generated for the first MessageDeduplicationId, the two messages are treated as duplicates and only one copy of the message is delivered.",
+              "description": "ContentBasedDeduplication - Enables content-based deduplication. Valid\nvalues: true, false. For more information, see Exactly-Once Processing\n(https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)\nin the Amazon Simple Queue Service Developer Guide. Every message must\nhave a unique MessageDeduplicationId, You may provide a MessageDeduplicationId\nexplicitly. If you aren't able to provide a MessageDeduplicationId and\nyou enable ContentBasedDeduplication for your queue, Amazon SQS uses a\nSHA-256 hash to generate the MessageDeduplicationId using the body of\nthe message (but not the attributes of the message). If you don't provide\na MessageDeduplicationId and the queue doesn't have ContentBasedDeduplication\nset, the action fails with an error. If the queue has ContentBasedDeduplication\nset, your MessageDeduplicationId overrides the generated one. When ContentBasedDeduplication\nis in effect, messages with identical content sent within the deduplication\ninterval are treated as duplicates and only one copy of the message is\ndelivered. If you send one message with ContentBasedDeduplication enabled\nand then another message with a MessageDeduplicationId that is the same\nas the one generated for the first MessageDeduplicationId, the two messages\nare treated as duplicates and only one copy of the message is delivered.",
               "type": "boolean"
             },
             "delaySeconds": {
-              "description": "DelaySeconds - The length of time, in seconds, for which the delivery of all messages in the queue is delayed. Valid values: An integer from 0 to 900 (15 minutes). Default: 0.",
+              "description": "DelaySeconds - The length of time, in seconds, for which the delivery\nof all messages in the queue is delayed. Valid values: An integer from\n0 to 900 (15 minutes). Default: 0.",
               "format": "int64",
               "type": "integer"
             },
             "fifoQueue": {
-              "description": "FIFOQueue - Designates a queue as FIFO. Valid values: true, false. If you don't specify the FifoQueue attribute, Amazon SQS creates a standard queue. You can provide this attribute only during queue creation. You can't change it for an existing queue. When you set this attribute, you must also provide the MessageGroupId for your messages explicitly. For more information, see FIFO Queue Logic (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic) in the Amazon Simple Queue Service Developer Guide.",
+              "description": "FIFOQueue - Designates a queue as FIFO. Valid values: true, false. If\n\tyou don't specify the FifoQueue attribute, Amazon SQS creates a standard\n\tqueue. You can provide this attribute only during queue creation. You\n\tcan't change it for an existing queue. When you set this attribute, you\n\tmust also provide the MessageGroupId for your messages explicitly. For\n\tmore information, see FIFO Queue Logic (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic)\n\tin the Amazon Simple Queue Service Developer Guide.",
               "type": "boolean"
             },
             "kmsDataKeyReusePeriodSeconds": {
-              "description": "KMSDataKeyReusePeriodSeconds - The length of time, in seconds, for which Amazon SQS can reuse a data key (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys) to encrypt or decrypt messages before calling AWS KMS again. An integer representing seconds, between 60 seconds (1 minute) and 86,400 seconds (24 hours). Default: 300 (5 minutes). A shorter time period provides better security but results in more calls to KMS which might incur charges after Free Tier. For more information, see How Does the Data Key Reuse Period Work? (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work). Applies only to server-side-encryption (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):",
+              "description": "KMSDataKeyReusePeriodSeconds - The length of time, in seconds, for which\nAmazon SQS can reuse a data key (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys)\nto encrypt or decrypt messages before calling AWS KMS again. An integer\nrepresenting seconds, between 60 seconds (1 minute) and 86,400 seconds\n(24 hours). Default: 300 (5 minutes). A shorter time period provides better\nsecurity but results in more calls to KMS which might incur charges after\nFree Tier. For more information, see How Does the Data Key Reuse Period\nWork? (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).\nApplies only to server-side-encryption (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):",
               "format": "int64",
               "type": "integer"
             },
             "kmsMasterKeyId": {
-              "description": "KMSMasterKeyID - The ID of an AWS-managed customer master key (CMK) for Amazon SQS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms). While the alias of the AWS-managed CMK for Amazon SQS is always alias/aws/sqs, the alias of a custom CMK can, for example, be alias/MyAlias . For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters) in the AWS Key Management Service API Reference. Applies only to server-side-encryption (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):",
+              "description": "KMSMasterKeyID - The ID of an AWS-managed customer master key (CMK)\nfor Amazon SQS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).\nWhile the alias of the AWS-managed CMK for Amazon SQS is always alias/aws/sqs,\nthe alias of a custom CMK can, for example, be alias/MyAlias . For more\nexamples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)\nin the AWS Key Management Service API Reference.\nApplies only to server-side-encryption (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):",
               "type": "string"
             },
             "kmsMasterKeyIdRef": {
@@ -61,7 +61,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -69,7 +69,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -91,7 +91,7 @@
               "description": "A Selector selects an object.",
               "properties": {
                 "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                   "type": "boolean"
                 },
                 "matchLabels": {
@@ -106,7 +106,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -114,7 +114,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -130,29 +130,29 @@
               "additionalProperties": false
             },
             "maximumMessageSize": {
-              "description": "MaximumMessageSize is the limit of how many bytes a message can contain before Amazon SQS rejects it. Valid values: An integer from 1,024 bytes (1 KiB) up to 262,144 bytes (256 KiB). Default: 262,144 (256 KiB).",
+              "description": "MaximumMessageSize is the limit of how many bytes a message can contain\nbefore Amazon SQS rejects it. Valid values: An integer from 1,024 bytes\n(1 KiB) up to 262,144 bytes (256 KiB). Default: 262,144 (256 KiB).",
               "format": "int64",
               "type": "integer"
             },
             "messageRetentionPeriod": {
-              "description": "MessageRetentionPeriod - The length of time, in seconds, for which Amazon SQS retains a message. Valid values: An integer representing seconds, from 60 (1 minute) to 1,209,600 (14 days). Default: 345,600 (4 days).",
+              "description": "MessageRetentionPeriod - The length of time, in seconds, for which Amazon\nSQS retains a message. Valid values: An integer representing seconds,\nfrom 60 (1 minute) to 1,209,600 (14 days). Default: 345,600 (4 days).",
               "format": "int64",
               "type": "integer"
             },
             "policy": {
-              "description": "The queue's policy. A valid AWS policy. For more information about policy structure, see Overview of AWS IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html) in the Amazon IAM User Guide.",
+              "description": "The queue's policy. A valid AWS policy. For more information\nabout policy structure, see Overview of AWS IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html)\nin the Amazon IAM User Guide.",
               "type": "string"
             },
             "receiveMessageWaitTimeSeconds": {
-              "description": "ReceiveMessageWaitTimeSeconds - The length of time, in seconds, for which a ReceiveMessage action waits for a message to arrive. Valid values: an integer from 0 to 20 (seconds). Default: 0.",
+              "description": "ReceiveMessageWaitTimeSeconds - The length of time, in seconds, for\nwhich a ReceiveMessage action waits for a message to arrive. Valid values:\nan integer from 0 to 20 (seconds). Default: 0.",
               "format": "int64",
               "type": "integer"
             },
             "redrivePolicy": {
-              "description": "RedrivePolicy includes the parameters for the dead-letter queue functionality of the source queue. For more information about the redrive policy and dead-letter queues, see Using Amazon SQS Dead-Letter Queues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html) in the Amazon Simple Queue Service Developer Guide",
+              "description": "RedrivePolicy includes the parameters for the dead-letter\nqueue functionality of the source queue. For more information about the\nredrive policy and dead-letter queues, see Using Amazon SQS Dead-Letter\nQueues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\nin the Amazon Simple Queue Service Developer Guide",
               "properties": {
                 "deadLetterTargetArn": {
-                  "description": "The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the value of maxReceiveCount is exceeded.",
+                  "description": "The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon\nSQS moves messages after the value of maxReceiveCount is exceeded.",
                   "type": "string"
                 },
                 "deadLetterTargetArnRef": {
@@ -167,7 +167,7 @@
                       "properties": {
                         "resolution": {
                           "default": "Required",
-                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                           "enum": [
                             "Required",
                             "Optional"
@@ -175,7 +175,7 @@
                           "type": "string"
                         },
                         "resolve": {
-                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                           "enum": [
                             "Always",
                             "IfNotPresent"
@@ -197,7 +197,7 @@
                   "description": "DeadLetterTargetARNSelector selects reference to a Queue to retrieve its ARN",
                   "properties": {
                     "matchControllerRef": {
-                      "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                      "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                       "type": "boolean"
                     },
                     "matchLabels": {
@@ -212,7 +212,7 @@
                       "properties": {
                         "resolution": {
                           "default": "Required",
-                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                           "enum": [
                             "Required",
                             "Optional"
@@ -220,7 +220,7 @@
                           "type": "string"
                         },
                         "resolve": {
-                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                           "enum": [
                             "Always",
                             "IfNotPresent"
@@ -236,7 +236,7 @@
                   "additionalProperties": false
                 },
                 "maxReceiveCount": {
-                  "description": "The number of times a message is delivered to the source queue before being moved to the dead-letter queue.",
+                  "description": "The number of times a message is delivered to the source queue before\nbeing moved to the dead-letter queue.",
                   "format": "int64",
                   "type": "integer"
                 }
@@ -252,27 +252,18 @@
               "type": "string"
             },
             "sseEnabled": {
-              "description": "Boolean to enable server-side encryption (SSE) of message content with SQS-owned encryption keys. See Encryption at rest.",
+              "description": "Boolean to enable server-side encryption (SSE) of\nmessage content with SQS-owned encryption keys. See Encryption at rest.",
               "type": "boolean"
             },
             "tags": {
-              "description": "Tags add cost allocation tags to the specified Amazon SQS queue. Tags should be provided as an array of objects with 'key' and 'value' properties.",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "required": ["key", "value"],
-                "properties": {
-                  "key": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              }
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Tags add cost allocation tags to the specified Amazon SQS queue.",
+              "type": "object"
             },
             "visibilityTimeout": {
-              "description": "VisibilityTimeout - The visibility timeout for the queue, in seconds. Valid values: an integer from 0 to 43,200 (12 hours). Default: 30. For more information about the visibility timeout, see Visibility Timeout (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html) in the Amazon Simple Queue Service Developer Guide.",
+              "description": "VisibilityTimeout - The visibility timeout for the queue, in seconds.\nValid values: an integer from 0 to 43,200 (12 hours). Default: 30. For\nmore information about the visibility timeout, see Visibility Timeout\n(https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)\nin the Amazon Simple Queue Service Developer Guide.",
               "format": "int64",
               "type": "integer"
             }
@@ -287,9 +278,9 @@
           "default": [
             "*"
           ],
-          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out through a Crossplane feature flag. ManagementPolicies specify the array of actions Crossplane is allowed to take on the managed and external resources. This field is planned to replace the DeletionPolicy field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. If both are custom, the DeletionPolicy field will be ignored. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223 and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
+          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out\nthrough a Crossplane feature flag.\nManagementPolicies specify the array of actions Crossplane is allowed to\ntake on the managed and external resources.\nThis field is planned to replace the DeletionPolicy field in a future\nrelease. Currently, both could be set independently and non-default\nvalues would be honored if the feature flag is enabled. If both are\ncustom, the DeletionPolicy field will be ignored.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223\nand this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
           "items": {
-            "description": "A ManagementAction represents an action that the Crossplane controllers can take on an external resource.",
+            "description": "A ManagementAction represents an action that the Crossplane controllers\ncan take on an external resource.",
             "enum": [
               "Observe",
               "Create",
@@ -306,7 +297,7 @@
           "default": {
             "name": "default"
           },
-          "description": "ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.",
+          "description": "ProviderConfigReference specifies how the provider that will be used to\ncreate, observe, update, and delete this managed resource should be\nconfigured.",
           "properties": {
             "name": {
               "description": "Name of the referenced object.",
@@ -317,7 +308,7 @@
               "properties": {
                 "resolution": {
                   "default": "Required",
-                  "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                  "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                   "enum": [
                     "Required",
                     "Optional"
@@ -325,7 +316,7 @@
                   "type": "string"
                 },
                 "resolve": {
-                  "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                  "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                   "enum": [
                     "Always",
                     "IfNotPresent"
@@ -344,13 +335,13 @@
           "additionalProperties": false
         },
         "publishConnectionDetailsTo": {
-          "description": "PublishConnectionDetailsTo specifies the connection secret config which contains a name, metadata and a reference to secret store config to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.",
+          "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
           "properties": {
             "configRef": {
               "default": {
                 "name": "default"
               },
-              "description": "SecretStoreConfigRef specifies which secret store config should be used for this ConnectionSecret.",
+              "description": "SecretStoreConfigRef specifies which secret store config should be used\nfor this ConnectionSecret.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -361,7 +352,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -369,7 +360,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -394,18 +385,18 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Annotations are the annotations to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.annotations\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Annotations are the annotations to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.annotations\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "labels": {
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Labels are the labels/tags to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.labels\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Labels are the labels/tags to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.labels\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "type": {
-                  "description": "Type is the SecretType for the connection secret. - Only valid for Kubernetes Secret Stores.",
+                  "description": "Type is the SecretType for the connection secret.\n- Only valid for Kubernetes Secret Stores.",
                   "type": "string"
                 }
               },
@@ -424,7 +415,7 @@
           "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
-          "description": "WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource. This field is planned to be replaced in a future release in favor of PublishConnectionDetailsTo. Currently, both could be set independently and connection details would be published to both without affecting each other.",
+          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
           "properties": {
             "name": {
               "description": "Name of the secret.",
@@ -456,17 +447,17 @@
           "description": "QueueObservation is the representation of the current state that is observed",
           "properties": {
             "approximateNumberOfMessages": {
-              "description": "ApproximateNumberOfMessages - The approximate number of messages available for retrieval from the queue.",
+              "description": "ApproximateNumberOfMessages - The approximate number of messages\navailable for retrieval from the queue.",
               "format": "int64",
               "type": "integer"
             },
             "approximateNumberOfMessagesDelayed": {
-              "description": "ApproximateNumberOfMessagesDelayed - The approximate number of messages in the queue that are delayed and not available for reading immediately. This can happen when the queue is configured as a delay queue or when a message has been sent with a delay parameter.",
+              "description": "ApproximateNumberOfMessagesDelayed - The approximate number\nof messages in the queue that are delayed and not available for reading\nimmediately. This can happen when the queue is configured as a delay queue\nor when a message has been sent with a delay parameter.",
               "format": "int64",
               "type": "integer"
             },
             "approximateNumberOfMessagesNotVisible": {
-              "description": "ApproximateNumberOfMessagesNotVisible - The approximate number of messages that are in flight. Messages are considered to be in flight if they have been sent to a client but have not yet been deleted or have not yet reached the end of their visibility window.",
+              "description": "ApproximateNumberOfMessagesNotVisible - The approximate number\nof messages that are in flight. Messages are considered to be in flight\nif they have been sent to a client but have not yet been deleted or have\nnot yet reached the end of their visibility window.",
               "format": "int64",
               "type": "integer"
             },
@@ -498,13 +489,18 @@
             "description": "A Condition that may apply to a resource.",
             "properties": {
               "lastTransitionTime": {
-                "description": "LastTransitionTime is the last time this condition transitioned from one status to another.",
+                "description": "LastTransitionTime is the last time this condition transitioned from one\nstatus to another.",
                 "format": "date-time",
                 "type": "string"
               },
               "message": {
-                "description": "A Message containing details about this condition's last transition from one status to another, if any.",
+                "description": "A Message containing details about this condition's last transition from\none status to another, if any.",
                 "type": "string"
+              },
+              "observedGeneration": {
+                "description": "ObservedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.",
+                "format": "int64",
+                "type": "integer"
               },
               "reason": {
                 "description": "A Reason for this condition's last transition from one status to another.",
@@ -515,7 +511,7 @@
                 "type": "string"
               },
               "type": {
-                "description": "Type of this condition. At most one of each condition type may apply to a resource at any point in time.",
+                "description": "Type of this condition. At most one of each condition type may apply to\na resource at any point in time.",
                 "type": "string"
               }
             },
@@ -533,6 +529,11 @@
             "type"
           ],
           "x-kubernetes-list-type": "map"
+        },
+        "observedGeneration": {
+          "description": "ObservedGeneration is the latest metadata.generation\nwhich resulted in either a ready state, or stalled due to error\nit can not recover from without human intervention.",
+          "format": "int64",
+          "type": "integer"
         }
       },
       "type": "object",

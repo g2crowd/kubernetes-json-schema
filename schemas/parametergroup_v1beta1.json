@@ -1,5 +1,5 @@
 {
-  "description": "ParameterGroup is the Schema for the ParameterGroups API. Provides an ElastiCache parameter group resource.",
+  "description": "ParameterGroup is the Schema for the ParameterGroups API. Provides an RDS DB parameter group resource.",
   "properties": {
     "apiVersion": {
       "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -27,27 +27,27 @@
         "forProvider": {
           "properties": {
             "description": {
-              "description": "The description of the ElastiCache parameter group.",
+              "description": "The description of the DB parameter group.",
               "type": "string"
             },
             "family": {
-              "description": "The family of the ElastiCache parameter group.",
-              "type": "string"
-            },
-            "name": {
-              "description": "The name of the ElastiCache parameter group.",
+              "description": "The family of the DB parameter group.",
               "type": "string"
             },
             "parameter": {
-              "description": "A list of ElastiCache parameters to apply.",
+              "description": "The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.",
               "items": {
                 "properties": {
+                  "applyMethod": {
+                    "description": "\"immediate\" (default), or \"pending-reboot\". Some\nengines can't apply some parameters without a reboot, and you will need to\nspecify \"pending-reboot\" here.",
+                    "type": "string"
+                  },
                   "name": {
-                    "description": "The name of the ElastiCache parameter group.",
+                    "description": "The name of the DB parameter.",
                     "type": "string"
                   },
                   "value": {
-                    "description": "The value of the ElastiCache parameter.",
+                    "description": "The value of the DB parameter.",
                     "type": "string"
                   }
                 },
@@ -59,6 +59,9 @@
             "region": {
               "description": "Region is the region you'd like your resource to be created in.",
               "type": "string"
+            },
+            "skipDestroy": {
+              "type": "boolean"
             },
             "tags": {
               "additionalProperties": {
@@ -79,27 +82,27 @@
           "description": "THIS IS A BETA FIELD. It will be honored\nunless the Management Policies feature flag is disabled.\nInitProvider holds the same fields as ForProvider, with the exception\nof Identifier and other resource reference fields. The fields that are\nin InitProvider are merged into ForProvider when the resource is created.\nThe same fields are also added to the terraform ignore_changes hook, to\navoid updating them after creation. This is useful for fields that are\nrequired on creation, but we do not desire to update them after creation,\nfor example because of an external controller is managing them, like an\nautoscaler.",
           "properties": {
             "description": {
-              "description": "The description of the ElastiCache parameter group.",
+              "description": "The description of the DB parameter group.",
               "type": "string"
             },
             "family": {
-              "description": "The family of the ElastiCache parameter group.",
-              "type": "string"
-            },
-            "name": {
-              "description": "The name of the ElastiCache parameter group.",
+              "description": "The family of the DB parameter group.",
               "type": "string"
             },
             "parameter": {
-              "description": "A list of ElastiCache parameters to apply.",
+              "description": "The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.",
               "items": {
                 "properties": {
+                  "applyMethod": {
+                    "description": "\"immediate\" (default), or \"pending-reboot\". Some\nengines can't apply some parameters without a reboot, and you will need to\nspecify \"pending-reboot\" here.",
+                    "type": "string"
+                  },
                   "name": {
-                    "description": "The name of the ElastiCache parameter group.",
+                    "description": "The name of the DB parameter.",
                     "type": "string"
                   },
                   "value": {
-                    "description": "The value of the ElastiCache parameter.",
+                    "description": "The value of the DB parameter.",
                     "type": "string"
                   }
                 },
@@ -107,6 +110,9 @@
                 "additionalProperties": false
               },
               "type": "array"
+            },
+            "skipDestroy": {
+              "type": "boolean"
             },
             "tags": {
               "additionalProperties": {
@@ -288,10 +294,6 @@
         {
           "message": "spec.forProvider.family is a required parameter",
           "rule": "!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family) || (has(self.initProvider) && has(self.initProvider.family))"
-        },
-        {
-          "message": "spec.forProvider.name is a required parameter",
-          "rule": "!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))"
         }
       ],
       "additionalProperties": false
@@ -302,35 +304,35 @@
         "atProvider": {
           "properties": {
             "arn": {
-              "description": "The AWS ARN associated with the parameter group.",
+              "description": "The ARN of the db parameter group.",
               "type": "string"
             },
             "description": {
-              "description": "The description of the ElastiCache parameter group.",
+              "description": "The description of the DB parameter group.",
               "type": "string"
             },
             "family": {
-              "description": "The family of the ElastiCache parameter group.",
+              "description": "The family of the DB parameter group.",
               "type": "string"
             },
             "id": {
-              "description": "The ElastiCache parameter group name.",
-              "type": "string"
-            },
-            "name": {
-              "description": "The name of the ElastiCache parameter group.",
+              "description": "The db parameter group name.",
               "type": "string"
             },
             "parameter": {
-              "description": "A list of ElastiCache parameters to apply.",
+              "description": "The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.",
               "items": {
                 "properties": {
+                  "applyMethod": {
+                    "description": "\"immediate\" (default), or \"pending-reboot\". Some\nengines can't apply some parameters without a reboot, and you will need to\nspecify \"pending-reboot\" here.",
+                    "type": "string"
+                  },
                   "name": {
-                    "description": "The name of the ElastiCache parameter group.",
+                    "description": "The name of the DB parameter.",
                     "type": "string"
                   },
                   "value": {
-                    "description": "The value of the ElastiCache parameter.",
+                    "description": "The value of the DB parameter.",
                     "type": "string"
                   }
                 },
@@ -338,6 +340,9 @@
                 "additionalProperties": false
               },
               "type": "array"
+            },
+            "skipDestroy": {
+              "type": "boolean"
             },
             "tags": {
               "additionalProperties": {

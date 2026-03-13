@@ -2,11 +2,11 @@
   "description": "UserPool is the Schema for the UserPools API",
   "properties": {
     "apiVersion": {
-      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
       "type": "string"
     },
     "kind": {
-      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
       "type": "string"
     },
     "metadata": {
@@ -17,7 +17,7 @@
       "properties": {
         "deletionPolicy": {
           "default": "Delete",
-          "description": "DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either \"Delete\" or \"Orphan\" the external resource. This field is planned to be deprecated in favor of the ManagementPolicies field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
+          "description": "DeletionPolicy specifies what will happen to the underlying external\nwhen this managed resource is deleted - either \"Delete\" or \"Orphan\" the\nexternal resource.\nThis field is planned to be deprecated in favor of the ManagementPolicies\nfield in a future release. Currently, both could be set independently and\nnon-default values would be honored if the feature flag is enabled.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
           "enum": [
             "Orphan",
             "Delete"
@@ -28,7 +28,7 @@
           "description": "UserPoolParameters defines the desired state of UserPool",
           "properties": {
             "accountRecoverySetting": {
-              "description": "The available verified method a user can use to recover their password when they call ForgotPassword. You can use this setting to define a preferred method when a user has more than one method available. With this setting, SMS doesn't qualify for a valid password recovery mechanism if the user also has SMS multi-factor authentication (MFA) activated. In the absence of this setting, Amazon Cognito uses the legacy behavior to determine the recovery method where SMS is preferred through email.",
+              "description": "The available verified method a user can use to recover their password when\nthey call ForgotPassword. You can use this setting to define a preferred\nmethod when a user has more than one method available. With this setting,\nSMS doesn't qualify for a valid password recovery mechanism if the user also\nhas SMS multi-factor authentication (MFA) activated. In the absence of this\nsetting, Amazon Cognito uses the legacy behavior to determine the recovery\nmethod where SMS is preferred through email.",
               "properties": {
                 "recoveryMechanisms": {
                   "items": {
@@ -77,7 +77,7 @@
               "additionalProperties": false
             },
             "aliasAttributes": {
-              "description": "Attributes supported as an alias for this user pool. Possible values: phone_number, email, or preferred_username.",
+              "description": "Attributes supported as an alias for this user pool. Possible values: phone_number,\nemail, or preferred_username.",
               "items": {
                 "type": "string"
               },
@@ -91,11 +91,11 @@
               "type": "array"
             },
             "deletionProtection": {
-              "description": "When active, DeletionProtection prevents accidental deletion of your user pool. Before you can delete a user pool that you have protected against deletion, you must deactivate this feature. \n When you try to delete a protected user pool in a DeleteUserPool API request, Amazon Cognito returns an InvalidParameterException error. To delete a protected user pool, send a new DeleteUserPool request after you deactivate deletion protection in an UpdateUserPool API request.",
+              "description": "When active, DeletionProtection prevents accidental deletion of your user\npool. Before you can delete a user pool that you have protected against deletion,\nyou must deactivate this feature.\n\nWhen you try to delete a protected user pool in a DeleteUserPool API request,\nAmazon Cognito returns an InvalidParameterException error. To delete a protected\nuser pool, send a new DeleteUserPool request after you deactivate deletion\nprotection in an UpdateUserPool API request.",
               "type": "string"
             },
             "deviceConfiguration": {
-              "description": "The device-remembering configuration for a user pool. A null value indicates that you have deactivated device remembering in your user pool. \n When you provide a value for any DeviceConfiguration field, you activate the Amazon Cognito device-remembering feature.",
+              "description": "The device-remembering configuration for a user pool. A null value indicates\nthat you have deactivated device remembering in your user pool.\n\nWhen you provide a value for any DeviceConfiguration field, you activate\nthe Amazon Cognito device-remembering feature.",
               "properties": {
                 "challengeRequiredOnNewDevice": {
                   "type": "boolean"
@@ -108,7 +108,7 @@
               "additionalProperties": false
             },
             "emailConfiguration": {
-              "description": "The email configuration of your user pool. The email configuration type sets your preferred sending method, Amazon Web Services Region, and sender for messages from your user pool.",
+              "description": "The email configuration of your user pool. The email configuration type sets\nyour preferred sending method, Amazon Web Services Region, and sender for\nmessages from your user pool.",
               "properties": {
                 "configurationSet": {
                   "type": "string"
@@ -138,7 +138,7 @@
               "type": "string"
             },
             "lambdaConfig": {
-              "description": "The Lambda trigger configuration information for the new user pool. \n In a push model, event sources (such as Amazon S3 and custom applications) need permission to invoke a function. So you must make an extra call to add permission for these event sources to invoke your Lambda function. \n For more information on using the Lambda API to add permission, see AddPermission (https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html). \n For adding permission using the CLI, see add-permission (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html).",
+              "description": "The Lambda trigger configuration information for the new user pool.\n\nIn a push model, event sources (such as Amazon S3 and custom applications)\nneed permission to invoke a function. So you must make an extra call to add\npermission for these event sources to invoke your Lambda function.\n\nFor more information on using the Lambda API to add permission, see AddPermission\n(https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html).\n\nFor adding permission using the CLI, see add-permission (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html).",
               "properties": {
                 "createAuthChallenge": {
                   "type": "string"
@@ -250,7 +250,7 @@
               "type": "string"
             },
             "schema": {
-              "description": "An array of schema attributes for the new user pool. These attributes can be standard or custom attributes.",
+              "description": "An array of schema attributes for the new user pool. These attributes can\nbe standard or custom attributes.",
               "items": {
                 "properties": {
                   "attributeDataType": {
@@ -266,7 +266,7 @@
                     "type": "string"
                   },
                   "numberAttributeConstraints": {
-                    "description": "The minimum and maximum values of an attribute that is of the number data type.",
+                    "description": "The minimum and maximum values of an attribute that is of the number data\ntype.",
                     "properties": {
                       "maxValue": {
                         "type": "string"
@@ -305,7 +305,7 @@
               "type": "string"
             },
             "smsConfiguration": {
-              "description": "The SMS configuration with the settings that your Amazon Cognito user pool must use to send an SMS message from your Amazon Web Services account through Amazon Simple Notification Service. To send SMS messages with Amazon SNS in the Amazon Web Services Region that you want, the Amazon Cognito user pool uses an Identity and Access Management (IAM) role in your Amazon Web Services account.",
+              "description": "The SMS configuration with the settings that your Amazon Cognito user pool\nmust use to send an SMS message from your Amazon Web Services account through\nAmazon Simple Notification Service. To send SMS messages with Amazon SNS\nin the Amazon Web Services Region that you want, the Amazon Cognito user\npool uses an Identity and Access Management (IAM) role in your Amazon Web\nServices account.",
               "properties": {
                 "externalID": {
                   "type": "string"
@@ -335,7 +335,7 @@
               "additionalProperties": false
             },
             "userAttributeUpdateSettings": {
-              "description": "The settings for updates to user attributes. These settings include the property AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For more information, see Verifying updates to email addresses and phone numbers (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates).",
+              "description": "The settings for updates to user attributes. These settings include the property\nAttributesRequireVerificationBeforeUpdate, a user-pool setting that tells\nAmazon Cognito how to handle changes to the value of your users' email address\nand phone number attributes. For more information, see Verifying updates\nto email addresses and phone numbers (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates).",
               "properties": {
                 "attributesRequireVerificationBeforeUpdate": {
                   "items": {
@@ -348,7 +348,7 @@
               "additionalProperties": false
             },
             "userPoolAddOns": {
-              "description": "User pool add-ons. Contains settings for activation of advanced security features. To log user security information but take no action, set to AUDIT. To configure automatic security responses to risky traffic to your user pool, set to ENFORCED. \n For more information, see Adding advanced security to a user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html).",
+              "description": "User pool add-ons. Contains settings for activation of advanced security\nfeatures. To log user security information but take no action, set to AUDIT.\nTo configure automatic security responses to risky traffic to your user pool,\nset to ENFORCED.\n\nFor more information, see Adding advanced security to a user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html).",
               "properties": {
                 "advancedSecurityMode": {
                   "type": "string"
@@ -361,18 +361,18 @@
               "additionalProperties": {
                 "type": "string"
               },
-              "description": "The tag keys and values to assign to the user pool. A tag is a label that you can use to categorize and manage user pools in different ways, such as by purpose, owner, environment, or other criteria.",
+              "description": "The tag keys and values to assign to the user pool. A tag is a label that\nyou can use to categorize and manage user pools in different ways, such as\nby purpose, owner, environment, or other criteria.",
               "type": "object"
             },
             "usernameAttributes": {
-              "description": "Specifies whether a user can use an email address or phone number as a username when they sign up.",
+              "description": "Specifies whether a user can use an email address or phone number as a username\nwhen they sign up.",
               "items": {
                 "type": "string"
               },
               "type": "array"
             },
             "usernameConfiguration": {
-              "description": "Case sensitivity on the username input for the selected sign-in option. When case sensitivity is set to False (case insensitive), users can sign in with any combination of capital and lowercase letters. For example, username, USERNAME, or UserName, or for email, email@example.com or EMaiL@eXamplE.Com. For most use cases, set case sensitivity to False (case insensitive) as a best practice. When usernames and email addresses are case insensitive, Amazon Cognito treats any variation in case as the same user, and prevents a case variation from being assigned to the same attribute for a different user. \n This configuration is immutable after you set it. For more information, see UsernameConfigurationType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html).",
+              "description": "Case sensitivity on the username input for the selected sign-in option. When\ncase sensitivity is set to False (case insensitive), users can sign in with\nany combination of capital and lowercase letters. For example, username,\nUSERNAME, or UserName, or for email, email@example.com or EMaiL@eXamplE.Com.\nFor most use cases, set case sensitivity to False (case insensitive) as a\nbest practice. When usernames and email addresses are case insensitive, Amazon\nCognito treats any variation in case as the same user, and prevents a case\nvariation from being assigned to the same attribute for a different user.\n\nThis configuration is immutable after you set it. For more information, see\nUsernameConfigurationType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html).",
               "properties": {
                 "caseSensitive": {
                   "type": "boolean"
@@ -382,7 +382,7 @@
               "additionalProperties": false
             },
             "verificationMessageTemplate": {
-              "description": "The template for the verification message that the user sees when the app requests permission to access the user's information.",
+              "description": "The template for the verification message that the user sees when the app\nrequests permission to access the user's information.",
               "properties": {
                 "defaultEmailOption": {
                   "type": "string"
@@ -418,9 +418,9 @@
           "default": [
             "*"
           ],
-          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out through a Crossplane feature flag. ManagementPolicies specify the array of actions Crossplane is allowed to take on the managed and external resources. This field is planned to replace the DeletionPolicy field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. If both are custom, the DeletionPolicy field will be ignored. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223 and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
+          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out\nthrough a Crossplane feature flag.\nManagementPolicies specify the array of actions Crossplane is allowed to\ntake on the managed and external resources.\nThis field is planned to replace the DeletionPolicy field in a future\nrelease. Currently, both could be set independently and non-default\nvalues would be honored if the feature flag is enabled. If both are\ncustom, the DeletionPolicy field will be ignored.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223\nand this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
           "items": {
-            "description": "A ManagementAction represents an action that the Crossplane controllers can take on an external resource.",
+            "description": "A ManagementAction represents an action that the Crossplane controllers\ncan take on an external resource.",
             "enum": [
               "Observe",
               "Create",
@@ -437,7 +437,7 @@
           "default": {
             "name": "default"
           },
-          "description": "ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.",
+          "description": "ProviderConfigReference specifies how the provider that will be used to\ncreate, observe, update, and delete this managed resource should be\nconfigured.",
           "properties": {
             "name": {
               "description": "Name of the referenced object.",
@@ -448,7 +448,7 @@
               "properties": {
                 "resolution": {
                   "default": "Required",
-                  "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                  "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                   "enum": [
                     "Required",
                     "Optional"
@@ -456,7 +456,7 @@
                   "type": "string"
                 },
                 "resolve": {
-                  "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                  "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                   "enum": [
                     "Always",
                     "IfNotPresent"
@@ -475,13 +475,13 @@
           "additionalProperties": false
         },
         "publishConnectionDetailsTo": {
-          "description": "PublishConnectionDetailsTo specifies the connection secret config which contains a name, metadata and a reference to secret store config to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.",
+          "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
           "properties": {
             "configRef": {
               "default": {
                 "name": "default"
               },
-              "description": "SecretStoreConfigRef specifies which secret store config should be used for this ConnectionSecret.",
+              "description": "SecretStoreConfigRef specifies which secret store config should be used\nfor this ConnectionSecret.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -492,7 +492,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -500,7 +500,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -525,18 +525,18 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Annotations are the annotations to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.annotations\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Annotations are the annotations to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.annotations\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "labels": {
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Labels are the labels/tags to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.labels\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Labels are the labels/tags to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.labels\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "type": {
-                  "description": "Type is the SecretType for the connection secret. - Only valid for Kubernetes Secret Stores.",
+                  "description": "Type is the SecretType for the connection secret.\n- Only valid for Kubernetes Secret Stores.",
                   "type": "string"
                 }
               },
@@ -555,7 +555,7 @@
           "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
-          "description": "WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource. This field is planned to be replaced in a future release in favor of PublishConnectionDetailsTo. Currently, both could be set independently and connection details would be published to both without affecting each other.",
+          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
           "properties": {
             "name": {
               "description": "Name of the secret.",
@@ -591,12 +591,12 @@
               "type": "string"
             },
             "creationDate": {
-              "description": "The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html) format, when the item was created.",
+              "description": "The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)\nformat, when the item was created.",
               "format": "date-time",
               "type": "string"
             },
             "customDomain": {
-              "description": "A custom domain name that you provide to Amazon Cognito. This parameter applies only if you use a custom domain to host the sign-up and sign-in pages for your application. An example of a custom domain name might be auth.example.com. \n For more information about adding a custom domain to your user pool, see Using Your Own Domain for the Hosted UI (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).",
+              "description": "A custom domain name that you provide to Amazon Cognito. This parameter applies\nonly if you use a custom domain to host the sign-up and sign-in pages for\nyour application. An example of a custom domain name might be auth.example.com.\n\nFor more information about adding a custom domain to your user pool, see\nUsing Your Own Domain for the Hosted UI (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).",
               "type": "string"
             },
             "domain": {
@@ -604,7 +604,7 @@
               "type": "string"
             },
             "emailConfigurationFailure": {
-              "description": "Deprecated. Review error codes from API requests with EventSource:cognito-idp.amazonaws.com in CloudTrail for information about problems with user pool email configuration.",
+              "description": "Deprecated. Review error codes from API requests with EventSource:cognito-idp.amazonaws.com\nin CloudTrail for information about problems with user pool email configuration.",
               "type": "string"
             },
             "estimatedNumberOfUsers": {
@@ -617,7 +617,7 @@
               "type": "string"
             },
             "lastModifiedDate": {
-              "description": "The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html) format, when the item was modified.",
+              "description": "The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)\nformat, when the item was modified.",
               "format": "date-time",
               "type": "string"
             },
@@ -626,7 +626,7 @@
               "type": "string"
             },
             "schemaAttributes": {
-              "description": "A list of the user attributes and their properties in your user pool. The attribute schema contains standard attributes, custom attributes with a custom: prefix, and developer attributes with a dev: prefix. For more information, see User pool attributes (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html). \n Developer-only attributes are a legacy feature of user pools, are read-only to all app clients. You can create and update developer-only attributes only with IAM-authenticated API operations. Use app client read/write permissions instead.",
+              "description": "A list of the user attributes and their properties in your user pool. The\nattribute schema contains standard attributes, custom attributes with a custom:\nprefix, and developer attributes with a dev: prefix. For more information,\nsee User pool attributes (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html).\n\nDeveloper-only attributes are a legacy feature of user pools, are read-only\nto all app clients. You can create and update developer-only attributes only\nwith IAM-authenticated API operations. Use app client read/write permissions\ninstead.",
               "items": {
                 "properties": {
                   "attributeDataType": {
@@ -642,7 +642,7 @@
                     "type": "string"
                   },
                   "numberAttributeConstraints": {
-                    "description": "The minimum and maximum values of an attribute that is of the number data type.",
+                    "description": "The minimum and maximum values of an attribute that is of the number data\ntype.",
                     "properties": {
                       "maxValue": {
                         "type": "string"
@@ -677,7 +677,7 @@
               "type": "array"
             },
             "smsConfigurationFailure": {
-              "description": "The reason why the SMS configuration can't send the messages to your users. \n This message might include comma-separated values to describe why your SMS configuration can't send messages to user pool end users. \n InvalidSmsRoleAccessPolicyException \n The Identity and Access Management role that Amazon Cognito uses to send SMS messages isn't properly configured. For more information, see SmsConfigurationType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html). \n SNSSandbox \n The Amazon Web Services account is in the SNS SMS Sandbox and messages will only reach verified end users. This parameter won\u2019t get populated with SNSSandbox if the user creating the user pool doesn\u2019t have SNS permissions. To learn how to move your Amazon Web Services account out of the sandbox, see Moving out of the SMS sandbox (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html).",
+              "description": "The reason why the SMS configuration can't send the messages to your users.\n\nThis message might include comma-separated values to describe why your SMS\nconfiguration can't send messages to user pool end users.\n\nInvalidSmsRoleAccessPolicyException\n\nThe Identity and Access Management role that Amazon Cognito uses to send\nSMS messages isn't properly configured. For more information, see SmsConfigurationType\n(https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html).\n\nSNSSandbox\n\nThe Amazon Web Services account is in the SNS SMS Sandbox and messages will\nonly reach verified end users. This parameter won\u2019t get populated with\nSNSSandbox if the user creating the user pool doesn\u2019t have SNS permissions.\nTo learn how to move your Amazon Web Services account out of the sandbox,\nsee Moving out of the SMS sandbox (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html).",
               "type": "string"
             },
             "status": {
@@ -694,13 +694,18 @@
             "description": "A Condition that may apply to a resource.",
             "properties": {
               "lastTransitionTime": {
-                "description": "LastTransitionTime is the last time this condition transitioned from one status to another.",
+                "description": "LastTransitionTime is the last time this condition transitioned from one\nstatus to another.",
                 "format": "date-time",
                 "type": "string"
               },
               "message": {
-                "description": "A Message containing details about this condition's last transition from one status to another, if any.",
+                "description": "A Message containing details about this condition's last transition from\none status to another, if any.",
                 "type": "string"
+              },
+              "observedGeneration": {
+                "description": "ObservedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.",
+                "format": "int64",
+                "type": "integer"
               },
               "reason": {
                 "description": "A Reason for this condition's last transition from one status to another.",
@@ -711,7 +716,7 @@
                 "type": "string"
               },
               "type": {
-                "description": "Type of this condition. At most one of each condition type may apply to a resource at any point in time.",
+                "description": "Type of this condition. At most one of each condition type may apply to\na resource at any point in time.",
                 "type": "string"
               }
             },
@@ -729,6 +734,11 @@
             "type"
           ],
           "x-kubernetes-list-type": "map"
+        },
+        "observedGeneration": {
+          "description": "ObservedGeneration is the latest metadata.generation\nwhich resulted in either a ready state, or stalled due to error\nit can not recover from without human intervention.",
+          "format": "int64",
+          "type": "integer"
         }
       },
       "type": "object",

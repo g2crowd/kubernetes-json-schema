@@ -1008,6 +1008,22 @@
                         "type": "object",
                         "additionalProperties": false
                       },
+                      "plugin": {
+                        "properties": {
+                          "config": {
+                            "type": "object",
+                            "x-kubernetes-preserve-unknown-fields": true
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name"
+                        ],
+                        "type": "object",
+                        "additionalProperties": false
+                      },
                       "setCanaryScale": {
                         "properties": {
                           "matchTrafficWeight": {
@@ -1450,6 +1466,12 @@
                         },
                         "annotationPrefix": {
                           "type": "string"
+                        },
+                        "canaryIngressAnnotations": {
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "type": "object"
                         },
                         "stableIngress": {
                           "type": "string"
@@ -5987,6 +6009,62 @@
             },
             "stablePingPong": {
               "type": "string"
+            },
+            "stepPluginStatuses": {
+              "items": {
+                "properties": {
+                  "backoff": {
+                    "type": "string"
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "executions": {
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "finishedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "index": {
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "operation": {
+                    "type": "string"
+                  },
+                  "phase": {
+                    "type": "string"
+                  },
+                  "startedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "object",
+                    "x-kubernetes-preserve-unknown-fields": true
+                  },
+                  "updatedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "index",
+                  "name",
+                  "operation"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              },
+              "type": "array"
             },
             "weights": {
               "properties": {

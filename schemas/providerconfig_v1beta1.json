@@ -124,9 +124,9 @@
               "enum": [
                 "None",
                 "Secret",
-                "InjectedIdentity",
                 "IRSA",
                 "WebIdentity",
+                "PodIdentity",
                 "Upbound"
               ],
               "type": "string"
@@ -291,7 +291,7 @@
           "description": "Endpoint is where you can override the default endpoint configuration\nof AWS calls made by the provider.",
           "properties": {
             "hostnameImmutable": {
-              "description": "Specifies if the endpoint's hostname can be modified by the SDK's API\nclient.\n\n\nIf the hostname is mutable the SDK API clients may modify any part of\nthe hostname based on the requirements of the API, (e.g. adding, or\nremoving content in the hostname). Such as, Amazon S3 API client\nprefixing \"bucketname\" to the hostname, or changing the\nhostname service name component from \"s3.\" to \"s3-accesspoint.dualstack.\"\nfor the dualstack endpoint of an S3 Accesspoint resource.\n\n\nCare should be taken when providing a custom endpoint for an API. If the\nendpoint hostname is mutable, and the client cannot modify the endpoint\ncorrectly, the operation call will most likely fail, or have undefined\nbehavior.\n\n\nIf hostname is immutable, the SDK API clients will not modify the\nhostname of the URL. This may cause the API client not to function\ncorrectly if the API requires the operation specific hostname values\nto be used by the client.\n\n\nThis flag does not modify the API client's behavior if this endpoint\nwill be used instead of Endpoint Discovery, or if the endpoint will be\nused to perform Endpoint Discovery. That behavior is configured via the\nAPI Client's Options.\nNote that this is effective only for resources that use AWS SDK v2.",
+              "description": "Specifies if the endpoint's hostname can be modified by the SDK's API\nclient.\n\nIf the hostname is mutable the SDK API clients may modify any part of\nthe hostname based on the requirements of the API, (e.g. adding, or\nremoving content in the hostname). Such as, Amazon S3 API client\nprefixing \"bucketname\" to the hostname, or changing the\nhostname service name component from \"s3.\" to \"s3-accesspoint.dualstack.\"\nfor the dualstack endpoint of an S3 Accesspoint resource.\n\nCare should be taken when providing a custom endpoint for an API. If the\nendpoint hostname is mutable, and the client cannot modify the endpoint\ncorrectly, the operation call will most likely fail, or have undefined\nbehavior.\n\nIf hostname is immutable, the SDK API clients will not modify the\nhostname of the URL. This may cause the API client not to function\ncorrectly if the API requires the operation specific hostname values\nto be used by the client.\n\nThis flag does not modify the API client's behavior if this endpoint\nwill be used instead of Endpoint Discovery, or if the endpoint will be\nused to perform Endpoint Discovery. That behavior is configured via the\nAPI Client's Options.\nNote that this is effective only for resources that use AWS SDK v2.",
               "type": "boolean"
             },
             "partitionId": {
@@ -359,7 +359,8 @@
                   "description": "You can provide a static URL that will be used regardless of the service\nand region by choosing Static type. Alternatively, you can provide\nconfiguration for dynamically resolving the URL with the config you provide\nonce you set the type as Dynamic.",
                   "enum": [
                     "Static",
-                    "Dynamic"
+                    "Dynamic",
+                    "Auto"
                   ],
                   "type": "string"
                 }

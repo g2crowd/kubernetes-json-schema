@@ -31,8 +31,8 @@
               "type": "boolean"
             },
             "atRestEncryptionEnabled": {
-              "description": "Whether to enable encryption at rest.",
-              "type": "boolean"
+              "description": "Whether to enable encryption at rest.\nWhen engine is redis, default is false.\nWhen engine is valkey, default is true.",
+              "type": "string"
             },
             "authTokenSecretRef": {
               "description": "Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.\nIf you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.",
@@ -59,7 +59,7 @@
               "additionalProperties": false
             },
             "authTokenUpdateStrategy": {
-              "description": "Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.",
+              "description": "Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.",
               "type": "string"
             },
             "autoGenerateAuthToken": {
@@ -67,23 +67,27 @@
               "type": "boolean"
             },
             "autoMinorVersionUpgrade": {
-              "description": "Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.\nOnly supported for engine type \"redis\" and if the engine version is 6 or higher.\nDefaults to true.",
+              "description": "Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.\nOnly supported for engine types \"redis\" and \"valkey\" and if the engine version is 6 or higher.\nDefaults to true.",
               "type": "string"
             },
             "automaticFailoverEnabled": {
               "description": "Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, num_cache_clusters must be greater than 1. Must be enabled for Redis (cluster mode enabled) replication groups. Defaults to false.",
               "type": "boolean"
             },
+            "clusterMode": {
+              "description": "Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible",
+              "type": "string"
+            },
             "dataTieringEnabled": {
               "description": "Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.",
               "type": "boolean"
             },
             "description": {
-              "description": "created description for the replication group. Must not be empty.",
+              "description": "User-created description for the replication group. Must not be empty.",
               "type": "string"
             },
             "engine": {
-              "description": "Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.",
+              "description": "Name of the cache engine to be used for the clusters in this replication group.\nValid values are redis or valkey.\nDefault is redis.",
               "type": "string"
             },
             "engineVersion": {
@@ -97,6 +101,86 @@
             "globalReplicationGroupId": {
               "description": "The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter cannot be set.",
               "type": "string"
+            },
+            "globalReplicationGroupIdRef": {
+              "description": "Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.",
+              "properties": {
+                "name": {
+                  "description": "Name of the referenced object.",
+                  "type": "string"
+                },
+                "policy": {
+                  "description": "Policies for referencing.",
+                  "properties": {
+                    "resolution": {
+                      "default": "Required",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
+                      "enum": [
+                        "Required",
+                        "Optional"
+                      ],
+                      "type": "string"
+                    },
+                    "resolve": {
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
+                      "enum": [
+                        "Always",
+                        "IfNotPresent"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "globalReplicationGroupIdSelector": {
+              "description": "Selector for a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.",
+              "properties": {
+                "matchControllerRef": {
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
+                  "type": "boolean"
+                },
+                "matchLabels": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "MatchLabels ensures an object with matching labels is selected.",
+                  "type": "object"
+                },
+                "policy": {
+                  "description": "Policies for selection.",
+                  "properties": {
+                    "resolution": {
+                      "default": "Required",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
+                      "enum": [
+                        "Required",
+                        "Optional"
+                      ],
+                      "type": "string"
+                    },
+                    "resolve": {
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
+                      "enum": [
+                        "Always",
+                        "IfNotPresent"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
             },
             "ipDiscovery": {
               "description": "The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.",
@@ -187,7 +271,7 @@
               "additionalProperties": false
             },
             "logDeliveryConfiguration": {
-              "description": "Specifies the destination and format of Redis SLOWLOG or Redis Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.",
+              "description": "Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.",
               "items": {
                 "properties": {
                   "destination": {
@@ -213,11 +297,11 @@
               "type": "array"
             },
             "maintenanceWindow": {
-              "description": "ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00",
+              "description": "Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00",
               "type": "string"
             },
             "multiAzEnabled": {
-              "description": "Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.",
+              "description": "Specifies whether to enable Multi-AZ Support for the replication group.\nIf true, automatic_failover_enabled must also be enabled.\nDefaults to false.",
               "type": "boolean"
             },
             "networkType": {
@@ -225,11 +309,11 @@
               "type": "string"
             },
             "nodeType": {
-              "description": "Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.",
+              "description": "Instance class to be used.\nSee AWS documentation for information on supported node types and guidance on selecting node types.\nRequired unless global_replication_group_id is set.\nCannot be set if global_replication_group_id is set.",
               "type": "string"
             },
             "notificationTopicArn": {
-              "description": "east-1:012345678999:my_sns_topic",
+              "description": "ARN of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic",
               "type": "string"
             },
             "numCacheClusters": {
@@ -237,7 +321,7 @@
               "type": "number"
             },
             "numNodeGroups": {
-              "description": "Number of node groups (shards) for this Redis replication group.\nChanging this number will trigger a resizing operation before other settings modifications.",
+              "description": "Number of node groups (shards) for this Redis replication group.\nChanging this number will trigger a resizing operation before other settings modifications.\nConflicts with num_cache_clusters.",
               "type": "number"
             },
             "parameterGroupName": {
@@ -245,7 +329,7 @@
               "type": "string"
             },
             "port": {
-              "description": "\u2013  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
+              "description": "Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
               "type": "number"
             },
             "preferredCacheClusterAzs": {
@@ -256,11 +340,11 @@
               "type": "array"
             },
             "region": {
-              "description": "Region is the region you'd like your resource to be created in.",
+              "description": "Region where this resource will be managed. Defaults to the Region set in the provider configuration.\nRegion is the region you'd like your resource to be created in.",
               "type": "string"
             },
             "replicasPerNodeGroup": {
-              "description": "Number of replica nodes in each node group.\nChanging this number will trigger a resizing operation before other settings modifications.\nValid values are 0 to 5.",
+              "description": "Number of replica nodes in each node group.\nChanging this number will trigger a resizing operation before other settings modifications.\nValid values are 0 to 5.\nConflicts with num_cache_clusters.\nCan only be set if num_node_groups is set.",
               "type": "number"
             },
             "securityGroupIdRefs": {
@@ -364,7 +448,7 @@
               "x-kubernetes-list-type": "set"
             },
             "snapshotArns": {
-              "description": "\u2013  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
+              "description": "List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
               "items": {
                 "type": "string"
               },
@@ -506,8 +590,8 @@
               "type": "boolean"
             },
             "atRestEncryptionEnabled": {
-              "description": "Whether to enable encryption at rest.",
-              "type": "boolean"
+              "description": "Whether to enable encryption at rest.\nWhen engine is redis, default is false.\nWhen engine is valkey, default is true.",
+              "type": "string"
             },
             "authTokenSecretRef": {
               "description": "Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.\nIf you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.",
@@ -534,27 +618,31 @@
               "additionalProperties": false
             },
             "authTokenUpdateStrategy": {
-              "description": "Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.",
+              "description": "Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.",
               "type": "string"
             },
             "autoMinorVersionUpgrade": {
-              "description": "Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.\nOnly supported for engine type \"redis\" and if the engine version is 6 or higher.\nDefaults to true.",
+              "description": "Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.\nOnly supported for engine types \"redis\" and \"valkey\" and if the engine version is 6 or higher.\nDefaults to true.",
               "type": "string"
             },
             "automaticFailoverEnabled": {
               "description": "Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, num_cache_clusters must be greater than 1. Must be enabled for Redis (cluster mode enabled) replication groups. Defaults to false.",
               "type": "boolean"
             },
+            "clusterMode": {
+              "description": "Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible",
+              "type": "string"
+            },
             "dataTieringEnabled": {
               "description": "Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.",
               "type": "boolean"
             },
             "description": {
-              "description": "created description for the replication group. Must not be empty.",
+              "description": "User-created description for the replication group. Must not be empty.",
               "type": "string"
             },
             "engine": {
-              "description": "Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.",
+              "description": "Name of the cache engine to be used for the clusters in this replication group.\nValid values are redis or valkey.\nDefault is redis.",
               "type": "string"
             },
             "engineVersion": {
@@ -568,6 +656,86 @@
             "globalReplicationGroupId": {
               "description": "The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter cannot be set.",
               "type": "string"
+            },
+            "globalReplicationGroupIdRef": {
+              "description": "Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.",
+              "properties": {
+                "name": {
+                  "description": "Name of the referenced object.",
+                  "type": "string"
+                },
+                "policy": {
+                  "description": "Policies for referencing.",
+                  "properties": {
+                    "resolution": {
+                      "default": "Required",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
+                      "enum": [
+                        "Required",
+                        "Optional"
+                      ],
+                      "type": "string"
+                    },
+                    "resolve": {
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
+                      "enum": [
+                        "Always",
+                        "IfNotPresent"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "globalReplicationGroupIdSelector": {
+              "description": "Selector for a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.",
+              "properties": {
+                "matchControllerRef": {
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
+                  "type": "boolean"
+                },
+                "matchLabels": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "MatchLabels ensures an object with matching labels is selected.",
+                  "type": "object"
+                },
+                "policy": {
+                  "description": "Policies for selection.",
+                  "properties": {
+                    "resolution": {
+                      "default": "Required",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
+                      "enum": [
+                        "Required",
+                        "Optional"
+                      ],
+                      "type": "string"
+                    },
+                    "resolve": {
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
+                      "enum": [
+                        "Always",
+                        "IfNotPresent"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
             },
             "ipDiscovery": {
               "description": "The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.",
@@ -658,7 +826,7 @@
               "additionalProperties": false
             },
             "logDeliveryConfiguration": {
-              "description": "Specifies the destination and format of Redis SLOWLOG or Redis Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.",
+              "description": "Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.",
               "items": {
                 "properties": {
                   "destination": {
@@ -684,11 +852,11 @@
               "type": "array"
             },
             "maintenanceWindow": {
-              "description": "ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00",
+              "description": "Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00",
               "type": "string"
             },
             "multiAzEnabled": {
-              "description": "Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.",
+              "description": "Specifies whether to enable Multi-AZ Support for the replication group.\nIf true, automatic_failover_enabled must also be enabled.\nDefaults to false.",
               "type": "boolean"
             },
             "networkType": {
@@ -696,11 +864,11 @@
               "type": "string"
             },
             "nodeType": {
-              "description": "Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.",
+              "description": "Instance class to be used.\nSee AWS documentation for information on supported node types and guidance on selecting node types.\nRequired unless global_replication_group_id is set.\nCannot be set if global_replication_group_id is set.",
               "type": "string"
             },
             "notificationTopicArn": {
-              "description": "east-1:012345678999:my_sns_topic",
+              "description": "ARN of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic",
               "type": "string"
             },
             "numCacheClusters": {
@@ -708,7 +876,7 @@
               "type": "number"
             },
             "numNodeGroups": {
-              "description": "Number of node groups (shards) for this Redis replication group.\nChanging this number will trigger a resizing operation before other settings modifications.",
+              "description": "Number of node groups (shards) for this Redis replication group.\nChanging this number will trigger a resizing operation before other settings modifications.\nConflicts with num_cache_clusters.",
               "type": "number"
             },
             "parameterGroupName": {
@@ -716,7 +884,7 @@
               "type": "string"
             },
             "port": {
-              "description": "\u2013  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
+              "description": "Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
               "type": "number"
             },
             "preferredCacheClusterAzs": {
@@ -727,7 +895,7 @@
               "type": "array"
             },
             "replicasPerNodeGroup": {
-              "description": "Number of replica nodes in each node group.\nChanging this number will trigger a resizing operation before other settings modifications.\nValid values are 0 to 5.",
+              "description": "Number of replica nodes in each node group.\nChanging this number will trigger a resizing operation before other settings modifications.\nValid values are 0 to 5.\nConflicts with num_cache_clusters.\nCan only be set if num_node_groups is set.",
               "type": "number"
             },
             "securityGroupIdRefs": {
@@ -831,7 +999,7 @@
               "x-kubernetes-list-type": "set"
             },
             "snapshotArns": {
-              "description": "\u2013  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
+              "description": "List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
               "items": {
                 "type": "string"
               },
@@ -1022,88 +1190,8 @@
           "type": "object",
           "additionalProperties": false
         },
-        "publishConnectionDetailsTo": {
-          "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
-          "properties": {
-            "configRef": {
-              "default": {
-                "name": "default"
-              },
-              "description": "SecretStoreConfigRef specifies which secret store config should be used\nfor this ConnectionSecret.",
-              "properties": {
-                "name": {
-                  "description": "Name of the referenced object.",
-                  "type": "string"
-                },
-                "policy": {
-                  "description": "Policies for referencing.",
-                  "properties": {
-                    "resolution": {
-                      "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                      "enum": [
-                        "Required",
-                        "Optional"
-                      ],
-                      "type": "string"
-                    },
-                    "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                      "enum": [
-                        "Always",
-                        "IfNotPresent"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "type": "object",
-                  "additionalProperties": false
-                }
-              },
-              "required": [
-                "name"
-              ],
-              "type": "object",
-              "additionalProperties": false
-            },
-            "metadata": {
-              "description": "Metadata is the metadata for connection secret.",
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Annotations are the annotations to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.annotations\".\n- It is up to Secret Store implementation for others store types.",
-                  "type": "object"
-                },
-                "labels": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Labels are the labels/tags to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.labels\".\n- It is up to Secret Store implementation for others store types.",
-                  "type": "object"
-                },
-                "type": {
-                  "description": "Type is the SecretType for the connection secret.\n- Only valid for Kubernetes Secret Stores.",
-                  "type": "string"
-                }
-              },
-              "type": "object",
-              "additionalProperties": false
-            },
-            "name": {
-              "description": "Name is the name of the connection secret.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "name"
-          ],
-          "type": "object",
-          "additionalProperties": false
-        },
         "writeConnectionSecretToRef": {
-          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
+          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
           "properties": {
             "name": {
               "description": "Name of the secret.",
@@ -1126,6 +1214,12 @@
         "forProvider"
       ],
       "type": "object",
+      "x-kubernetes-validations": [
+        {
+          "message": "spec.forProvider.description is a required parameter",
+          "rule": "!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || (has(self.initProvider) && has(self.initProvider.description))"
+        }
+      ],
       "additionalProperties": false
     },
     "status": {
@@ -1142,15 +1236,15 @@
               "type": "string"
             },
             "atRestEncryptionEnabled": {
-              "description": "Whether to enable encryption at rest.",
-              "type": "boolean"
+              "description": "Whether to enable encryption at rest.\nWhen engine is redis, default is false.\nWhen engine is valkey, default is true.",
+              "type": "string"
             },
             "authTokenUpdateStrategy": {
-              "description": "Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.",
+              "description": "Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.",
               "type": "string"
             },
             "autoMinorVersionUpgrade": {
-              "description": "Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.\nOnly supported for engine type \"redis\" and if the engine version is 6 or higher.\nDefaults to true.",
+              "description": "Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.\nOnly supported for engine types \"redis\" and \"valkey\" and if the engine version is 6 or higher.\nDefaults to true.",
               "type": "string"
             },
             "automaticFailoverEnabled": {
@@ -1161,6 +1255,10 @@
               "description": "Indicates if cluster mode is enabled.",
               "type": "boolean"
             },
+            "clusterMode": {
+              "description": "Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible",
+              "type": "string"
+            },
             "configurationEndpointAddress": {
               "description": "Address of the replication group configuration endpoint when cluster mode is enabled.",
               "type": "string"
@@ -1170,11 +1268,11 @@
               "type": "boolean"
             },
             "description": {
-              "description": "created description for the replication group. Must not be empty.",
+              "description": "User-created description for the replication group. Must not be empty.",
               "type": "string"
             },
             "engine": {
-              "description": "Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.",
+              "description": "Name of the cache engine to be used for the clusters in this replication group.\nValid values are redis or valkey.\nDefault is redis.",
               "type": "string"
             },
             "engineVersion": {
@@ -1206,7 +1304,7 @@
               "type": "string"
             },
             "logDeliveryConfiguration": {
-              "description": "Specifies the destination and format of Redis SLOWLOG or Redis Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.",
+              "description": "Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.",
               "items": {
                 "properties": {
                   "destination": {
@@ -1232,7 +1330,7 @@
               "type": "array"
             },
             "maintenanceWindow": {
-              "description": "ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00",
+              "description": "Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00",
               "type": "string"
             },
             "memberClusters": {
@@ -1244,7 +1342,7 @@
               "x-kubernetes-list-type": "set"
             },
             "multiAzEnabled": {
-              "description": "Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.",
+              "description": "Specifies whether to enable Multi-AZ Support for the replication group.\nIf true, automatic_failover_enabled must also be enabled.\nDefaults to false.",
               "type": "boolean"
             },
             "networkType": {
@@ -1252,11 +1350,11 @@
               "type": "string"
             },
             "nodeType": {
-              "description": "Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.",
+              "description": "Instance class to be used.\nSee AWS documentation for information on supported node types and guidance on selecting node types.\nRequired unless global_replication_group_id is set.\nCannot be set if global_replication_group_id is set.",
               "type": "string"
             },
             "notificationTopicArn": {
-              "description": "east-1:012345678999:my_sns_topic",
+              "description": "ARN of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic",
               "type": "string"
             },
             "numCacheClusters": {
@@ -1264,7 +1362,7 @@
               "type": "number"
             },
             "numNodeGroups": {
-              "description": "Number of node groups (shards) for this Redis replication group.\nChanging this number will trigger a resizing operation before other settings modifications.",
+              "description": "Number of node groups (shards) for this Redis replication group.\nChanging this number will trigger a resizing operation before other settings modifications.\nConflicts with num_cache_clusters.",
               "type": "number"
             },
             "parameterGroupName": {
@@ -1272,7 +1370,7 @@
               "type": "string"
             },
             "port": {
-              "description": "\u2013  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
+              "description": "Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.",
               "type": "number"
             },
             "preferredCacheClusterAzs": {
@@ -1290,8 +1388,12 @@
               "description": "(Redis only) Address of the endpoint for the reader node in the replication group, if the cluster mode is disabled.",
               "type": "string"
             },
+            "region": {
+              "description": "Region where this resource will be managed. Defaults to the Region set in the provider configuration.\nRegion is the region you'd like your resource to be created in.",
+              "type": "string"
+            },
             "replicasPerNodeGroup": {
-              "description": "Number of replica nodes in each node group.\nChanging this number will trigger a resizing operation before other settings modifications.\nValid values are 0 to 5.",
+              "description": "Number of replica nodes in each node group.\nChanging this number will trigger a resizing operation before other settings modifications.\nValid values are 0 to 5.\nConflicts with num_cache_clusters.\nCan only be set if num_node_groups is set.",
               "type": "number"
             },
             "securityGroupIds": {
@@ -1311,7 +1413,7 @@
               "x-kubernetes-list-type": "set"
             },
             "snapshotArns": {
-              "description": "\u2013  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
+              "description": "List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.",
               "items": {
                 "type": "string"
               },
