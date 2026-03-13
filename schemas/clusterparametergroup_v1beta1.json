@@ -51,7 +51,8 @@
                     "type": "string"
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "additionalProperties": false
               },
               "type": "array"
             },
@@ -71,7 +72,8 @@
           "required": [
             "region"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "initProvider": {
           "description": "THIS IS A BETA FIELD. It will be honored\nunless the Management Policies feature flag is disabled.\nInitProvider holds the same fields as ForProvider, with the exception\nof Identifier and other resource reference fields. The fields that are\nin InitProvider are merged into ForProvider when the resource is created.\nThe same fields are also added to the terraform ignore_changes hook, to\navoid updating them after creation. This is useful for fields that are\nrequired on creation, but we do not desire to update them after creation,\nfor example because of an external controller is managing them, like an\nautoscaler.",
@@ -101,7 +103,8 @@
                     "type": "string"
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "additionalProperties": false
               },
               "type": "array"
             },
@@ -114,7 +117,8 @@
               "x-kubernetes-map-type": "granular"
             }
           },
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "managementPolicies": {
           "default": [
@@ -166,13 +170,15 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             }
           },
           "required": [
             "name"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "publishConnectionDetailsTo": {
           "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
@@ -208,13 +214,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "metadata": {
               "description": "Metadata is the metadata for connection secret.",
@@ -238,7 +246,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "name": {
               "description": "Name is the name of the connection secret.",
@@ -248,7 +257,8 @@
           "required": [
             "name"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
           "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
@@ -266,7 +276,8 @@
             "name",
             "namespace"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         }
       },
       "required": [
@@ -278,7 +289,8 @@
           "message": "spec.forProvider.family is a required parameter",
           "rule": "!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family) || (has(self.initProvider) && has(self.initProvider.family))"
         }
-      ]
+      ],
+      "additionalProperties": false
     },
     "status": {
       "description": "ClusterParameterGroupStatus defines the observed state of ClusterParameterGroup.",
@@ -318,7 +330,8 @@
                     "type": "string"
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "additionalProperties": false
               },
               "type": "array"
             },
@@ -339,7 +352,8 @@
               "x-kubernetes-map-type": "granular"
             }
           },
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "conditions": {
           "description": "Conditions of the resource.",
@@ -379,7 +393,8 @@
               "status",
               "type"
             ],
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false
           },
           "type": "array",
           "x-kubernetes-list-map-keys": [
@@ -393,7 +408,8 @@
           "type": "integer"
         }
       },
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false
     }
   },
   "required": [

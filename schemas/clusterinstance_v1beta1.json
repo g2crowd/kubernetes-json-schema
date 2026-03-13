@@ -74,13 +74,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "clusterIdentifierSelector": {
               "description": "Selector for a Cluster in rds to populate clusterIdentifier.",
@@ -117,10 +119,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "copyTagsToSnapshot": {
               "description": "defined tags from the DB instance to snapshots of the DB instance. Default false.",
@@ -162,13 +166,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbParameterGroupNameSelector": {
               "description": "Selector for a ParameterGroup in rds to populate dbParameterGroupName.",
@@ -205,10 +211,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSubnetGroupName": {
               "description": "Specifies the DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.",
@@ -242,13 +250,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSubnetGroupNameSelector": {
               "description": "Selector for a SubnetGroup in rds to populate dbSubnetGroupName.",
@@ -285,10 +295,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "engine": {
               "description": "Name of the database engine to be used for the RDS cluster instance.\nValid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).",
@@ -338,13 +350,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "monitoringRoleArnSelector": {
               "description": "Selector for a Role in iam to populate monitoringRoleArn.",
@@ -381,10 +395,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "performanceInsightsEnabled": {
               "description": "Specifies whether Performance Insights is enabled or not.",
@@ -422,13 +438,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "performanceInsightsKmsKeyIdSelector": {
               "description": "Selector for a Key in kms to populate performanceInsightsKmsKeyId.",
@@ -465,10 +483,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "performanceInsightsRetentionPeriod": {
               "description": "Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.",
@@ -506,7 +526,8 @@
           "required": [
             "region"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "initProvider": {
           "description": "THIS IS A BETA FIELD. It will be honored\nunless the Management Policies feature flag is disabled.\nInitProvider holds the same fields as ForProvider, with the exception\nof Identifier and other resource reference fields. The fields that are\nin InitProvider are merged into ForProvider when the resource is created.\nThe same fields are also added to the terraform ignore_changes hook, to\navoid updating them after creation. This is useful for fields that are\nrequired on creation, but we do not desire to update them after creation,\nfor example because of an external controller is managing them, like an\nautoscaler.",
@@ -559,13 +580,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "clusterIdentifierSelector": {
               "description": "Selector for a Cluster in rds to populate clusterIdentifier.",
@@ -602,10 +625,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "copyTagsToSnapshot": {
               "description": "defined tags from the DB instance to snapshots of the DB instance. Default false.",
@@ -647,13 +672,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbParameterGroupNameSelector": {
               "description": "Selector for a ParameterGroup in rds to populate dbParameterGroupName.",
@@ -690,10 +717,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSubnetGroupName": {
               "description": "Specifies the DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.",
@@ -727,13 +756,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSubnetGroupNameSelector": {
               "description": "Selector for a SubnetGroup in rds to populate dbSubnetGroupName.",
@@ -770,10 +801,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "engine": {
               "description": "Name of the database engine to be used for the RDS cluster instance.\nValid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).",
@@ -823,13 +856,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "monitoringRoleArnSelector": {
               "description": "Selector for a Role in iam to populate monitoringRoleArn.",
@@ -866,10 +901,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "performanceInsightsEnabled": {
               "description": "Specifies whether Performance Insights is enabled or not.",
@@ -907,13 +944,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "performanceInsightsKmsKeyIdSelector": {
               "description": "Selector for a Key in kms to populate performanceInsightsKmsKeyId.",
@@ -950,10 +989,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "performanceInsightsRetentionPeriod": {
               "description": "Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.",
@@ -984,7 +1025,8 @@
               "x-kubernetes-map-type": "granular"
             }
           },
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "managementPolicies": {
           "default": [
@@ -1036,13 +1078,15 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             }
           },
           "required": [
             "name"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "publishConnectionDetailsTo": {
           "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
@@ -1078,13 +1122,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "metadata": {
               "description": "Metadata is the metadata for connection secret.",
@@ -1108,7 +1154,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "name": {
               "description": "Name is the name of the connection secret.",
@@ -1118,7 +1165,8 @@
           "required": [
             "name"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
           "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
@@ -1136,7 +1184,8 @@
             "name",
             "namespace"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         }
       },
       "required": [
@@ -1152,7 +1201,8 @@
           "message": "spec.forProvider.instanceClass is a required parameter",
           "rule": "!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceClass) || (has(self.initProvider) && has(self.initProvider.instanceClass))"
         }
-      ]
+      ],
+      "additionalProperties": false
     },
     "status": {
       "description": "ClusterInstanceStatus defines the observed state of ClusterInstance.",
@@ -1296,11 +1346,12 @@
               "x-kubernetes-map-type": "granular"
             },
             "writer": {
-              "description": "– Boolean indicating if this instance is writable. False indicates this instance is a read replica.",
+              "description": "\u2013 Boolean indicating if this instance is writable. False indicates this instance is a read replica.",
               "type": "boolean"
             }
           },
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "conditions": {
           "description": "Conditions of the resource.",
@@ -1340,7 +1391,8 @@
               "status",
               "type"
             ],
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false
           },
           "type": "array",
           "x-kubernetes-list-map-keys": [
@@ -1354,7 +1406,8 @@
           "type": "integer"
         }
       },
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false
     }
   },
   "required": [

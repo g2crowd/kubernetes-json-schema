@@ -1,5 +1,5 @@
 {
-  "description": "SubnetGroup is the Schema for the SubnetGroups API. Provides an ElastiCache Subnet Group resource.",
+  "description": "SubnetGroup is the Schema for the SubnetGroups API. Provides an RDS DB subnet group resource.",
   "properties": {
     "apiVersion": {
       "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -27,7 +27,7 @@
         "forProvider": {
           "properties": {
             "description": {
-              "description": "\u2013  Description for the cache subnet group.",
+              "description": "The description of the DB subnet group.",
               "type": "string"
             },
             "region": {
@@ -119,7 +119,7 @@
               "additionalProperties": false
             },
             "subnetIds": {
-              "description": "\u2013  List of VPC Subnet IDs for the cache subnet group",
+              "description": "A list of VPC subnet IDs.",
               "items": {
                 "type": "string"
               },
@@ -145,7 +145,7 @@
           "description": "THIS IS A BETA FIELD. It will be honored\nunless the Management Policies feature flag is disabled.\nInitProvider holds the same fields as ForProvider, with the exception\nof Identifier and other resource reference fields. The fields that are\nin InitProvider are merged into ForProvider when the resource is created.\nThe same fields are also added to the terraform ignore_changes hook, to\navoid updating them after creation. This is useful for fields that are\nrequired on creation, but we do not desire to update them after creation,\nfor example because of an external controller is managing them, like an\nautoscaler.",
           "properties": {
             "description": {
-              "description": "\u2013  Description for the cache subnet group.",
+              "description": "The description of the DB subnet group.",
               "type": "string"
             },
             "subnetIdRefs": {
@@ -233,7 +233,7 @@
               "additionalProperties": false
             },
             "subnetIds": {
-              "description": "\u2013  List of VPC Subnet IDs for the cache subnet group",
+              "description": "A list of VPC subnet IDs.",
               "items": {
                 "type": "string"
               },
@@ -277,10 +277,6 @@
           },
           "description": "ProviderConfigReference specifies how the provider that will be used to\ncreate, observe, update, and delete this managed resource should be\nconfigured.",
           "properties": {
-            "kind": {
-              "description": "Kind of the referenced object.",
-              "type": "string"
-            },
             "name": {
               "description": "Name of the referenced object.",
               "type": "string"
@@ -428,17 +424,27 @@
         "atProvider": {
           "properties": {
             "arn": {
+              "description": "The ARN of the db subnet group.",
               "type": "string"
             },
             "description": {
-              "description": "\u2013  Description for the cache subnet group.",
+              "description": "The description of the DB subnet group.",
               "type": "string"
             },
             "id": {
+              "description": "The db subnet group name.",
               "type": "string"
             },
             "subnetIds": {
-              "description": "\u2013  List of VPC Subnet IDs for the cache subnet group",
+              "description": "A list of VPC subnet IDs.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "x-kubernetes-list-type": "set"
+            },
+            "supportedNetworkTypes": {
+              "description": "The network type of the db subnet group.",
               "items": {
                 "type": "string"
               },
@@ -462,7 +468,7 @@
               "x-kubernetes-map-type": "granular"
             },
             "vpcId": {
-              "description": "The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group.",
+              "description": "Provides the VPC ID of the DB subnet group.",
               "type": "string"
             }
           },

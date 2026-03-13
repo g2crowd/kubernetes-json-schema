@@ -33,86 +33,6 @@
               },
               "type": "array"
             },
-            "cidrBlocksRefs": {
-              "description": "References to VPC in ec2 to populate cidrBlocks.",
-              "items": {
-                "description": "A Reference to a named object.",
-                "properties": {
-                  "name": {
-                    "description": "Name of the referenced object.",
-                    "type": "string"
-                  },
-                  "policy": {
-                    "description": "Policies for referencing.",
-                    "properties": {
-                      "resolution": {
-                        "default": "Required",
-                        "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                        "enum": [
-                          "Required",
-                          "Optional"
-                        ],
-                        "type": "string"
-                      },
-                      "resolve": {
-                        "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                        "enum": [
-                          "Always",
-                          "IfNotPresent"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  }
-                },
-                "required": [
-                  "name"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "cidrBlocksSelector": {
-              "description": "Selector for a list of VPC in ec2 to populate cidrBlocks.",
-              "properties": {
-                "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
-                  "type": "boolean"
-                },
-                "matchLabels": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "MatchLabels ensures an object with matching labels is selected.",
-                  "type": "object"
-                },
-                "policy": {
-                  "description": "Policies for selection.",
-                  "properties": {
-                    "resolution": {
-                      "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                      "enum": [
-                        "Required",
-                        "Optional"
-                      ],
-                      "type": "string"
-                    },
-                    "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                      "enum": [
-                        "Always",
-                        "IfNotPresent"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              },
-              "type": "object"
-            },
             "description": {
               "description": "Description of the rule.",
               "type": "string"
@@ -127,86 +47,6 @@
                 "type": "string"
               },
               "type": "array"
-            },
-            "ipv6CidrBlocksRefs": {
-              "description": "References to VPC in ec2 to populate ipv6CidrBlocks.",
-              "items": {
-                "description": "A Reference to a named object.",
-                "properties": {
-                  "name": {
-                    "description": "Name of the referenced object.",
-                    "type": "string"
-                  },
-                  "policy": {
-                    "description": "Policies for referencing.",
-                    "properties": {
-                      "resolution": {
-                        "default": "Required",
-                        "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                        "enum": [
-                          "Required",
-                          "Optional"
-                        ],
-                        "type": "string"
-                      },
-                      "resolve": {
-                        "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                        "enum": [
-                          "Always",
-                          "IfNotPresent"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  }
-                },
-                "required": [
-                  "name"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "ipv6CidrBlocksSelector": {
-              "description": "Selector for a list of VPC in ec2 to populate ipv6CidrBlocks.",
-              "properties": {
-                "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
-                  "type": "boolean"
-                },
-                "matchLabels": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "MatchLabels ensures an object with matching labels is selected.",
-                  "type": "object"
-                },
-                "policy": {
-                  "description": "Policies for selection.",
-                  "properties": {
-                    "resolution": {
-                      "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                      "enum": [
-                        "Required",
-                        "Optional"
-                      ],
-                      "type": "string"
-                    },
-                    "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                      "enum": [
-                        "Always",
-                        "IfNotPresent"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              },
-              "type": "object"
             },
             "prefixListIdRefs": {
               "description": "References to ManagedPrefixList in ec2 to populate prefixListIds.",
@@ -238,13 +78,15 @@
                         "type": "string"
                       }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": false
                   }
                 },
                 "required": [
                   "name"
                 ],
-                "type": "object"
+                "type": "object",
+                "additionalProperties": false
               },
               "type": "array"
             },
@@ -283,10 +125,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "prefixListIds": {
               "description": "List of Prefix List IDs.",
@@ -300,7 +144,7 @@
               "type": "string"
             },
             "region": {
-              "description": "Region where this resource will be managed. Defaults to the Region set in the provider configuration.\nRegion is the region you'd like your resource to be created in.",
+              "description": "Region is the region you'd like your resource to be created in.",
               "type": "string"
             },
             "securityGroupId": {
@@ -335,13 +179,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "securityGroupIdSelector": {
               "description": "Selector for a SecurityGroup in ec2 to populate securityGroupId.",
@@ -378,10 +224,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "self": {
               "description": "Whether the security group itself will be added as a source to this ingress rule. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or source_security_group_id.",
@@ -419,13 +267,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "sourceSecurityGroupIdSelector": {
               "description": "Selector for a SecurityGroup in ec2 to populate sourceSecurityGroupId.",
@@ -462,10 +312,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "toPort": {
               "description": "End port (or ICMP code if protocol is \"icmp\").",
@@ -479,7 +331,8 @@
           "required": [
             "region"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "initProvider": {
           "description": "THIS IS A BETA FIELD. It will be honored\nunless the Management Policies feature flag is disabled.\nInitProvider holds the same fields as ForProvider, with the exception\nof Identifier and other resource reference fields. The fields that are\nin InitProvider are merged into ForProvider when the resource is created.\nThe same fields are also added to the terraform ignore_changes hook, to\navoid updating them after creation. This is useful for fields that are\nrequired on creation, but we do not desire to update them after creation,\nfor example because of an external controller is managing them, like an\nautoscaler.",
@@ -490,86 +343,6 @@
                 "type": "string"
               },
               "type": "array"
-            },
-            "cidrBlocksRefs": {
-              "description": "References to VPC in ec2 to populate cidrBlocks.",
-              "items": {
-                "description": "A Reference to a named object.",
-                "properties": {
-                  "name": {
-                    "description": "Name of the referenced object.",
-                    "type": "string"
-                  },
-                  "policy": {
-                    "description": "Policies for referencing.",
-                    "properties": {
-                      "resolution": {
-                        "default": "Required",
-                        "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                        "enum": [
-                          "Required",
-                          "Optional"
-                        ],
-                        "type": "string"
-                      },
-                      "resolve": {
-                        "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                        "enum": [
-                          "Always",
-                          "IfNotPresent"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  }
-                },
-                "required": [
-                  "name"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "cidrBlocksSelector": {
-              "description": "Selector for a list of VPC in ec2 to populate cidrBlocks.",
-              "properties": {
-                "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
-                  "type": "boolean"
-                },
-                "matchLabels": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "MatchLabels ensures an object with matching labels is selected.",
-                  "type": "object"
-                },
-                "policy": {
-                  "description": "Policies for selection.",
-                  "properties": {
-                    "resolution": {
-                      "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                      "enum": [
-                        "Required",
-                        "Optional"
-                      ],
-                      "type": "string"
-                    },
-                    "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                      "enum": [
-                        "Always",
-                        "IfNotPresent"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              },
-              "type": "object"
             },
             "description": {
               "description": "Description of the rule.",
@@ -585,86 +358,6 @@
                 "type": "string"
               },
               "type": "array"
-            },
-            "ipv6CidrBlocksRefs": {
-              "description": "References to VPC in ec2 to populate ipv6CidrBlocks.",
-              "items": {
-                "description": "A Reference to a named object.",
-                "properties": {
-                  "name": {
-                    "description": "Name of the referenced object.",
-                    "type": "string"
-                  },
-                  "policy": {
-                    "description": "Policies for referencing.",
-                    "properties": {
-                      "resolution": {
-                        "default": "Required",
-                        "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                        "enum": [
-                          "Required",
-                          "Optional"
-                        ],
-                        "type": "string"
-                      },
-                      "resolve": {
-                        "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                        "enum": [
-                          "Always",
-                          "IfNotPresent"
-                        ],
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  }
-                },
-                "required": [
-                  "name"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "ipv6CidrBlocksSelector": {
-              "description": "Selector for a list of VPC in ec2 to populate ipv6CidrBlocks.",
-              "properties": {
-                "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
-                  "type": "boolean"
-                },
-                "matchLabels": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "MatchLabels ensures an object with matching labels is selected.",
-                  "type": "object"
-                },
-                "policy": {
-                  "description": "Policies for selection.",
-                  "properties": {
-                    "resolution": {
-                      "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
-                      "enum": [
-                        "Required",
-                        "Optional"
-                      ],
-                      "type": "string"
-                    },
-                    "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
-                      "enum": [
-                        "Always",
-                        "IfNotPresent"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              },
-              "type": "object"
             },
             "prefixListIdRefs": {
               "description": "References to ManagedPrefixList in ec2 to populate prefixListIds.",
@@ -696,13 +389,15 @@
                         "type": "string"
                       }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": false
                   }
                 },
                 "required": [
                   "name"
                 ],
-                "type": "object"
+                "type": "object",
+                "additionalProperties": false
               },
               "type": "array"
             },
@@ -741,10 +436,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "prefixListIds": {
               "description": "List of Prefix List IDs.",
@@ -789,13 +486,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "securityGroupIdSelector": {
               "description": "Selector for a SecurityGroup in ec2 to populate securityGroupId.",
@@ -832,10 +531,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "self": {
               "description": "Whether the security group itself will be added as a source to this ingress rule. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or source_security_group_id.",
@@ -873,13 +574,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "sourceSecurityGroupIdSelector": {
               "description": "Selector for a SecurityGroup in ec2 to populate sourceSecurityGroupId.",
@@ -916,10 +619,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "toPort": {
               "description": "End port (or ICMP code if protocol is \"icmp\").",
@@ -930,7 +635,8 @@
               "type": "string"
             }
           },
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "managementPolicies": {
           "default": [
@@ -982,16 +688,98 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             }
           },
           "required": [
             "name"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
+        },
+        "publishConnectionDetailsTo": {
+          "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
+          "properties": {
+            "configRef": {
+              "default": {
+                "name": "default"
+              },
+              "description": "SecretStoreConfigRef specifies which secret store config should be used\nfor this ConnectionSecret.",
+              "properties": {
+                "name": {
+                  "description": "Name of the referenced object.",
+                  "type": "string"
+                },
+                "policy": {
+                  "description": "Policies for referencing.",
+                  "properties": {
+                    "resolution": {
+                      "default": "Required",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
+                      "enum": [
+                        "Required",
+                        "Optional"
+                      ],
+                      "type": "string"
+                    },
+                    "resolve": {
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
+                      "enum": [
+                        "Always",
+                        "IfNotPresent"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "metadata": {
+              "description": "Metadata is the metadata for connection secret.",
+              "properties": {
+                "annotations": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "Annotations are the annotations to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.annotations\".\n- It is up to Secret Store implementation for others store types.",
+                  "type": "object"
+                },
+                "labels": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "Labels are the labels/tags to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.labels\".\n- It is up to Secret Store implementation for others store types.",
+                  "type": "object"
+                },
+                "type": {
+                  "description": "Type is the SecretType for the connection secret.\n- Only valid for Kubernetes Secret Stores.",
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "name": {
+              "description": "Name is the name of the connection secret.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
-          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
+          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
           "properties": {
             "name": {
               "description": "Name of the secret.",
@@ -1006,7 +794,8 @@
             "name",
             "namespace"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         }
       },
       "required": [
@@ -1030,7 +819,8 @@
           "message": "spec.forProvider.type is a required parameter",
           "rule": "!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))"
         }
-      ]
+      ],
+      "additionalProperties": false
     },
     "status": {
       "description": "SecurityGroupRuleStatus defines the observed state of SecurityGroupRule.",
@@ -1074,10 +864,6 @@
               "description": "Protocol. If not icmp, icmpv6, tcp, udp, or all use the protocol number",
               "type": "string"
             },
-            "region": {
-              "description": "Region where this resource will be managed. Defaults to the Region set in the provider configuration.\nRegion is the region you'd like your resource to be created in.",
-              "type": "string"
-            },
             "securityGroupId": {
               "description": "Security group to apply this rule to.",
               "type": "string"
@@ -1103,7 +889,8 @@
               "type": "string"
             }
           },
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "conditions": {
           "description": "Conditions of the resource.",
@@ -1143,7 +930,8 @@
               "status",
               "type"
             ],
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false
           },
           "type": "array",
           "x-kubernetes-list-map-keys": [
@@ -1157,7 +945,8 @@
           "type": "integer"
         }
       },
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false
     }
   },
   "required": [

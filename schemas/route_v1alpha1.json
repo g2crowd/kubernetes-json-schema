@@ -2,11 +2,11 @@
   "description": "Route is the Schema for the Routes API",
   "properties": {
     "apiVersion": {
-      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
       "type": "string"
     },
     "kind": {
-      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
       "type": "string"
     },
     "metadata": {
@@ -17,7 +17,7 @@
       "properties": {
         "deletionPolicy": {
           "default": "Delete",
-          "description": "DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either \"Delete\" or \"Orphan\" the external resource. This field is planned to be deprecated in favor of the ManagementPolicies field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
+          "description": "DeletionPolicy specifies what will happen to the underlying external\nwhen this managed resource is deleted - either \"Delete\" or \"Orphan\" the\nexternal resource.\nThis field is planned to be deprecated in favor of the ManagementPolicies\nfield in a future release. Currently, both could be set independently and\nnon-default values would be honored if the feature flag is enabled.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
           "enum": [
             "Orphan",
             "Delete"
@@ -28,7 +28,7 @@
           "description": "RouteParameters defines the desired state of Route",
           "properties": {
             "carrierGatewayID": {
-              "description": "The ID of the carrier gateway. \n You can only use this option when the VPC contains a subnet which is associated with a Wavelength Zone.",
+              "description": "The ID of the carrier gateway.\n\nYou can only use this option when the VPC contains a subnet which is associated\nwith a Wavelength Zone.",
               "type": "string"
             },
             "coreNetworkARN": {
@@ -36,11 +36,11 @@
               "type": "string"
             },
             "destinationCIDRBlock": {
-              "description": "The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.",
+              "description": "The IPv4 CIDR address block used for the destination match. Routing decisions\nare based on the most specific match. We modify the specified CIDR block\nto its canonical form; for example, if you specify 100.68.0.18/18, we modify\nit to 100.68.0.0/18.",
               "type": "string"
             },
             "destinationIPv6CIDRBlock": {
-              "description": "The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.",
+              "description": "The IPv6 CIDR block used for the destination match. Routing decisions are\nbased on the most specific match.",
               "type": "string"
             },
             "destinationPrefixListID": {
@@ -56,7 +56,7 @@
               "type": "string"
             },
             "gatewayIdRef": {
-              "description": "GatewayIDRef is a reference to an API used to set the GatewayID.",
+              "description": "GatewayIDRef is a reference to an API used to set\nthe GatewayID.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -67,7 +67,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -75,7 +75,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -94,10 +94,10 @@
               "additionalProperties": false
             },
             "gatewayIdSelector": {
-              "description": "GatewayIDSelector selects references to API used to set the GatewayID.",
+              "description": "GatewayIDSelector selects references to API used\nto set the GatewayID.",
               "properties": {
                 "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                   "type": "boolean"
                 },
                 "matchLabels": {
@@ -112,7 +112,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -120,7 +120,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -136,11 +136,11 @@
               "additionalProperties": false
             },
             "instanceId": {
-              "description": "The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.",
+              "description": "The ID of a NAT instance in your VPC. The operation fails if you specify\nan instance ID unless exactly one network interface is attached.",
               "type": "string"
             },
             "instanceIdRef": {
-              "description": "InstanceIDRef is a reference to an API used to set the InstanceID.",
+              "description": "InstanceIDRef is a reference to an API used to set\nthe InstanceID.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -151,7 +151,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -159,7 +159,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -178,10 +178,10 @@
               "additionalProperties": false
             },
             "instanceIdSelector": {
-              "description": "InstanceIDSelector selects references to API used to set the InstanceID.",
+              "description": "InstanceIDSelector selects references to API used\nto set the InstanceID.",
               "properties": {
                 "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                   "type": "boolean"
                 },
                 "matchLabels": {
@@ -196,7 +196,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -204,7 +204,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -228,7 +228,7 @@
               "type": "string"
             },
             "natGatewayIdRef": {
-              "description": "NATGatewayIDRef is a reference to an API used to set the NATGatewayID.",
+              "description": "NATGatewayIDRef is a reference to an API used to set\nthe NATGatewayID.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -239,7 +239,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -247,7 +247,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -266,10 +266,10 @@
               "additionalProperties": false
             },
             "natGatewayIdSelector": {
-              "description": "NATGatewayIDSelector selects references to API used to set the NATGatewayID.",
+              "description": "NATGatewayIDSelector selects references to API used\nto set the NATGatewayID.",
               "properties": {
                 "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                   "type": "boolean"
                 },
                 "matchLabels": {
@@ -284,7 +284,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -292,7 +292,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -316,11 +316,11 @@
               "type": "string"
             },
             "routeTableId": {
-              "description": "The ID of the route table for the route. provider-aws currently provides both a standalone Route resource and a RouteTable resource with routes defined in-line. At this time you cannot use a RouteTable with in-line routes in conjunction with any Route resources. Set the flag ignoreRoutes=true in RouteTable to use Route resource",
+              "description": "The ID of the route table for the route.\nprovider-aws currently provides both a standalone Route resource\nand a RouteTable resource with routes defined in-line.\nAt this time you cannot use a RouteTable with in-line routes\nin conjunction with any Route resources.\nSet the flag ignoreRoutes=true in RouteTable to use Route resource",
               "type": "string"
             },
             "routeTableIdRef": {
-              "description": "RouteTableIDRef is a reference to an API used to set the RouteTableID.",
+              "description": "RouteTableIDRef is a reference to an API used to set\nthe RouteTableID.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -331,7 +331,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -339,7 +339,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -358,10 +358,10 @@
               "additionalProperties": false
             },
             "routeTableIdSelector": {
-              "description": "RouteTableIDSelector selects references to API used to set the RouteTableID.",
+              "description": "RouteTableIDSelector selects references to API used\nto set the RouteTableID.",
               "properties": {
                 "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                   "type": "boolean"
                 },
                 "matchLabels": {
@@ -376,7 +376,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -384,7 +384,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -404,7 +404,7 @@
               "type": "string"
             },
             "transitGatewayIdRef": {
-              "description": "TransitGatewayIDRef is a reference to an API used to set the TransitGatewayID.",
+              "description": "TransitGatewayIDRef is a reference to an API used to set\nthe TransitGatewayID.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -415,7 +415,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -423,7 +423,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -442,10 +442,10 @@
               "additionalProperties": false
             },
             "transitGatewayIdSelector": {
-              "description": "TransitGatewayIDSelector selects references to API used to set the TransitGatewayID.",
+              "description": "TransitGatewayIDSelector selects references to API used\nto set the TransitGatewayID.",
               "properties": {
                 "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                   "type": "boolean"
                 },
                 "matchLabels": {
@@ -460,7 +460,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -468,7 +468,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -492,7 +492,7 @@
               "type": "string"
             },
             "vpcPeeringConnectionIdRef": {
-              "description": "VPCPeeringConnectionIDRef is a reference to an API used to set the VPCPeeringConnectionID.",
+              "description": "VPCPeeringConnectionIDRef is a reference to an API used to set\nthe VPCPeeringConnectionID.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -503,7 +503,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -511,7 +511,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -530,10 +530,10 @@
               "additionalProperties": false
             },
             "vpcPeeringConnectionIdSelector": {
-              "description": "VPCPeeringConnectionIDSelector selects references to API used to set the VPCPeeringConnectionID.",
+              "description": "VPCPeeringConnectionIDSelector selects references to API used\nto set the VPCPeeringConnectionID.",
               "properties": {
                 "matchControllerRef": {
-                  "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                  "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                   "type": "boolean"
                 },
                 "matchLabels": {
@@ -548,7 +548,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -556,7 +556,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -582,9 +582,9 @@
           "default": [
             "*"
           ],
-          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out through a Crossplane feature flag. ManagementPolicies specify the array of actions Crossplane is allowed to take on the managed and external resources. This field is planned to replace the DeletionPolicy field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. If both are custom, the DeletionPolicy field will be ignored. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223 and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
+          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out\nthrough a Crossplane feature flag.\nManagementPolicies specify the array of actions Crossplane is allowed to\ntake on the managed and external resources.\nThis field is planned to replace the DeletionPolicy field in a future\nrelease. Currently, both could be set independently and non-default\nvalues would be honored if the feature flag is enabled. If both are\ncustom, the DeletionPolicy field will be ignored.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223\nand this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
           "items": {
-            "description": "A ManagementAction represents an action that the Crossplane controllers can take on an external resource.",
+            "description": "A ManagementAction represents an action that the Crossplane controllers\ncan take on an external resource.",
             "enum": [
               "Observe",
               "Create",
@@ -601,7 +601,7 @@
           "default": {
             "name": "default"
           },
-          "description": "ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.",
+          "description": "ProviderConfigReference specifies how the provider that will be used to\ncreate, observe, update, and delete this managed resource should be\nconfigured.",
           "properties": {
             "name": {
               "description": "Name of the referenced object.",
@@ -612,7 +612,7 @@
               "properties": {
                 "resolution": {
                   "default": "Required",
-                  "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                  "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                   "enum": [
                     "Required",
                     "Optional"
@@ -620,7 +620,7 @@
                   "type": "string"
                 },
                 "resolve": {
-                  "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                  "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                   "enum": [
                     "Always",
                     "IfNotPresent"
@@ -639,13 +639,13 @@
           "additionalProperties": false
         },
         "publishConnectionDetailsTo": {
-          "description": "PublishConnectionDetailsTo specifies the connection secret config which contains a name, metadata and a reference to secret store config to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.",
+          "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
           "properties": {
             "configRef": {
               "default": {
                 "name": "default"
               },
-              "description": "SecretStoreConfigRef specifies which secret store config should be used for this ConnectionSecret.",
+              "description": "SecretStoreConfigRef specifies which secret store config should be used\nfor this ConnectionSecret.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -656,7 +656,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -664,7 +664,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -689,18 +689,18 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Annotations are the annotations to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.annotations\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Annotations are the annotations to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.annotations\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "labels": {
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Labels are the labels/tags to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.labels\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Labels are the labels/tags to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.labels\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "type": {
-                  "description": "Type is the SecretType for the connection secret. - Only valid for Kubernetes Secret Stores.",
+                  "description": "Type is the SecretType for the connection secret.\n- Only valid for Kubernetes Secret Stores.",
                   "type": "string"
                 }
               },
@@ -719,7 +719,7 @@
           "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
-          "description": "WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource. This field is planned to be replaced in a future release in favor of PublishConnectionDetailsTo. Currently, both could be set independently and connection details would be published to both without affecting each other.",
+          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
           "properties": {
             "name": {
               "description": "Name of the secret.",
@@ -764,13 +764,18 @@
             "description": "A Condition that may apply to a resource.",
             "properties": {
               "lastTransitionTime": {
-                "description": "LastTransitionTime is the last time this condition transitioned from one status to another.",
+                "description": "LastTransitionTime is the last time this condition transitioned from one\nstatus to another.",
                 "format": "date-time",
                 "type": "string"
               },
               "message": {
-                "description": "A Message containing details about this condition's last transition from one status to another, if any.",
+                "description": "A Message containing details about this condition's last transition from\none status to another, if any.",
                 "type": "string"
+              },
+              "observedGeneration": {
+                "description": "ObservedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.",
+                "format": "int64",
+                "type": "integer"
               },
               "reason": {
                 "description": "A Reason for this condition's last transition from one status to another.",
@@ -781,7 +786,7 @@
                 "type": "string"
               },
               "type": {
-                "description": "Type of this condition. At most one of each condition type may apply to a resource at any point in time.",
+                "description": "Type of this condition. At most one of each condition type may apply to\na resource at any point in time.",
                 "type": "string"
               }
             },
@@ -799,6 +804,11 @@
             "type"
           ],
           "x-kubernetes-list-type": "map"
+        },
+        "observedGeneration": {
+          "description": "ObservedGeneration is the latest metadata.generation\nwhich resulted in either a ready state, or stalled due to error\nit can not recover from without human intervention.",
+          "format": "int64",
+          "type": "integer"
         }
       },
       "type": "object",

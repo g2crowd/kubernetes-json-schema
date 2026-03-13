@@ -2,11 +2,11 @@
   "description": "ConfigurationSet is the Schema for the ConfigurationSets API",
   "properties": {
     "apiVersion": {
-      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
       "type": "string"
     },
     "kind": {
-      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
       "type": "string"
     },
     "metadata": {
@@ -17,7 +17,7 @@
       "properties": {
         "deletionPolicy": {
           "default": "Delete",
-          "description": "DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either \"Delete\" or \"Orphan\" the external resource. This field is planned to be deprecated in favor of the ManagementPolicies field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
+          "description": "DeletionPolicy specifies what will happen to the underlying external\nwhen this managed resource is deleted - either \"Delete\" or \"Orphan\" the\nexternal resource.\nThis field is planned to be deprecated in favor of the ManagementPolicies\nfield in a future release. Currently, both could be set independently and\nnon-default values would be honored if the feature flag is enabled.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
           "enum": [
             "Orphan",
             "Delete"
@@ -28,14 +28,14 @@
           "description": "ConfigurationSetParameters defines the desired state of ConfigurationSet",
           "properties": {
             "deliveryOptions": {
-              "description": "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
+              "description": "An object that defines the dedicated IP pool that is used to send emails\nthat you send using the configuration set.",
               "properties": {
                 "sendingPoolName": {
                   "description": "The name of a dedicated IP pool.",
                   "type": "string"
                 },
                 "tlsPolicy": {
-                  "description": "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established.",
+                  "description": "Specifies whether messages that use the configuration set are required to\nuse Transport Layer Security (TLS). If the value is Require, messages are\nonly delivered if a TLS connection can be established. If the value is Optional,\nmessages can be delivered in plain text if a TLS connection can't be established.",
                   "type": "string"
                 }
               },
@@ -47,7 +47,7 @@
               "type": "string"
             },
             "reputationOptions": {
-              "description": "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
+              "description": "An object that defines whether or not Amazon SES collects reputation metrics\nfor the emails that you send that use the configuration set.",
               "properties": {
                 "reputationMetricsEnabled": {
                   "type": "boolean"
@@ -57,7 +57,7 @@
               "additionalProperties": false
             },
             "sendingOptions": {
-              "description": "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
+              "description": "An object that defines whether or not Amazon SES can send email that you\nsend using the configuration set.",
               "properties": {
                 "sendingEnabled": {
                   "type": "boolean"
@@ -79,7 +79,7 @@
               "additionalProperties": false
             },
             "tags": {
-              "description": "An array of objects that define the tags (keys and values) to associate with the configuration set.",
+              "description": "An array of objects that define the tags (keys and values) to associate with\nthe configuration set.",
               "items": {
                 "properties": {
                   "key": {
@@ -95,7 +95,7 @@
               "type": "array"
             },
             "trackingOptions": {
-              "description": "An object that defines the open and click tracking options for emails that you send using the configuration set.",
+              "description": "An object that defines the open and click tracking options for emails that\nyou send using the configuration set.",
               "properties": {
                 "customRedirectDomain": {
                   "description": "The domain to use for tracking open and click events.",
@@ -106,10 +106,10 @@
               "additionalProperties": false
             },
             "vdmOptions": {
-              "description": "An object that defines the VDM options for emails that you send using the configuration set.",
+              "description": "An object that defines the VDM options for emails that you send using the\nconfiguration set.",
               "properties": {
                 "dashboardOptions": {
-                  "description": "An object containing additional settings for your VDM configuration as applicable to the Dashboard.",
+                  "description": "An object containing additional settings for your VDM configuration as applicable\nto the Dashboard.",
                   "properties": {
                     "engagementMetrics": {
                       "type": "string"
@@ -119,7 +119,7 @@
                   "additionalProperties": false
                 },
                 "guardianOptions": {
-                  "description": "An object containing additional settings for your VDM configuration as applicable to the Guardian.",
+                  "description": "An object containing additional settings for your VDM configuration as applicable\nto the Guardian.",
                   "properties": {
                     "optimizedSharedDelivery": {
                       "type": "string"
@@ -143,9 +143,9 @@
           "default": [
             "*"
           ],
-          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out through a Crossplane feature flag. ManagementPolicies specify the array of actions Crossplane is allowed to take on the managed and external resources. This field is planned to replace the DeletionPolicy field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. If both are custom, the DeletionPolicy field will be ignored. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223 and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
+          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out\nthrough a Crossplane feature flag.\nManagementPolicies specify the array of actions Crossplane is allowed to\ntake on the managed and external resources.\nThis field is planned to replace the DeletionPolicy field in a future\nrelease. Currently, both could be set independently and non-default\nvalues would be honored if the feature flag is enabled. If both are\ncustom, the DeletionPolicy field will be ignored.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223\nand this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
           "items": {
-            "description": "A ManagementAction represents an action that the Crossplane controllers can take on an external resource.",
+            "description": "A ManagementAction represents an action that the Crossplane controllers\ncan take on an external resource.",
             "enum": [
               "Observe",
               "Create",
@@ -162,7 +162,7 @@
           "default": {
             "name": "default"
           },
-          "description": "ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.",
+          "description": "ProviderConfigReference specifies how the provider that will be used to\ncreate, observe, update, and delete this managed resource should be\nconfigured.",
           "properties": {
             "name": {
               "description": "Name of the referenced object.",
@@ -173,7 +173,7 @@
               "properties": {
                 "resolution": {
                   "default": "Required",
-                  "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                  "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                   "enum": [
                     "Required",
                     "Optional"
@@ -181,7 +181,7 @@
                   "type": "string"
                 },
                 "resolve": {
-                  "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                  "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                   "enum": [
                     "Always",
                     "IfNotPresent"
@@ -200,13 +200,13 @@
           "additionalProperties": false
         },
         "publishConnectionDetailsTo": {
-          "description": "PublishConnectionDetailsTo specifies the connection secret config which contains a name, metadata and a reference to secret store config to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.",
+          "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
           "properties": {
             "configRef": {
               "default": {
                 "name": "default"
               },
-              "description": "SecretStoreConfigRef specifies which secret store config should be used for this ConnectionSecret.",
+              "description": "SecretStoreConfigRef specifies which secret store config should be used\nfor this ConnectionSecret.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -217,7 +217,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -225,7 +225,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -250,18 +250,18 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Annotations are the annotations to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.annotations\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Annotations are the annotations to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.annotations\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "labels": {
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Labels are the labels/tags to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.labels\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Labels are the labels/tags to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.labels\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "type": {
-                  "description": "Type is the SecretType for the connection secret. - Only valid for Kubernetes Secret Stores.",
+                  "description": "Type is the SecretType for the connection secret.\n- Only valid for Kubernetes Secret Stores.",
                   "type": "string"
                 }
               },
@@ -280,7 +280,7 @@
           "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
-          "description": "WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource. This field is planned to be replaced in a future release in favor of PublishConnectionDetailsTo. Currently, both could be set independently and connection details would be published to both without affecting each other.",
+          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
           "properties": {
             "name": {
               "description": "Name of the secret.",
@@ -318,13 +318,18 @@
             "description": "A Condition that may apply to a resource.",
             "properties": {
               "lastTransitionTime": {
-                "description": "LastTransitionTime is the last time this condition transitioned from one status to another.",
+                "description": "LastTransitionTime is the last time this condition transitioned from one\nstatus to another.",
                 "format": "date-time",
                 "type": "string"
               },
               "message": {
-                "description": "A Message containing details about this condition's last transition from one status to another, if any.",
+                "description": "A Message containing details about this condition's last transition from\none status to another, if any.",
                 "type": "string"
+              },
+              "observedGeneration": {
+                "description": "ObservedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.",
+                "format": "int64",
+                "type": "integer"
               },
               "reason": {
                 "description": "A Reason for this condition's last transition from one status to another.",
@@ -335,7 +340,7 @@
                 "type": "string"
               },
               "type": {
-                "description": "Type of this condition. At most one of each condition type may apply to a resource at any point in time.",
+                "description": "Type of this condition. At most one of each condition type may apply to\na resource at any point in time.",
                 "type": "string"
               }
             },
@@ -353,6 +358,11 @@
             "type"
           ],
           "x-kubernetes-list-type": "map"
+        },
+        "observedGeneration": {
+          "description": "ObservedGeneration is the latest metadata.generation\nwhich resulted in either a ready state, or stalled due to error\nit can not recover from without human intervention.",
+          "format": "int64",
+          "type": "integer"
         }
       },
       "type": "object",

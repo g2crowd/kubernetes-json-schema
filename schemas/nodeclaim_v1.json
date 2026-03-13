@@ -18,7 +18,7 @@
         "expireAfter": {
           "default": "336h",
           "description": "ExpireAfter is the duration the controller will wait\nbefore terminating a node, measured from when the node is created. This\nis useful to implement features like eventually consistent node upgrade,\nmemory leak protection, and disruption testing.",
-          "pattern": "^(([0-9]+(s|m|h))+)|(Never)$",
+          "pattern": "^(([0-9]+(s|m|h))+|Never)$",
           "type": "string"
         },
         "nodeClassRef": {
@@ -77,7 +77,7 @@
                 "x-kubernetes-validations": [
                   {
                     "message": "label domain \"kubernetes.io\" is restricted",
-                    "rule": "self in [\"beta.kubernetes.io/instance-type\", \"failure-domain.beta.kubernetes.io/region\", \"beta.kubernetes.io/os\", \"beta.kubernetes.io/arch\", \"failure-domain.beta.kubernetes.io/zone\", \"topology.kubernetes.io/zone\", \"topology.kubernetes.io/region\", \"node.kubernetes.io/instance-type\", \"kubernetes.io/arch\", \"kubernetes.io/os\", \"node.kubernetes.io/windows-build\"] || self.find(\"^([^/]+)\").endsWith(\"node.kubernetes.io\") || self.find(\"^([^/]+)\").endsWith(\"node-restriction.kubernetes.io\") || !self.find(\"^([^/]+)\").endsWith(\"kubernetes.io\")"
+                    "rule": "self in [\"beta.kubernetes.io/instance-type\", \"failure-domain.beta.kubernetes.io/region\", \"beta.kubernetes.io/os\", \"beta.kubernetes.io/arch\", \"failure-domain.beta.kubernetes.io/zone\", \"topology.kubernetes.io/zone\", \"topology.kubernetes.io/region\", \"node.kubernetes.io/instance-type\", \"kubernetes.io/arch\", \"kubernetes.io/os\", \"node.kubernetes.io/windows-build\"] || self.find(\"^([^/]+)\").endsWith(\"node.kubernetes.io\") || self.find(\"^([^/]+)\").endsWith(\"node-restriction.kubernetes.io\") || !self.find(\"^([^/]+)\").endsWith(\"kubernetes.io\") || self in [\"app.kubernetes.io/managed-by\"]"
                   },
                   {
                     "message": "label domain \"k8s.io\" is restricted",
@@ -93,11 +93,15 @@
                   },
                   {
                     "message": "label domain \"karpenter.k8s.aws\" is restricted",
-                    "rule": "self in [\"karpenter.k8s.aws/ec2nodeclass\", \"karpenter.k8s.aws/instance-encryption-in-transit-supported\", \"karpenter.k8s.aws/instance-category\", \"karpenter.k8s.aws/instance-hypervisor\", \"karpenter.k8s.aws/instance-family\", \"karpenter.k8s.aws/instance-generation\", \"karpenter.k8s.aws/instance-local-nvme\", \"karpenter.k8s.aws/instance-size\", \"karpenter.k8s.aws/instance-cpu\", \"karpenter.k8s.aws/instance-cpu-manufacturer\", \"karpenter.k8s.aws/instance-cpu-sustained-clock-speed-mhz\", \"karpenter.k8s.aws/instance-memory\", \"karpenter.k8s.aws/instance-ebs-bandwidth\", \"karpenter.k8s.aws/instance-network-bandwidth\", \"karpenter.k8s.aws/instance-gpu-name\", \"karpenter.k8s.aws/instance-gpu-manufacturer\", \"karpenter.k8s.aws/instance-gpu-count\", \"karpenter.k8s.aws/instance-gpu-memory\", \"karpenter.k8s.aws/instance-accelerator-name\", \"karpenter.k8s.aws/instance-accelerator-manufacturer\", \"karpenter.k8s.aws/instance-accelerator-count\"] || !self.find(\"^([^/]+)\").endsWith(\"karpenter.k8s.aws\")"
+                    "rule": "self in [\"karpenter.k8s.aws/instance-tenancy\", \"karpenter.k8s.aws/capacity-reservation-type\", \"karpenter.k8s.aws/capacity-reservation-id\", \"karpenter.k8s.aws/ec2nodeclass\", \"karpenter.k8s.aws/instance-encryption-in-transit-supported\", \"karpenter.k8s.aws/instance-category\", \"karpenter.k8s.aws/instance-hypervisor\", \"karpenter.k8s.aws/instance-family\", \"karpenter.k8s.aws/instance-generation\", \"karpenter.k8s.aws/instance-local-nvme\", \"karpenter.k8s.aws/instance-size\", \"karpenter.k8s.aws/instance-cpu\", \"karpenter.k8s.aws/instance-cpu-manufacturer\", \"karpenter.k8s.aws/instance-cpu-sustained-clock-speed-mhz\", \"karpenter.k8s.aws/instance-memory\", \"karpenter.k8s.aws/instance-ebs-bandwidth\", \"karpenter.k8s.aws/instance-network-bandwidth\", \"karpenter.k8s.aws/instance-gpu-name\", \"karpenter.k8s.aws/instance-gpu-manufacturer\", \"karpenter.k8s.aws/instance-gpu-count\", \"karpenter.k8s.aws/instance-gpu-memory\", \"karpenter.k8s.aws/instance-accelerator-name\", \"karpenter.k8s.aws/instance-accelerator-manufacturer\", \"karpenter.k8s.aws/instance-accelerator-count\", \"karpenter.k8s.aws/instance-capability-flex\"] || !self.find(\"^([^/]+)\").endsWith(\"karpenter.k8s.aws\")"
                   },
                   {
                     "message": "label domain \"eks.amazonaws.com\" is restricted",
-                    "rule": "self in [\"eks.amazonaws.com/nodeclass\", \"eks.amazonaws.com/compute-type\", \"eks.amazonaws.com/instance-encryption-in-transit-supported\", \"eks.amazonaws.com/instance-category\", \"eks.amazonaws.com/instance-hypervisor\", \"eks.amazonaws.com/instance-family\", \"eks.amazonaws.com/instance-generation\", \"eks.amazonaws.com/instance-local-nvme\", \"eks.amazonaws.com/instance-size\", \"eks.amazonaws.com/instance-cpu\", \"eks.amazonaws.com/instance-cpu-manufacturer\", \"eks.amazonaws.com/instance-cpu-sustained-clock-speed-mhz\", \"eks.amazonaws.com/instance-memory\", \"eks.amazonaws.com/instance-ebs-bandwidth\", \"eks.amazonaws.com/instance-network-bandwidth\", \"eks.amazonaws.com/instance-gpu-name\", \"eks.amazonaws.com/instance-gpu-manufacturer\", \"eks.amazonaws.com/instance-gpu-count\", \"eks.amazonaws.com/instance-gpu-memory\", \"eks.amazonaws.com/instance-accelerator-name\", \"eks.amazonaws.com/instance-accelerator-manufacturer\", \"eks.amazonaws.com/instance-accelerator-count\"] || !self.find(\"^([^/]+)\").endsWith(\"eks.amazonaws.com\")"
+                    "rule": "self in [\"eks.amazonaws.com/instance-tenancy\", \"eks.amazonaws.com/capacity-reservation-type\", \"eks.amazonaws.com/capacity-reservation-id\", \"eks.amazonaws.com/nodeclass\", \"eks.amazonaws.com/compute-type\", \"eks.amazonaws.com/instance-encryption-in-transit-supported\", \"eks.amazonaws.com/instance-category\", \"eks.amazonaws.com/instance-hypervisor\", \"eks.amazonaws.com/instance-family\", \"eks.amazonaws.com/instance-generation\", \"eks.amazonaws.com/instance-local-nvme\", \"eks.amazonaws.com/instance-size\", \"eks.amazonaws.com/instance-cpu\", \"eks.amazonaws.com/instance-cpu-manufacturer\", \"eks.amazonaws.com/instance-cpu-sustained-clock-speed-mhz\", \"eks.amazonaws.com/instance-memory\", \"eks.amazonaws.com/instance-ebs-bandwidth\", \"eks.amazonaws.com/instance-network-bandwidth\", \"eks.amazonaws.com/instance-gpu-name\", \"eks.amazonaws.com/instance-gpu-manufacturer\", \"eks.amazonaws.com/instance-gpu-count\", \"eks.amazonaws.com/instance-gpu-memory\", \"eks.amazonaws.com/instance-accelerator-name\", \"eks.amazonaws.com/instance-accelerator-manufacturer\", \"eks.amazonaws.com/instance-accelerator-count\", \"eks.amazonaws.com/instance-capability-flex\"] || !self.find(\"^([^/]+)\").endsWith(\"eks.amazonaws.com\")"
+                  },
+                  {
+                    "message": "label domain \"sagemaker.amazonaws.com\" is restricted",
+                    "rule": "self in [\"sagemaker.amazonaws.com/compute-type\", \"karpenter.sagemaker.amazonaws.com/hyperpodnodeclass\"] || !self.find(\"^([^/]+)\").endsWith(\"sagemaker.amazonaws.com\")"
                   }
                 ]
               },
@@ -108,8 +112,10 @@
                 "type": "integer"
               },
               "operator": {
-                "description": "Represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.",
+                "description": "Represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists, DoesNotExist. Gt, Lt, Gte, and Lte.",
                 "enum": [
+                  "Gte",
+                  "Lte",
                   "In",
                   "NotIn",
                   "Exists",
@@ -120,7 +126,7 @@
                 "type": "string"
               },
               "values": {
-                "description": "An array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. If the operator is Gt or Lt, the values\narray must have a single element, which will be interpreted as an integer.\nThis array is replaced during a strategic merge patch.",
+                "description": "An array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. If the operator is Gt, Lt, Gte, or Lte, the values\narray must have a single element, which will be interpreted as an integer.\nThis array is replaced during a strategic merge patch.",
                 "items": {
                   "type": "string"
                 },
@@ -145,8 +151,8 @@
               "rule": "self.all(x, x.operator == 'In' ? x.values.size() != 0 : true)"
             },
             {
-              "message": "requirements operator 'Gt' or 'Lt' must have a single positive integer value",
-              "rule": "self.all(x, (x.operator == 'Gt' || x.operator == 'Lt') ? (x.values.size() == 1 && int(x.values[0]) >= 0) : true)"
+              "message": "requirements operator 'Gt', 'Lt', 'Gte', or 'Lte' must have a single positive integer value",
+              "rule": "self.all(x, (x.operator == 'Gt' || x.operator == 'Lt' || x.operator == 'Gte' || x.operator == 'Lte') ? (x.values.size() == 1 && int(x.values[0]) >= 0) : true)"
             },
             {
               "message": "requirements with 'minValues' must have at least that many values specified in the 'values' field",
@@ -198,7 +204,7 @@
                 "type": "string"
               },
               "timeAdded": {
-                "description": "TimeAdded represents the time at which the taint was added.\nIt is only written for NoExecute taints.",
+                "description": "TimeAdded represents the time at which the taint was added.",
                 "format": "date-time",
                 "type": "string"
               },
@@ -238,7 +244,7 @@
                 "type": "string"
               },
               "timeAdded": {
-                "description": "TimeAdded represents the time at which the taint was added.\nIt is only written for NoExecute taints.",
+                "description": "TimeAdded represents the time at which the taint was added.",
                 "format": "date-time",
                 "type": "string"
               },

@@ -2,11 +2,11 @@
   "description": "An Bucket is a managed resource that represents an AWS S3 Bucket.",
   "properties": {
     "apiVersion": {
-      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
       "type": "string"
     },
     "kind": {
-      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
       "type": "string"
     },
     "metadata": {
@@ -17,7 +17,7 @@
       "properties": {
         "deletionPolicy": {
           "default": "Delete",
-          "description": "DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either \"Delete\" or \"Orphan\" the external resource. This field is planned to be deprecated in favor of the ManagementPolicies field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
+          "description": "DeletionPolicy specifies what will happen to the underlying external\nwhen this managed resource is deleted - either \"Delete\" or \"Orphan\" the\nexternal resource.\nThis field is planned to be deprecated in favor of the ManagementPolicies\nfield in a future release. Currently, both could be set independently and\nnon-default values would be honored if the feature flag is enabled.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223",
           "enum": [
             "Orphan",
             "Delete"
@@ -28,7 +28,7 @@
           "description": "BucketParameters are parameters for configuring the calls made to AWS Bucket API.",
           "properties": {
             "accelerateConfiguration": {
-              "description": "AccelerateConfiguration configures the transfer acceleration state for an Amazon S3 bucket. For more information, see Amazon S3 Transfer Acceleration (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in the Amazon Simple Storage Service Developer Guide.",
+              "description": "AccelerateConfiguration configures the transfer acceleration state for an\nAmazon S3 bucket. For more information, see Amazon S3 Transfer Acceleration\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)\nin the Amazon Simple Storage Service Developer Guide.",
               "properties": {
                 "status": {
                   "description": "Status specifies the transfer acceleration status of the bucket.",
@@ -60,22 +60,22 @@
               "type": "string"
             },
             "corsConfiguration": {
-              "description": "Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see Enabling Cross-Origin Resource Sharing (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon Simple Storage Service Developer Guide.",
+              "description": "Describes the cross-origin access configuration for objects in an Amazon\nS3 bucket. For more information, see Enabling Cross-Origin Resource Sharing\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon\nSimple Storage Service Developer Guide.",
               "properties": {
                 "corsRules": {
-                  "description": "A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.",
+                  "description": "A set of origins and methods (cross-origin access that you want to allow).\nYou can add up to 100 rules to the configuration.",
                   "items": {
                     "description": "CORSRule specifies a cross-origin access rule for an Amazon S3 bucket.",
                     "properties": {
                       "allowedHeaders": {
-                        "description": "Headers that are specified in the Access-Control-Request-Headers header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.",
+                        "description": "Headers that are specified in the Access-Control-Request-Headers header.\nThese headers are allowed in a preflight OPTIONS request. In response to\nany preflight OPTIONS request, Amazon S3 returns any requested headers that\nare allowed.",
                         "items": {
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "allowedMethods": {
-                        "description": "An HTTP method that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, and DELETE.",
+                        "description": "An HTTP method that you allow the origin to execute. Valid values are GET,\nPUT, HEAD, POST, and DELETE.",
                         "items": {
                           "type": "string"
                         },
@@ -89,14 +89,14 @@
                         "type": "array"
                       },
                       "exposeHeaders": {
-                        "description": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
+                        "description": "One or more headers in the response that you want customers to be able to\naccess from their applications (for example, from a JavaScript XMLHttpRequest\nobject).",
                         "items": {
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "maxAgeSeconds": {
-                        "description": "The time in seconds that your browser is to cache the preflight response for the specified resource.",
+                        "description": "The time in seconds that your browser is to cache the preflight response\nfor the specified resource.",
                         "format": "int32",
                         "type": "integer"
                       }
@@ -118,7 +118,7 @@
               "additionalProperties": false
             },
             "grantFullControl": {
-              "description": "Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.",
+              "description": "Allows grantee the read, write, read ACP, and write ACP permissions on the\nbucket.",
               "type": "string"
             },
             "grantRead": {
@@ -138,18 +138,18 @@
               "type": "string"
             },
             "lifecycleConfiguration": {
-              "description": "Creates a new lifecycle configuration for the bucket or replaces an existing lifecycle configuration. For information about lifecycle configuration, see Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).",
+              "description": "Creates a new lifecycle configuration for the bucket or replaces an existing\nlifecycle configuration. For information about lifecycle configuration, see\nManaging Access Permissions to Your Amazon S3 Resources\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).",
               "properties": {
                 "rules": {
-                  "description": "A lifecycle rule for individual objects in an Amazon S3 bucket. \n Rules is a required field",
+                  "description": "A lifecycle rule for individual objects in an Amazon S3 bucket.\n\nRules is a required field",
                   "items": {
                     "description": "LifecycleRule for individual objects in an Amazon S3 bucket.",
                     "properties": {
                       "abortIncompleteMultipartUpload": {
-                        "description": "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. For more information, see Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config) in the Amazon Simple Storage Service Developer Guide.",
+                        "description": "Specifies the days since the initiation of an incomplete multipart upload\nthat Amazon S3 will wait before permanently removing all parts of the upload.\nFor more information, see Aborting Incomplete Multipart Uploads Using a Bucket\nLifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)\nin the Amazon Simple Storage Service Developer Guide.",
                         "properties": {
                           "daysAfterInitiation": {
-                            "description": "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
+                            "description": "Specifies the number of days after which Amazon S3 aborts an incomplete multipart\nupload.",
                             "format": "int32",
                             "type": "integer"
                           }
@@ -161,7 +161,7 @@
                         "additionalProperties": false
                       },
                       "expiration": {
-                        "description": "Specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker.",
+                        "description": "Specifies the expiration for the lifecycle of the object in the form of date,\ndays and, whether the object has a delete marker.",
                         "properties": {
                           "date": {
                             "description": "Indicates at what date the object is to be moved or deleted.",
@@ -169,13 +169,13 @@
                             "type": "string"
                           },
                           "days": {
-                            "description": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.",
+                            "description": "Indicates the lifetime, in days, of the objects that are subject to the rule.\nThe value must be a non-zero positive integer.",
                             "format": "int32",
                             "minimum": 1,
                             "type": "integer"
                           },
                           "expiredObjectDeleteMarker": {
-                            "description": "Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.",
+                            "description": "Indicates whether Amazon S3 will remove a delete marker with no noncurrent\nversions. If set to true, the delete marker will be expired; if set to false\nthe policy takes no action. This cannot be specified with Days or Date in\na Lifecycle Expiration Policy.",
                             "type": "boolean"
                           }
                         },
@@ -183,26 +183,26 @@
                         "additionalProperties": false
                       },
                       "filter": {
-                        "description": "The Filter is used to identify objects that a Lifecycle Rule applies to. A Filter must have exactly one of Prefix, Tag, or And specified.",
+                        "description": "The Filter is used to identify objects that a Lifecycle Rule applies to.\nA Filter must have exactly one of Prefix, Tag, or And specified.",
                         "properties": {
                           "and": {
-                            "description": "This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.",
+                            "description": "This is used in a Lifecycle Rule Filter to apply a logical AND to two or\nmore predicates. The Lifecycle Rule will apply to any object matching all\nof the predicates configured inside the And operator.",
                             "properties": {
                               "prefix": {
                                 "description": "Prefix identifying one or more objects to which the rule applies.",
                                 "type": "string"
                               },
                               "tags": {
-                                "description": "All of these tags must exist in the object's tag set in order for the rule to apply.",
+                                "description": "All of these tags must exist in the object's tag set in order for the rule\nto apply.",
                                 "items": {
                                   "description": "Tag is a container for a key value name pair.",
                                   "properties": {
                                     "key": {
-                                      "description": "Name of the tag. Key is a required field",
+                                      "description": "Name of the tag.\nKey is a required field",
                                       "type": "string"
                                     },
                                     "value": {
-                                      "description": "Value of the tag. Value is a required field",
+                                      "description": "Value of the tag.\nValue is a required field",
                                       "type": "string"
                                     }
                                   },
@@ -230,11 +230,11 @@
                             "description": "This tag must exist in the object's tag set in order for the rule to apply.",
                             "properties": {
                               "key": {
-                                "description": "Name of the tag. Key is a required field",
+                                "description": "Name of the tag.\nKey is a required field",
                                 "type": "string"
                               },
                               "value": {
-                                "description": "Value of the tag. Value is a required field",
+                                "description": "Value of the tag.\nValue is a required field",
                                 "type": "string"
                               }
                             },
@@ -254,10 +254,10 @@
                         "type": "string"
                       },
                       "noncurrentVersionExpiration": {
-                        "description": "Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime.",
+                        "description": "Specifies when noncurrent object versions expire. Upon expiration, Amazon\nS3 permanently deletes the noncurrent object versions. You set this lifecycle\nconfiguration action on a bucket that has versioning enabled (or suspended)\nto request that Amazon S3 delete noncurrent object versions at a specific\nperiod in the object's lifetime.",
                         "properties": {
                           "noncurrentDays": {
-                            "description": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see How Amazon S3 Calculates When an Object Became Noncurrent (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the Amazon Simple Storage Service Developer Guide.",
+                            "description": "Specifies the number of days an object is noncurrent before Amazon S3 can\nperform the associated action. For information about the noncurrent days\ncalculations, see How Amazon S3 Calculates When an Object Became Noncurrent\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)\nin the Amazon Simple Storage Service Developer Guide.",
                             "format": "int32",
                             "type": "integer"
                           }
@@ -266,19 +266,20 @@
                         "additionalProperties": false
                       },
                       "noncurrentVersionTransitions": {
-                        "description": "Specifies the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to a specific storage class at a set period in the object's lifetime.",
+                        "description": "Specifies the transition rule for the lifecycle rule that describes when\nnoncurrent objects transition to a specific storage class. If your bucket\nis versioning-enabled (or versioning is suspended), you can set this action\nto request that Amazon S3 transition noncurrent object versions to a specific\nstorage class at a set period in the object's lifetime.",
                         "items": {
-                          "description": "NoncurrentVersionTransition contains the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
+                          "description": "NoncurrentVersionTransition contains the transition rule that describes when noncurrent objects\ntransition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, GLACIER_IR\nor DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning\nis suspended), you can set this action to request that Amazon S3 transition\nnoncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING,\nGLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's\nlifetime.",
                           "properties": {
                             "noncurrentDays": {
-                              "description": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see How Amazon S3 Calculates How Long an Object Has Been Noncurrent (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the Amazon Simple Storage Service Developer Guide.",
+                              "description": "Specifies the number of days an object is noncurrent before Amazon S3 can\nperform the associated action. For information about the noncurrent days\ncalculations, see How Amazon S3 Calculates How Long an Object Has Been Noncurrent\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)\nin the Amazon Simple Storage Service Developer Guide.",
                               "format": "int32",
                               "type": "integer"
                             },
                             "storageClass": {
-                              "description": "The class of storage used to store the object. Valid values are: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE",
+                              "description": "The class of storage used to store the object.\nValid values are: GLACIER, GLACIER_IR, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE",
                               "enum": [
                                 "GLACIER",
+                                "GLACIER_IR",
                                 "STANDARD_IA",
                                 "ONEZONE_IA",
                                 "INTELLIGENT_TIERING",
@@ -296,7 +297,7 @@
                         "type": "array"
                       },
                       "status": {
-                        "description": "If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied. \n Status is a required field, valid values are Enabled or Disabled",
+                        "description": "If 'Enabled', the rule is currently being applied. If 'Disabled', the rule\nis not currently being applied.\n\nStatus is a required field, valid values are Enabled or Disabled",
                         "enum": [
                           "Enabled",
                           "Disabled"
@@ -306,23 +307,24 @@
                       "transitions": {
                         "description": "Specifies when an Amazon S3 object transitions to a specified storage class.",
                         "items": {
-                          "description": "Transition specifies when an object transitions to a specified storage class. For more information about Amazon S3 lifecycle configuration rules, see Transitioning Objects Using Amazon S3 Lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html) in the Amazon Simple Storage Service Developer Guide.",
+                          "description": "Transition specifies when an object transitions to a specified storage class. For more\ninformation about Amazon S3 lifecycle configuration rules, see Transitioning\nObjects Using Amazon S3 Lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html)\nin the Amazon Simple Storage Service Developer Guide.",
                           "properties": {
                             "date": {
-                              "description": "Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.",
+                              "description": "Indicates when objects are transitioned to the specified storage class. The\ndate value must be in ISO 8601 format. The time is always midnight UTC.",
                               "format": "date-time",
                               "type": "string"
                             },
                             "days": {
-                              "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.",
+                              "description": "Indicates the number of days after creation when objects are transitioned\nto the specified storage class. The value must be a positive integer.",
                               "format": "int32",
                               "minimum": 1,
                               "type": "integer"
                             },
                             "storageClass": {
-                              "description": "The storage class to which you want the object to transition. Valid values are: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE",
+                              "description": "The storage class to which you want the object to transition.\nValid values are: GLACIER, GLACIER_IR, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE",
                               "enum": [
                                 "GLACIER",
+                                "GLACIER_IR",
                                 "STANDARD_IA",
                                 "ONEZONE_IA",
                                 "INTELLIGENT_TIERING",
@@ -356,14 +358,14 @@
               "additionalProperties": false
             },
             "locationConstraint": {
-              "description": "LocationConstraint specifies the Region where the bucket will be created. It is a required field. Due to AWS API limitations lacking on a proper response, when this field is set to a wrong value, or to non-existent region on bucket creation, it's impossible forwarding a meaningful status message to the user about the problem, producing connection errors instead.",
+              "description": "LocationConstraint specifies the Region where the bucket will be created.\nIt is a required field.\nDue to AWS API limitations lacking on a proper response, when this field is set to a wrong value,\nor to non-existent region on bucket creation, it's impossible forwarding a meaningful status message to the user\nabout the problem, producing connection errors instead.",
               "type": "string"
             },
             "loggingConfiguration": {
-              "description": "Specifies logging parameters for an Amazon S3 bucket. Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. See the AWS API reference guide for Amazon Simple Storage Service's API operation PutBucketLogging for usage and error information. See also, https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLogging",
+              "description": "Specifies logging parameters for an Amazon S3 bucket. Set the logging parameters for a bucket and\nto specify permissions for who can view and modify the logging parameters. See the AWS API\nreference guide for Amazon Simple Storage Service's API operation PutBucketLogging for usage\nand error information. See also, https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLogging",
               "properties": {
                 "targetBucket": {
-                  "description": "TargetBucket where logs will be stored, it can be the same bucket. At least one of targetBucket, targetBucketRef or targetBucketSelector is required.",
+                  "description": "TargetBucket where logs will be stored, it can be the same bucket.\nAt least one of targetBucket, targetBucketRef or targetBucketSelector is\nrequired.",
                   "type": "string"
                 },
                 "targetBucketRef": {
@@ -378,7 +380,7 @@
                       "properties": {
                         "resolution": {
                           "default": "Required",
-                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                           "enum": [
                             "Required",
                             "Optional"
@@ -386,7 +388,7 @@
                           "type": "string"
                         },
                         "resolve": {
-                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                           "enum": [
                             "Always",
                             "IfNotPresent"
@@ -408,7 +410,7 @@
                   "description": "TargetBucketSelector selects a reference to an S3Bucket to retrieve its name",
                   "properties": {
                     "matchControllerRef": {
-                      "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                      "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                       "type": "boolean"
                     },
                     "matchLabels": {
@@ -423,7 +425,7 @@
                       "properties": {
                         "resolution": {
                           "default": "Required",
-                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                           "enum": [
                             "Required",
                             "Optional"
@@ -431,7 +433,7 @@
                           "type": "string"
                         },
                         "resolve": {
-                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                           "enum": [
                             "Always",
                             "IfNotPresent"
@@ -452,7 +454,7 @@
                     "description": "TargetGrant is the container for granting information.",
                     "properties": {
                       "bucketLogsPermission": {
-                        "description": "Logging permissions assigned to the Grantee for the bucket. Valid values are \"FULL_CONTROL\", \"READ\", \"WRITE\"",
+                        "description": "Logging permissions assigned to the Grantee for the bucket.\nValid values are \"FULL_CONTROL\", \"READ\", \"WRITE\"",
                         "enum": [
                           "FULL_CONTROL",
                           "READ",
@@ -476,11 +478,11 @@
                             "type": "string"
                           },
                           "emailAddress": {
-                            "description": "Email address of the grantee. For a list of all the Amazon S3 supported Regions and endpoints, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the AWS General Reference.",
+                            "description": "Email address of the grantee.\nFor a list of all the Amazon S3 supported Regions and endpoints, see Regions\nand Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)\nin the AWS General Reference.",
                             "type": "string"
                           },
                           "type": {
-                            "description": "Type of grantee Type is a required field",
+                            "description": "Type of grantee\nType is a required field",
                             "enum": [
                               "CanonicalUser",
                               "AmazonCustomerByEmail",
@@ -517,37 +519,37 @@
               "additionalProperties": false
             },
             "notificationConfiguration": {
-              "description": "Enables notifications of specified events for a bucket. For more information about event notifications, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html).",
+              "description": "Enables notifications of specified events for a bucket.\nFor more information about event notifications, see Configuring Event Notifications\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html).",
               "properties": {
                 "lambdaFunctionConfigurations": {
-                  "description": "Describes the AWS Lambda functions to invoke and the events for which to invoke them.",
+                  "description": "Describes the AWS Lambda functions to invoke and the events for which to\ninvoke them.",
                   "items": {
                     "description": "LambdaFunctionConfiguration contains the configuration for AWS Lambda notifications.",
                     "properties": {
                       "ID": {
-                        "description": "An optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.",
+                        "description": "An optional unique identifier for configurations in a notification configuration.\nIf you don't provide one, Amazon S3 will assign an ID.",
                         "type": "string"
                       },
                       "events": {
-                        "description": "The Amazon S3 bucket event for which to invoke the AWS Lambda function. For more information, see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide. \n Events is a required field A full list of valid events can be found in the Amazon S3 Developer guide https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations",
+                        "description": "The Amazon S3 bucket event for which to invoke the AWS Lambda function. For\nmore information, see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\nin the Amazon Simple Storage Service Developer Guide.\n\nEvents is a required field\nA full list of valid events can be found in the Amazon S3 Developer guide\nhttps://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations",
                         "items": {
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "filter": {
-                        "description": "Specifies object key name filtering rules. For information about key name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide.",
+                        "description": "Specifies object key name filtering rules. For information about key name\nfiltering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\nin the Amazon Simple Storage Service Developer Guide.",
                         "properties": {
                           "key": {
                             "description": "A container for object key name prefix and suffix filtering rules.",
                             "properties": {
                               "filterRules": {
-                                "description": "A list of containers for the key-value pair that defines the criteria for the filter rule.",
+                                "description": "A list of containers for the key-value pair that defines the criteria for\nthe filter rule.",
                                 "items": {
-                                  "description": "FilterRule specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
+                                  "description": "FilterRule specifies the Amazon S3 object key name to filter on and whether to filter\non the suffix or prefix of the key name.",
                                   "properties": {
                                     "name": {
-                                      "description": "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide. Valid values are \"prefix\" or \"suffix\"",
+                                      "description": "The object key name prefix or suffix identifying one or more objects to which\nthe filtering rule applies. The maximum length is 1,024 characters. Overlapping\nprefixes and suffixes are not supported. For more information, see Configuring\nEvent Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\nin the Amazon Simple Storage Service Developer Guide.\nValid values are \"prefix\" or \"suffix\"",
                                       "enum": [
                                         "prefix",
                                         "suffix"
@@ -579,7 +581,7 @@
                         "additionalProperties": false
                       },
                       "lambdaFunctionArn": {
-                        "description": "The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs. \n LambdaFunctionArn is a required field",
+                        "description": "The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3\ninvokes when the specified event type occurs.\n\nLambdaFunctionArn is a required field",
                         "type": "string"
                       }
                     },
@@ -593,34 +595,34 @@
                   "type": "array"
                 },
                 "queueConfigurations": {
-                  "description": "The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.",
+                  "description": "The Amazon Simple Queue Service queues to publish messages to and the events\nfor which to publish messages.",
                   "items": {
-                    "description": "QueueConfiguration specifies the configuration for publishing messages to an Amazon Simple Queue Service (Amazon SQS) queue when Amazon S3 detects specified events.",
+                    "description": "QueueConfiguration specifies the configuration for publishing messages to an Amazon Simple Queue\nService (Amazon SQS) queue when Amazon S3 detects specified events.",
                     "properties": {
                       "ID": {
-                        "description": "An optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.",
+                        "description": "An optional unique identifier for configurations in a notification configuration.\nIf you don't provide one, Amazon S3 will assign an ID.",
                         "type": "string"
                       },
                       "events": {
-                        "description": "A collection of bucket events for which to send notifications \n Events is a required field A full list of valid events can be found in the Amazon S3 Developer guide https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations",
+                        "description": "A collection of bucket events for which to send notifications\n\nEvents is a required field\nA full list of valid events can be found in the Amazon S3 Developer guide\nhttps://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations",
                         "items": {
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "filter": {
-                        "description": "Specifies object key name filtering rules. For information about key name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide.",
+                        "description": "Specifies object key name filtering rules. For information about key name\nfiltering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\nin the Amazon Simple Storage Service Developer Guide.",
                         "properties": {
                           "key": {
                             "description": "A container for object key name prefix and suffix filtering rules.",
                             "properties": {
                               "filterRules": {
-                                "description": "A list of containers for the key-value pair that defines the criteria for the filter rule.",
+                                "description": "A list of containers for the key-value pair that defines the criteria for\nthe filter rule.",
                                 "items": {
-                                  "description": "FilterRule specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
+                                  "description": "FilterRule specifies the Amazon S3 object key name to filter on and whether to filter\non the suffix or prefix of the key name.",
                                   "properties": {
                                     "name": {
-                                      "description": "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide. Valid values are \"prefix\" or \"suffix\"",
+                                      "description": "The object key name prefix or suffix identifying one or more objects to which\nthe filtering rule applies. The maximum length is 1,024 characters. Overlapping\nprefixes and suffixes are not supported. For more information, see Configuring\nEvent Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\nin the Amazon Simple Storage Service Developer Guide.\nValid values are \"prefix\" or \"suffix\"",
                                       "enum": [
                                         "prefix",
                                         "suffix"
@@ -652,7 +654,7 @@
                         "additionalProperties": false
                       },
                       "queueArn": {
-                        "description": "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type. \n QueueArn is a required field",
+                        "description": "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3\npublishes a message when it detects events of the specified type.\n\nQueueArn is a required field",
                         "type": "string"
                       },
                       "queueArnRef": {
@@ -667,7 +669,7 @@
                             "properties": {
                               "resolution": {
                                 "default": "Required",
-                                "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                 "enum": [
                                   "Required",
                                   "Optional"
@@ -675,7 +677,7 @@
                                 "type": "string"
                               },
                               "resolve": {
-                                "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                 "enum": [
                                   "Always",
                                   "IfNotPresent"
@@ -697,7 +699,7 @@
                         "description": "QueueArnSelector selects a reference to an Queue to retrieve its ARN",
                         "properties": {
                           "matchControllerRef": {
-                            "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                            "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                             "type": "boolean"
                           },
                           "matchLabels": {
@@ -712,7 +714,7 @@
                             "properties": {
                               "resolution": {
                                 "default": "Required",
-                                "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                 "enum": [
                                   "Required",
                                   "Optional"
@@ -720,7 +722,7 @@
                                 "type": "string"
                               },
                               "resolve": {
-                                "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                 "enum": [
                                   "Always",
                                   "IfNotPresent"
@@ -745,34 +747,34 @@
                   "type": "array"
                 },
                 "topicConfigurations": {
-                  "description": "The topic to which notifications are sent and the events for which notifications are generated.",
+                  "description": "The topic to which notifications are sent and the events for which notifications\nare generated.",
                   "items": {
-                    "description": "TopicConfiguration specifies the configuration for publication of messages to an Amazon Simple Notification Service (Amazon SNS) topic when Amazon S3 detects specified events.",
+                    "description": "TopicConfiguration specifies the configuration for publication of messages\nto an Amazon Simple Notification Service (Amazon SNS) topic when Amazon S3\ndetects specified events.",
                     "properties": {
                       "ID": {
-                        "description": "An optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.",
+                        "description": "An optional unique identifier for configurations in a notification configuration.\nIf you don't provide one, Amazon S3 will assign an ID.",
                         "type": "string"
                       },
                       "events": {
-                        "description": "The Amazon S3 bucket event about which to send notifications. For more information, see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide. \n Events is a required field A full list of valid events can be found in the Amazon S3 Developer guide https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations",
+                        "description": "The Amazon S3 bucket event about which to send notifications. For more information,\nsee Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\nin the Amazon Simple Storage Service Developer Guide.\n\nEvents is a required field\nA full list of valid events can be found in the Amazon S3 Developer guide\nhttps://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations",
                         "items": {
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "filter": {
-                        "description": "Specifies object key name filtering rules. For information about key name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide.",
+                        "description": "Specifies object key name filtering rules. For information about key name\nfiltering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\nin the Amazon Simple Storage Service Developer Guide.",
                         "properties": {
                           "key": {
                             "description": "A container for object key name prefix and suffix filtering rules.",
                             "properties": {
                               "filterRules": {
-                                "description": "A list of containers for the key-value pair that defines the criteria for the filter rule.",
+                                "description": "A list of containers for the key-value pair that defines the criteria for\nthe filter rule.",
                                 "items": {
-                                  "description": "FilterRule specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
+                                  "description": "FilterRule specifies the Amazon S3 object key name to filter on and whether to filter\non the suffix or prefix of the key name.",
                                   "properties": {
                                     "name": {
-                                      "description": "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide. Valid values are \"prefix\" or \"suffix\"",
+                                      "description": "The object key name prefix or suffix identifying one or more objects to which\nthe filtering rule applies. The maximum length is 1,024 characters. Overlapping\nprefixes and suffixes are not supported. For more information, see Configuring\nEvent Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\nin the Amazon Simple Storage Service Developer Guide.\nValid values are \"prefix\" or \"suffix\"",
                                       "enum": [
                                         "prefix",
                                         "suffix"
@@ -804,7 +806,7 @@
                         "additionalProperties": false
                       },
                       "topicArn": {
-                        "description": "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type. At least one of topicArn, topicArnRef or topicSelector is required.",
+                        "description": "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3\npublishes a message when it detects events of the specified type.\nAt least one of topicArn, topicArnRef or topicSelector is required.",
                         "type": "string"
                       },
                       "topicRef": {
@@ -819,7 +821,7 @@
                             "properties": {
                               "resolution": {
                                 "default": "Required",
-                                "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                 "enum": [
                                   "Required",
                                   "Optional"
@@ -827,7 +829,7 @@
                                 "type": "string"
                               },
                               "resolve": {
-                                "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                 "enum": [
                                   "Always",
                                   "IfNotPresent"
@@ -849,7 +851,7 @@
                         "description": "TopicArnSelector selects a reference to an SNS Topic to retrieve its Arn",
                         "properties": {
                           "matchControllerRef": {
-                            "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                            "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                             "type": "boolean"
                           },
                           "matchLabels": {
@@ -864,7 +866,7 @@
                             "properties": {
                               "resolution": {
                                 "default": "Required",
-                                "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                 "enum": [
                                   "Required",
                                   "Optional"
@@ -872,7 +874,7 @@
                                 "type": "string"
                               },
                               "resolve": {
-                                "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                 "enum": [
                                   "Always",
                                   "IfNotPresent"
@@ -901,11 +903,46 @@
               "additionalProperties": false
             },
             "objectLockEnabledForBucket": {
-              "description": "Specifies whether you want S3 Object Lock to be enabled for the new bucket.",
+              "description": "Specifies whether you want S3 Object Lock to be enabled for the new bucket.\nAfter you enable Object Lock for a bucket, you can't disable Object Lock or suspend Versioning for that bucket",
               "type": "boolean"
             },
+            "objectLockRule": {
+              "description": "Specifies the Object Lock rule for the bucket. Works only when ObjectLockEnabledForBucket is true.",
+              "properties": {
+                "defaultRetention": {
+                  "description": "The container element for optionally specifying the default Object Lock\nretention settings for new objects placed in the specified bucket.\nThe DefaultRetention settings require both a mode and a period.\nThe DefaultRetention period can be either Days or Years but you must select one\nYou cannot specify Days and Years at the same time.\nFor more information, see Object Lock(https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)",
+                  "properties": {
+                    "days": {
+                      "description": "The number of days that you want to specify for the default retention period.\nMust be used with Mode.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "mode": {
+                      "description": "The default Object Lock retention mode you want to apply to new objects placed\nin the specified bucket. Must be used with either Days or Years .\nValid values are \"GOVERNANCE\", \"COMPLIANCE\"",
+                      "enum": [
+                        "GOVERNANCE",
+                        "COMPLIANCE"
+                      ],
+                      "type": "string"
+                    },
+                    "years": {
+                      "description": "The number of years that you want to specify for the default retention period.\nMust be used with Mode .",
+                      "format": "int32",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "mode"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
             "objectOwnership": {
-              "description": "The container element for object ownership for a bucket's ownership controls. BucketOwnerPreferred - Objects uploaded to the bucket change ownership to the bucket owner if the objects are uploaded with the bucket-owner-full-control canned ACL. ObjectWriter - The uploading account will own the object if the object is uploaded with the bucket-owner-full-control canned ACL. BucketOwnerEnforced - Access control lists (ACLs) are disabled and no longer affect permissions. The bucket owner automatically owns and has full control over every object in the bucket. The bucket only accepts PUT requests that don't specify an ACL or bucket owner full control ACLs, such as the bucket-owner-full-control canned ACL or an equivalent form of this ACL expressed in the XML format.",
+              "description": "The container element for object ownership for a bucket's ownership controls.\nBucketOwnerPreferred - Objects uploaded to the bucket change ownership to the\nbucket owner if the objects are uploaded with the bucket-owner-full-control\ncanned ACL. ObjectWriter - The uploading account will own the object if the\nobject is uploaded with the bucket-owner-full-control canned ACL.\nBucketOwnerEnforced - Access control lists (ACLs) are disabled and no longer\naffect permissions. The bucket owner automatically owns and has full control\nover every object in the bucket. The bucket only accepts PUT requests that don't\nspecify an ACL or bucket owner full control ACLs, such as the\nbucket-owner-full-control canned ACL or an equivalent form of this ACL expressed\nin the XML format.",
               "enum": [
                 "BucketOwnerPreferred",
                 "ObjectWriter",
@@ -914,10 +951,10 @@
               "type": "string"
             },
             "paymentConfiguration": {
-              "description": "Specifies payer parameters for an Amazon S3 bucket. For more information, see Request Pays buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html) in the Amazon Simple Storage Service Developer Guide.",
+              "description": "Specifies payer parameters for an Amazon S3 bucket.\nFor more information, see Request Pays buckets\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html) in the Amazon\nSimple Storage Service Developer Guide.",
               "properties": {
                 "payer": {
-                  "description": "Payer is a required field, detailing who pays Valid values are \"Requester\" and \"BucketOwner\"",
+                  "description": "Payer is a required field, detailing who pays\nValid values are \"Requester\" and \"BucketOwner\"",
                   "enum": [
                     "Requester",
                     "BucketOwner"
@@ -932,40 +969,40 @@
               "additionalProperties": false
             },
             "policy": {
-              "description": "Policy is a well defined type which can be parsed into an JSON S3 Bucket Policy. \n By default, to ensure compatibility with previous APIs, a bucket policy is never deleted from a bucket if this field is set to null. To change this behaviour, see `policyUpdatePolicy`.",
+              "description": "Policy is a well defined type which can be parsed into an JSON S3 Bucket\nPolicy.\n\nBy default, to ensure compatibility with previous APIs, a bucket policy\nis never deleted from a bucket if this field is set to null.\nTo change this behaviour, see `policyUpdatePolicy`.",
               "properties": {
                 "id": {
                   "description": "ID is the policy's optional identifier",
                   "type": "string"
                 },
                 "statements": {
-                  "description": "Statements is the list of statement this policy applies either jsonStatements or statements must be specified in the policy",
+                  "description": "Statements is the list of statement this policy applies\neither jsonStatements or statements must be specified in the policy",
                   "items": {
-                    "description": "BucketPolicyStatement defines an individual statement within the BucketPolicyBody",
+                    "description": "BucketPolicyStatement defines an individual statement within the\nBucketPolicyBody",
                     "properties": {
                       "action": {
-                        "description": "Each element of the PolicyAction array describes the specific action or actions that will be allowed or denied with this PolicyStatement.",
+                        "description": "Each element of the PolicyAction array describes the specific\naction or actions that will be allowed or denied with this PolicyStatement.",
                         "items": {
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "condition": {
-                        "description": "Condition specifies where conditions for policy are in effect. https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html",
+                        "description": "Condition specifies where conditions for policy are in effect.\nhttps://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html",
                         "items": {
                           "description": "Condition represents a set of condition pairs for a bucket policy",
                           "properties": {
                             "conditions": {
                               "description": "Conditions represents each of the key/value pairs for the operator key",
                               "items": {
-                                "description": "ConditionPair represents one condition inside of the set of conditions for a bucket policy",
+                                "description": "ConditionPair represents one condition inside of the set of conditions for\na bucket policy",
                                 "properties": {
                                   "booleanValue": {
                                     "description": "ConditionBooleanValue is the expected boolean value of the key from the parent condition",
                                     "type": "boolean"
                                   },
                                   "dateValue": {
-                                    "description": "ConditionDateValue is the expected string value of the key from the parent condition. The date value must be in ISO 8601 format. The time is always midnight UTC.",
+                                    "description": "ConditionDateValue is the expected string value of the key from the parent condition. The\ndate value must be in ISO 8601 format. The time is always midnight UTC.",
                                     "format": "date-time",
                                     "type": "string"
                                   },
@@ -1013,7 +1050,7 @@
                         "type": "array"
                       },
                       "effect": {
-                        "description": "The effect is required and specifies whether the statement results in an allow or an explicit deny. Valid values for Effect are Allow and Deny.",
+                        "description": "The effect is required and specifies whether the statement results\nin an allow or an explicit deny. Valid values for Effect are Allow and Deny.",
                         "enum": [
                           "Allow",
                           "Deny"
@@ -1021,23 +1058,23 @@
                         "type": "string"
                       },
                       "notAction": {
-                        "description": "Each element of the NotPolicyAction array will allow the property to match all but the listed actions.",
+                        "description": "Each element of the NotPolicyAction array will allow the property to match\nall but the listed actions.",
                         "items": {
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "notPrincipal": {
-                        "description": "Used with the S3 policy to specify the users which are not included in this policy",
+                        "description": "Used with the S3 policy to specify the users which are not included\nin this policy",
                         "properties": {
                           "allowAnon": {
-                            "description": "This flag indicates if the policy should be made available to all anonymous users.",
+                            "description": "This flag indicates if the policy should be made available\nto all anonymous users.",
                             "type": "boolean"
                           },
                           "awsPrincipals": {
-                            "description": "This list contains the all of the AWS IAM users which are affected by the policy statement.",
+                            "description": "This list contains the all of the AWS IAM users which are affected\nby the policy statement.",
                             "items": {
-                              "description": "AWSPrincipal wraps the potential values a policy principal can take. Only one of the values should be set.",
+                              "description": "AWSPrincipal wraps the potential values a policy\nprincipal can take. Only one of the values should be set.",
                               "properties": {
                                 "awsAccountId": {
                                   "description": "AWSAccountID identifies an AWS account as the principal",
@@ -1059,7 +1096,7 @@
                                       "properties": {
                                         "resolution": {
                                           "default": "Required",
-                                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                           "enum": [
                                             "Required",
                                             "Optional"
@@ -1067,7 +1104,7 @@
                                           "type": "string"
                                         },
                                         "resolve": {
-                                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                           "enum": [
                                             "Always",
                                             "IfNotPresent"
@@ -1089,7 +1126,7 @@
                                   "description": "IAMRoleARNSelector queries for an IAM role to retrieve its userName",
                                   "properties": {
                                     "matchControllerRef": {
-                                      "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                                      "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                                       "type": "boolean"
                                     },
                                     "matchLabels": {
@@ -1104,7 +1141,7 @@
                                       "properties": {
                                         "resolution": {
                                           "default": "Required",
-                                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                           "enum": [
                                             "Required",
                                             "Optional"
@@ -1112,7 +1149,7 @@
                                           "type": "string"
                                         },
                                         "resolve": {
-                                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                           "enum": [
                                             "Always",
                                             "IfNotPresent"
@@ -1143,7 +1180,7 @@
                                       "properties": {
                                         "resolution": {
                                           "default": "Required",
-                                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                           "enum": [
                                             "Required",
                                             "Optional"
@@ -1151,7 +1188,7 @@
                                           "type": "string"
                                         },
                                         "resolve": {
-                                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                           "enum": [
                                             "Always",
                                             "IfNotPresent"
@@ -1173,7 +1210,7 @@
                                   "description": "UserARNSelector queries for an User to retrieve its userName",
                                   "properties": {
                                     "matchControllerRef": {
-                                      "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                                      "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                                       "type": "boolean"
                                     },
                                     "matchLabels": {
@@ -1188,7 +1225,7 @@
                                       "properties": {
                                         "resolution": {
                                           "default": "Required",
-                                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                           "enum": [
                                             "Required",
                                             "Optional"
@@ -1196,7 +1233,7 @@
                                           "type": "string"
                                         },
                                         "resolve": {
-                                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                           "enum": [
                                             "Always",
                                             "IfNotPresent"
@@ -1218,7 +1255,7 @@
                             "type": "array"
                           },
                           "federated": {
-                            "description": "This string contains the identifier for any federated web identity provider.",
+                            "description": "This string contains the identifier for any federated web identity\nprovider.",
                             "type": "string"
                           },
                           "service": {
@@ -1233,23 +1270,23 @@
                         "additionalProperties": false
                       },
                       "notResource": {
-                        "description": "This will explicitly match all resource paths except the ones specified in this array",
+                        "description": "This will explicitly match all resource paths except the ones\nspecified in this array",
                         "items": {
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "principal": {
-                        "description": "Used with the S3 policy to specify the principal that is allowed or denied access to a resource.",
+                        "description": "Used with the S3 policy to specify the principal that is allowed\nor denied access to a resource.",
                         "properties": {
                           "allowAnon": {
-                            "description": "This flag indicates if the policy should be made available to all anonymous users.",
+                            "description": "This flag indicates if the policy should be made available\nto all anonymous users.",
                             "type": "boolean"
                           },
                           "awsPrincipals": {
-                            "description": "This list contains the all of the AWS IAM users which are affected by the policy statement.",
+                            "description": "This list contains the all of the AWS IAM users which are affected\nby the policy statement.",
                             "items": {
-                              "description": "AWSPrincipal wraps the potential values a policy principal can take. Only one of the values should be set.",
+                              "description": "AWSPrincipal wraps the potential values a policy\nprincipal can take. Only one of the values should be set.",
                               "properties": {
                                 "awsAccountId": {
                                   "description": "AWSAccountID identifies an AWS account as the principal",
@@ -1271,7 +1308,7 @@
                                       "properties": {
                                         "resolution": {
                                           "default": "Required",
-                                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                           "enum": [
                                             "Required",
                                             "Optional"
@@ -1279,7 +1316,7 @@
                                           "type": "string"
                                         },
                                         "resolve": {
-                                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                           "enum": [
                                             "Always",
                                             "IfNotPresent"
@@ -1301,7 +1338,7 @@
                                   "description": "IAMRoleARNSelector queries for an IAM role to retrieve its userName",
                                   "properties": {
                                     "matchControllerRef": {
-                                      "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                                      "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                                       "type": "boolean"
                                     },
                                     "matchLabels": {
@@ -1316,7 +1353,7 @@
                                       "properties": {
                                         "resolution": {
                                           "default": "Required",
-                                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                           "enum": [
                                             "Required",
                                             "Optional"
@@ -1324,7 +1361,7 @@
                                           "type": "string"
                                         },
                                         "resolve": {
-                                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                           "enum": [
                                             "Always",
                                             "IfNotPresent"
@@ -1355,7 +1392,7 @@
                                       "properties": {
                                         "resolution": {
                                           "default": "Required",
-                                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                           "enum": [
                                             "Required",
                                             "Optional"
@@ -1363,7 +1400,7 @@
                                           "type": "string"
                                         },
                                         "resolve": {
-                                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                           "enum": [
                                             "Always",
                                             "IfNotPresent"
@@ -1385,7 +1422,7 @@
                                   "description": "UserARNSelector queries for an User to retrieve its userName",
                                   "properties": {
                                     "matchControllerRef": {
-                                      "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                                      "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                                       "type": "boolean"
                                     },
                                     "matchLabels": {
@@ -1400,7 +1437,7 @@
                                       "properties": {
                                         "resolution": {
                                           "default": "Required",
-                                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                           "enum": [
                                             "Required",
                                             "Optional"
@@ -1408,7 +1445,7 @@
                                           "type": "string"
                                         },
                                         "resolve": {
-                                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                           "enum": [
                                             "Always",
                                             "IfNotPresent"
@@ -1430,7 +1467,7 @@
                             "type": "array"
                           },
                           "federated": {
-                            "description": "This string contains the identifier for any federated web identity provider.",
+                            "description": "This string contains the identifier for any federated web identity\nprovider.",
                             "type": "string"
                           },
                           "service": {
@@ -1452,7 +1489,7 @@
                         "type": "array"
                       },
                       "sid": {
-                        "description": "Optional identifier for this statement, must be unique within the policy if provided.",
+                        "description": "Optional identifier for this statement, must be unique within the\npolicy if provided.",
                         "type": "string"
                       }
                     },
@@ -1485,7 +1522,7 @@
               "properties": {
                 "deletionPolicy": {
                   "default": "Never",
-                  "description": "DeletionPolicy specifies how and if the bucket policy should be deleted from the bucket. \n * `Never`: The bucket policy is never deleted, but only overwritten. If a change is detected. \n * `IfNull`: The bucket policy is deleted if the `policy` field is set to null. \n The default is `Never`.",
+                  "description": "DeletionPolicy specifies how and if the bucket policy should be deleted\nfrom the bucket.\n\n* `Never`: The bucket policy is never deleted, but only overwritten. If a\nchange is detected.\n\n* `IfNull`: The bucket policy is deleted if the `policy` field is set to\nnull.\n\nThe default is `Never`.",
                   "type": "string"
                 }
               },
@@ -1493,22 +1530,22 @@
               "additionalProperties": false
             },
             "publicAccessBlockConfiguration": {
-              "description": "PublicAccessBlockConfiguration that you want to apply to this Amazon S3 bucket.",
+              "description": "PublicAccessBlockConfiguration that you want to apply to this Amazon\nS3 bucket.",
               "properties": {
                 "blockPublicAcls": {
-                  "description": "Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior: \n * PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public. \n * PUT Object calls fail if the request includes a public ACL. \n * PUT Bucket calls fail if the request includes a public ACL. \n Enabling this setting doesn't affect existing policies or ACLs.",
+                  "description": "Specifies whether Amazon S3 should block public access control lists (ACLs)\nfor this bucket and objects in this bucket. Setting this element to TRUE\ncauses the following behavior:\n\n   * PUT Bucket acl and PUT Object acl calls fail if the specified ACL is\n   public.\n\n   * PUT Object calls fail if the request includes a public ACL.\n\n   * PUT Bucket calls fail if the request includes a public ACL.\n\nEnabling this setting doesn't affect existing policies or ACLs.",
                   "type": "boolean"
                 },
                 "blockPublicPolicy": {
-                  "description": "Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. \n Enabling this setting doesn't affect existing bucket policies.",
+                  "description": "Specifies whether Amazon S3 should block public bucket policies for this\nbucket. Setting this element to TRUE causes Amazon S3 to reject calls to\nPUT Bucket policy if the specified bucket policy allows public access.\n\nEnabling this setting doesn't affect existing bucket policies.",
                   "type": "boolean"
                 },
                 "ignorePublicAcls": {
-                  "description": "Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket. \n Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
+                  "description": "Specifies whether Amazon S3 should ignore public ACLs for this bucket and\nobjects in this bucket. Setting this element to TRUE causes Amazon S3 to\nignore all public ACLs on this bucket and objects in this bucket.\n\nEnabling this setting doesn't affect the persistence of any existing ACLs\nand doesn't prevent new public ACLs from being set.",
                   "type": "boolean"
                 },
                 "restrictPublicBuckets": {
-                  "description": "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy. \n Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
+                  "description": "Specifies whether Amazon S3 should restrict public bucket policies for this\nbucket. Setting this element to TRUE restricts access to this bucket to only\nAWS services and authorized users within this account if the bucket has a\npublic policy.\n\nEnabling this setting doesn't affect previously stored bucket policies, except\nthat public and cross-account access within any public bucket policy, including\nnon-public delegation to specific accounts, is blocked.",
                   "type": "boolean"
                 }
               },
@@ -1516,10 +1553,10 @@
               "additionalProperties": false
             },
             "replicationConfiguration": {
-              "description": "Creates a replication configuration or replaces an existing one. For more information, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon S3 Developer Guide.",
+              "description": "Creates a replication configuration or replaces an existing one.\nFor more information, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html)\nin the Amazon S3 Developer Guide.",
               "properties": {
                 "role": {
-                  "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects. For more information, see How to Set Up Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html) in the Amazon Simple Storage Service Developer Guide. \n At least one of role, roleRef or roleSelector fields is required.",
+                  "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management\n(IAM) role that Amazon S3 assumes when replicating objects. For more information,\nsee How to Set Up Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html)\nin the Amazon Simple Storage Service Developer Guide.\n\nAt least one of role, roleRef or roleSelector fields is required.",
                   "type": "string"
                 },
                 "roleRef": {
@@ -1534,7 +1571,7 @@
                       "properties": {
                         "resolution": {
                           "default": "Required",
-                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                           "enum": [
                             "Required",
                             "Optional"
@@ -1542,7 +1579,7 @@
                           "type": "string"
                         },
                         "resolve": {
-                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                           "enum": [
                             "Always",
                             "IfNotPresent"
@@ -1564,7 +1601,7 @@
                   "description": "RoleSelector selects a reference to an IAMRole to retrieve its Name",
                   "properties": {
                     "matchControllerRef": {
-                      "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                      "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                       "type": "boolean"
                     },
                     "matchLabels": {
@@ -1579,7 +1616,7 @@
                       "properties": {
                         "resolution": {
                           "default": "Required",
-                          "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                          "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                           "enum": [
                             "Required",
                             "Optional"
@@ -1587,7 +1624,7 @@
                           "type": "string"
                         },
                         "resolve": {
-                          "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                          "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                           "enum": [
                             "Always",
                             "IfNotPresent"
@@ -1603,15 +1640,15 @@
                   "additionalProperties": false
                 },
                 "rules": {
-                  "description": "A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules. \n Rules is a required field",
+                  "description": "A container for one or more replication rules. A replication configuration\nmust have at least one rule and can contain a maximum of 1,000 rules.\n\nRules is a required field",
                   "items": {
                     "description": "ReplicationRule specifies which Amazon S3 objects to replicate and where to store the replicas.",
                     "properties": {
                       "deleteMarkerReplication": {
-                        "description": "Specifies whether Amazon S3 replicates the delete markers. If you specify a Filter, you must specify this element. However, in the latest version of replication configuration (when Filter is specified), Amazon S3 doesn't replicate delete markers. Therefore, the DeleteMarkerReplication element can contain only <Status>Disabled</Status>. For an example configuration, see Basic Rule Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). \n If you don't specify the Filter element, Amazon S3 assumes that the replication configuration is the earlier version, V1. In the earlier version, Amazon S3 handled replication of delete markers differently. For more information, see Backward Compatibility (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).",
+                        "description": "Specifies whether Amazon S3 replicates the delete markers. If you specify\na Filter, you must specify this element. However, in the latest version of\nreplication configuration (when Filter is specified), Amazon S3 doesn't replicate\ndelete markers. Therefore, the DeleteMarkerReplication element can contain\nonly <Status>Disabled</Status>. For an example configuration, see Basic Rule\nConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).\n\nIf you don't specify the Filter element, Amazon S3 assumes that the replication\nconfiguration is the earlier version, V1. In the earlier version, Amazon\nS3 handled replication of delete markers differently. For more information,\nsee Backward Compatibility (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).",
                         "properties": {
                           "status": {
-                            "description": "Indicates whether to replicate delete markers. Valid values are \"Enabled\" or \"Disabled\"",
+                            "description": "Indicates whether to replicate delete markers.\nValid values are \"Enabled\" or \"Disabled\"",
                             "enum": [
                               "Enabled",
                               "Disabled"
@@ -1626,13 +1663,13 @@
                         "additionalProperties": false
                       },
                       "destination": {
-                        "description": "A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC). \n Destination is a required field",
+                        "description": "A container for information about the replication destination and its configurations\nincluding enabling the S3 Replication Time Control (S3 RTC).\n\nDestination is a required field",
                         "properties": {
                           "accessControlTranslation": {
-                            "description": "Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object.",
+                            "description": "Specify this only in a cross-account scenario (where source and destination\nbucket owners are not the same), and you want to change replica ownership\nto the AWS account that owns the destination bucket. If this is not specified\nin the replication configuration, the replicas are owned by same AWS account\nthat owns the source object.",
                             "properties": {
                               "ownerOverride": {
-                                "description": "Specifies the replica ownership. For default and valid values, see PUT bucket replication (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) in the Amazon Simple Storage Service API Reference. Owner is a required field",
+                                "description": "Specifies the replica ownership. For default and valid values, see PUT bucket\nreplication (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)\nin the Amazon Simple Storage Service API Reference.\nOwner is a required field",
                                 "type": "string"
                               }
                             },
@@ -1643,11 +1680,11 @@
                             "additionalProperties": false
                           },
                           "account": {
-                            "description": "Destination bucket owner account ID. In a cross-account scenario, if you direct Amazon S3 to change replica ownership to the AWS account that owns the destination bucket by specifying the AccessControlTranslation property, this is the account ID of the destination bucket owner. For more information, see Replication Additional Configuration: Changing the Replica Owner (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-change-owner.html) in the Amazon Simple Storage Service Developer Guide.",
+                            "description": "Destination bucket owner account ID. In a cross-account scenario, if you\ndirect Amazon S3 to change replica ownership to the AWS account that owns\nthe destination bucket by specifying the AccessControlTranslation property,\nthis is the account ID of the destination bucket owner. For more information,\nsee Replication Additional Configuration: Changing the Replica Owner (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-change-owner.html)\nin the Amazon Simple Storage Service Developer Guide.",
                             "type": "string"
                           },
                           "bucket": {
-                            "description": "The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store the results. At least one of bucket, bucketRef or bucketSelector is required.",
+                            "description": "The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to\nstore the results.\nAt least one of bucket, bucketRef or bucketSelector is required.",
                             "type": "string"
                           },
                           "bucketRef": {
@@ -1662,7 +1699,7 @@
                                 "properties": {
                                   "resolution": {
                                     "default": "Required",
-                                    "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                    "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                     "enum": [
                                       "Required",
                                       "Optional"
@@ -1670,7 +1707,7 @@
                                     "type": "string"
                                   },
                                   "resolve": {
-                                    "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                    "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                     "enum": [
                                       "Always",
                                       "IfNotPresent"
@@ -1692,7 +1729,7 @@
                             "description": "BucketSelector selects a reference to a Bucket to retrieve its Name",
                             "properties": {
                               "matchControllerRef": {
-                                "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                                "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                                 "type": "boolean"
                               },
                               "matchLabels": {
@@ -1707,7 +1744,7 @@
                                 "properties": {
                                   "resolution": {
                                     "default": "Required",
-                                    "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                    "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                     "enum": [
                                       "Required",
                                       "Optional"
@@ -1715,7 +1752,7 @@
                                     "type": "string"
                                   },
                                   "resolve": {
-                                    "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                    "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                     "enum": [
                                       "Always",
                                       "IfNotPresent"
@@ -1731,10 +1768,10 @@
                             "additionalProperties": false
                           },
                           "encryptionConfiguration": {
-                            "description": "A container that provides information about encryption. If SourceSelectionCriteria is specified, you must specify this element.",
+                            "description": "A container that provides information about encryption. If SourceSelectionCriteria\nis specified, you must specify this element.",
                             "properties": {
                               "replicaKmsKeyId": {
-                                "description": "Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket. Amazon S3 uses this key to encrypt replica objects. Amazon S3 only supports symmetric customer managed CMKs. For more information, see Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the AWS Key Management Service Developer Guide.",
+                                "description": "Specifies the ID (Key ARN or Alias ARN) of the customer managed customer\nmaster key (CMK) stored in AWS Key Management Service (KMS) for the destination\nbucket. Amazon S3 uses this key to encrypt replica objects. Amazon S3 only\nsupports symmetric customer managed CMKs. For more information, see Using\nSymmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)\nin the AWS Key Management Service Developer Guide.",
                                 "type": "string"
                               },
                               "replicaKmsKeyIdRef": {
@@ -1749,7 +1786,7 @@
                                     "properties": {
                                       "resolution": {
                                         "default": "Required",
-                                        "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                        "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                         "enum": [
                                           "Required",
                                           "Optional"
@@ -1757,7 +1794,7 @@
                                         "type": "string"
                                       },
                                       "resolve": {
-                                        "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                        "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                         "enum": [
                                           "Always",
                                           "IfNotPresent"
@@ -1779,7 +1816,7 @@
                                 "description": "ReplicaKmsKeyIDSelector selects a reference to an KMSKey to retrieve its ID",
                                 "properties": {
                                   "matchControllerRef": {
-                                    "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                                    "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                                     "type": "boolean"
                                   },
                                   "matchLabels": {
@@ -1794,7 +1831,7 @@
                                     "properties": {
                                       "resolution": {
                                         "default": "Required",
-                                        "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                        "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                         "enum": [
                                           "Required",
                                           "Optional"
@@ -1802,7 +1839,7 @@
                                         "type": "string"
                                       },
                                       "resolve": {
-                                        "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                        "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                         "enum": [
                                           "Always",
                                           "IfNotPresent"
@@ -1825,13 +1862,13 @@
                             "additionalProperties": false
                           },
                           "metrics": {
-                            "description": "A container specifying replication metrics-related settings enabling metrics and Amazon S3 events for S3 Replication Time Control (S3 RTC). Must be specified together with a ReplicationTime block.",
+                            "description": "A container specifying replication metrics-related settings enabling metrics\nand Amazon S3 events for S3 Replication Time Control (S3 RTC). Must be specified\ntogether with a ReplicationTime block.",
                             "properties": {
                               "eventThreshold": {
-                                "description": "A container specifying the time threshold for emitting the s3:Replication:OperationMissedThreshold event.",
+                                "description": "A container specifying the time threshold for emitting the s3:Replication:OperationMissedThreshold\nevent.",
                                 "properties": {
                                   "minutes": {
-                                    "description": "Contains an integer specifying time in minutes. \n Valid values: 15 minutes.",
+                                    "description": "Contains an integer specifying time in minutes.\n\nValid values: 15 minutes.",
                                     "format": "int32",
                                     "type": "integer"
                                   }
@@ -1843,7 +1880,7 @@
                                 "additionalProperties": false
                               },
                               "status": {
-                                "description": "Specifies whether the replication metrics are enabled. \n Status is a required field, valid values are \"Enabled\" and \"Disabled\"",
+                                "description": "Specifies whether the replication metrics are enabled.\n\nStatus is a required field, valid values are \"Enabled\" and \"Disabled\"",
                                 "enum": [
                                   "Enabled",
                                   "Disabled"
@@ -1858,10 +1895,10 @@
                             "additionalProperties": false
                           },
                           "replicationTime": {
-                            "description": "A container specifying S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated. Must be specified together with a Metrics block.",
+                            "description": "A container specifying S3 Replication Time Control (S3 RTC), including whether\nS3 RTC is enabled and the time when all objects and operations on objects\nmust be replicated. Must be specified together with a Metrics block.",
                             "properties": {
                               "status": {
-                                "description": "Specifies whether the replication time is enabled Status is a required field Valid values are \"Enabled\" and \"Disabled\"",
+                                "description": "Specifies whether the replication time is enabled\nStatus is a required field\nValid values are \"Enabled\" and \"Disabled\"",
                                 "enum": [
                                   "Enabled",
                                   "Disabled"
@@ -1869,10 +1906,10 @@
                                 "type": "string"
                               },
                               "time": {
-                                "description": "A container specifying the time by which replication should be complete for all objects and operations on objects. Time is a required field",
+                                "description": "A container specifying the time by which replication should be complete for\nall objects and operations on objects.\nTime is a required field",
                                 "properties": {
                                   "minutes": {
-                                    "description": "Contains an integer specifying time in minutes. \n Valid values: 15 minutes.",
+                                    "description": "Contains an integer specifying time in minutes.\n\nValid values: 15 minutes.",
                                     "format": "int32",
                                     "type": "integer"
                                   }
@@ -1892,10 +1929,11 @@
                             "additionalProperties": false
                           },
                           "storageClass": {
-                            "description": "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica. For valid values, see the StorageClass element of the PUT Bucket replication (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the Amazon Simple Storage Service API Reference.",
+                            "description": "The storage class to use when replicating objects, such as S3 Standard or\nreduced redundancy. By default, Amazon S3 uses the storage class of the source\nobject to create the object replica.\nFor valid values, see the StorageClass element of the PUT Bucket replication\n(https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)\naction in the Amazon Simple Storage Service API Reference.",
                             "enum": [
                               "STANDARD",
                               "GLACIER",
+                              "GLACIER_IR",
                               "STANDARD_IA",
                               "ONEZONE_IA",
                               "INTELLIGENT_TIERING",
@@ -1908,10 +1946,10 @@
                         "additionalProperties": false
                       },
                       "existingObjectReplication": {
-                        "description": "Optional configuration to replicate existing source bucket objects. For more information, see Replicating Existing Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication) in the Amazon S3 Developer Guide.",
+                        "description": "Optional configuration to replicate existing source bucket objects. For more\ninformation, see Replicating Existing Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication)\nin the Amazon S3 Developer Guide.",
                         "properties": {
                           "status": {
-                            "description": "Status is a required field Valid values are \"Enabled\" and \"Disabled\"",
+                            "description": "Status is a required field\nValid values are \"Enabled\" and \"Disabled\"",
                             "enum": [
                               "Enabled",
                               "Disabled"
@@ -1926,13 +1964,13 @@
                         "additionalProperties": false
                       },
                       "filter": {
-                        "description": "A filter that identifies the subset of objects to which the replication rule applies. A Filter must specify exactly one Prefix, Tag, or an And child element.",
+                        "description": "A filter that identifies the subset of objects to which the replication rule\napplies. A Filter must specify exactly one Prefix, Tag, or an And child element.",
                         "properties": {
                           "and": {
-                            "description": "A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example: \n * If you specify both a Prefix and a Tag filter, wrap these filters in an And tag. \n * If you specify a filter based on multiple tags, wrap the Tag elements in an And tag.",
+                            "description": "A container for specifying rule filters. The filters determine the subset\nof objects to which the rule applies. This element is required only if you\nspecify more than one filter. For example:\n\n   * If you specify both a Prefix and a Tag filter, wrap these filters in\n   an And tag.\n\n   * If you specify a filter based on multiple tags, wrap the Tag elements\n   in an And tag.",
                             "properties": {
                               "prefix": {
-                                "description": "An object key name prefix that identifies the subset of objects to which the rule applies.",
+                                "description": "An object key name prefix that identifies the subset of objects to which\nthe rule applies.",
                                 "type": "string"
                               },
                               "tag": {
@@ -1941,11 +1979,11 @@
                                   "description": "Tag is a container for a key value name pair.",
                                   "properties": {
                                     "key": {
-                                      "description": "Name of the tag. Key is a required field",
+                                      "description": "Name of the tag.\nKey is a required field",
                                       "type": "string"
                                     },
                                     "value": {
-                                      "description": "Value of the tag. Value is a required field",
+                                      "description": "Value of the tag.\nValue is a required field",
                                       "type": "string"
                                     }
                                   },
@@ -1963,18 +2001,18 @@
                             "additionalProperties": false
                           },
                           "prefix": {
-                            "description": "An object key name prefix that identifies the subset of objects to which the rule applies.",
+                            "description": "An object key name prefix that identifies the subset of objects to which\nthe rule applies.",
                             "type": "string"
                           },
                           "tag": {
-                            "description": "A container for specifying a tag key and value. The rule applies only to objects that have the tag in their tag set.",
+                            "description": "A container for specifying a tag key and value.\nThe rule applies only to objects that have the tag in their tag set.",
                             "properties": {
                               "key": {
-                                "description": "Name of the tag. Key is a required field",
+                                "description": "Name of the tag.\nKey is a required field",
                                 "type": "string"
                               },
                               "value": {
-                                "description": "Value of the tag. Value is a required field",
+                                "description": "Value of the tag.\nValue is a required field",
                                 "type": "string"
                               }
                             },
@@ -1994,18 +2032,18 @@
                         "type": "string"
                       },
                       "priority": {
-                        "description": "The priority associated with the rule. If you specify multiple rules in a replication configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering. If two or more rules identify the same object based on a specified filter, the rule with higher priority takes precedence. For example: \n * Same object quality prefix-based filter criteria if prefixes you specified in multiple rules overlap \n * Same object qualify tag-based filter criteria specified in multiple rules \n For more information, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon Simple Storage Service Developer Guide.",
+                        "description": "The priority associated with the rule. If you specify multiple rules in a\nreplication configuration, Amazon S3 prioritizes the rules to prevent conflicts\nwhen filtering. If two or more rules identify the same object based on a\nspecified filter, the rule with higher priority takes precedence. For example:\n\n   * Same object quality prefix-based filter criteria if prefixes you specified\n   in multiple rules overlap\n\n   * Same object qualify tag-based filter criteria specified in multiple\n   rules\n\nFor more information, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html)\nin the Amazon Simple Storage Service Developer Guide.",
                         "format": "int32",
                         "type": "integer"
                       },
                       "sourceSelectionCriteria": {
-                        "description": "A container that describes additional filters for identifying the source objects that you want to replicate. You can choose to enable or disable the replication of these objects. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service (SSE-KMS).",
+                        "description": "A container that describes additional filters for identifying the source\nobjects that you want to replicate. You can choose to enable or disable the\nreplication of these objects. Currently, Amazon S3 supports only the filter\nthat you can specify for objects created with server-side encryption using\na customer master key (CMK) stored in AWS Key Management Service (SSE-KMS).",
                         "properties": {
                           "sseKmsEncryptedObjects": {
-                            "description": "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS. If you include SourceSelectionCriteria in the replication configuration, this element is required.",
+                            "description": "A container for filter information for the selection of Amazon S3 objects\nencrypted with AWS KMS. If you include SourceSelectionCriteria in the replication\nconfiguration, this element is required.",
                             "properties": {
                               "status": {
-                                "description": "Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service. \n Status is a required field Valid values are \"Enabled\" or \"Disabled\"",
+                                "description": "Specifies whether Amazon S3 replicates objects created with server-side encryption\nusing a customer master key (CMK) stored in AWS Key Management Service.\n\nStatus is a required field\nValid values are \"Enabled\" or \"Disabled\"",
                                 "enum": [
                                   "Enabled",
                                   "Disabled"
@@ -2027,7 +2065,7 @@
                         "additionalProperties": false
                       },
                       "status": {
-                        "description": "Specifies whether the rule is enabled. \n Status is a required field Valid values are \"Enabled\" or \"Disabled\"",
+                        "description": "Specifies whether the rule is enabled.\n\nStatus is a required field\nValid values are \"Enabled\" or \"Disabled\"",
                         "enum": [
                           "Enabled",
                           "Disabled"
@@ -2052,18 +2090,18 @@
               "additionalProperties": false
             },
             "serverSideEncryptionConfiguration": {
-              "description": "Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3) or customer master keys stored in AWS KMS (SSE-KMS). For information about the Amazon S3 default encryption feature, see Amazon S3 Default Bucket Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the Amazon Simple Storage Service Developer Guide.",
+              "description": "Specifies default encryption for a bucket using server-side encryption with\nAmazon S3-managed keys (SSE-S3) or customer master keys stored in AWS KMS\n(SSE-KMS). For information about the Amazon S3 default encryption feature,\nsee Amazon S3 Default Bucket Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)\nin the Amazon Simple Storage Service Developer Guide.",
               "properties": {
                 "rules": {
-                  "description": "Container for information about a particular server-side encryption configuration rule.",
+                  "description": "Container for information about a particular server-side encryption configuration\nrule.",
                   "items": {
                     "description": "ServerSideEncryptionRule Specifies the default server-side encryption configuration.",
                     "properties": {
                       "applyServerSideEncryptionByDefault": {
-                        "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
+                        "description": "Specifies the default server-side encryption to apply to new objects in the\nbucket. If a PUT Object request doesn't specify any server-side encryption,\nthis default encryption will be applied.",
                         "properties": {
                           "kmsMasterKeyId": {
-                            "description": "AWS Key Management Service (KMS) customer master key ID to use for the default encryption. This parameter is allowed if and only if SSEAlgorithm is set to aws:kms. \n You can specify the key ID or the Amazon Resource Name (ARN) of the CMK. However, if you are using encryption with cross-account operations, you must use a fully qualified CMK ARN. For more information, see Using encryption for cross-account operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy). \n For example: \n * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab \n * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab \n Amazon S3 only supports symmetric CMKs and not asymmetric CMKs. For more information, see Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the AWS Key Management Service Developer Guide.",
+                            "description": "AWS Key Management Service (KMS) customer master key ID to use for the default\nencryption. This parameter is allowed if and only if SSEAlgorithm is set\nto aws:kms.\n\nYou can specify the key ID or the Amazon Resource Name (ARN) of the CMK.\nHowever, if you are using encryption with cross-account operations, you must\nuse a fully qualified CMK ARN. For more information, see Using encryption\nfor cross-account operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n\nFor example:\n\n   * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab\n\n   * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\n\nAmazon S3 only supports symmetric CMKs and not asymmetric CMKs. For more\ninformation, see Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)\nin the AWS Key Management Service Developer Guide.",
                             "type": "string"
                           },
                           "kmsMasterKeyIdRef": {
@@ -2078,7 +2116,7 @@
                                 "properties": {
                                   "resolution": {
                                     "default": "Required",
-                                    "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                    "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                     "enum": [
                                       "Required",
                                       "Optional"
@@ -2086,7 +2124,7 @@
                                     "type": "string"
                                   },
                                   "resolve": {
-                                    "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                    "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                     "enum": [
                                       "Always",
                                       "IfNotPresent"
@@ -2108,7 +2146,7 @@
                             "description": "KMSMasterKeyIDSelector selects a reference to an KMSKey to retrieve its ID",
                             "properties": {
                               "matchControllerRef": {
-                                "description": "MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.",
+                                "description": "MatchControllerRef ensures an object with the same controller reference\nas the selecting object is selected.",
                                 "type": "boolean"
                               },
                               "matchLabels": {
@@ -2123,7 +2161,7 @@
                                 "properties": {
                                   "resolution": {
                                     "default": "Required",
-                                    "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                                    "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                                     "enum": [
                                       "Required",
                                       "Optional"
@@ -2131,7 +2169,7 @@
                                     "type": "string"
                                   },
                                   "resolve": {
-                                    "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                                    "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                                     "enum": [
                                       "Always",
                                       "IfNotPresent"
@@ -2147,7 +2185,7 @@
                             "additionalProperties": false
                           },
                           "sseAlgorithm": {
-                            "description": "Server-side encryption algorithm to use for the default encryption. Options are AES256 or aws:kms",
+                            "description": "Server-side encryption algorithm to use for the default encryption.\nOptions are AES256 or aws:kms",
                             "type": "string"
                           }
                         },
@@ -2158,7 +2196,7 @@
                         "additionalProperties": false
                       },
                       "bucketKeyEnabled": {
-                        "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled. For more information, see Amazon S3 Bucket Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon S3 User Guide.",
+                        "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side\nencryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects\nare not affected. Setting the BucketKeyEnabled element to true causes Amazon S3\nto use an S3 Bucket Key. By default, S3 Bucket Key is not enabled. For more\ninformation, see Amazon S3 Bucket Keys\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon\nS3 User Guide.",
                         "type": "boolean"
                       }
                     },
@@ -2178,19 +2216,19 @@
               "additionalProperties": false
             },
             "tagging": {
-              "description": "Sets the tags for a bucket. Use tags to organize your AWS bill to reflect your own cost structure. For more information, see Billing and usage reporting for S3 buckets. (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketBilling.html) in the Amazon Simple Storage Service Developer Guide.",
+              "description": "Sets the tags for a bucket.\nUse tags to organize your AWS bill to reflect your own cost structure.\nFor more information, see Billing and usage reporting for S3 buckets.\n(https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketBilling.html) in the Amazon\nSimple Storage Service Developer Guide.",
               "properties": {
                 "tagSet": {
-                  "description": "A collection for a set of tags TagSet is a required field",
+                  "description": "A collection for a set of tags\nTagSet is a required field",
                   "items": {
                     "description": "Tag is a container for a key value name pair.",
                     "properties": {
                       "key": {
-                        "description": "Name of the tag. Key is a required field",
+                        "description": "Name of the tag.\nKey is a required field",
                         "type": "string"
                       },
                       "value": {
-                        "description": "Value of the tag. Value is a required field",
+                        "description": "Value of the tag.\nValue is a required field",
                         "type": "string"
                       }
                     },
@@ -2211,10 +2249,10 @@
               "additionalProperties": false
             },
             "versioningConfiguration": {
-              "description": "VersioningConfiguration describes the versioning state of an Amazon S3 bucket. See the AWS API reference guide for Amazon Simple Storage Service's API operation PutBucketVersioning for usage and error information. See also, https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioning",
+              "description": "VersioningConfiguration describes the versioning state of an Amazon S3 bucket.\nSee the AWS API reference guide for Amazon Simple Storage Service's API operation PutBucketVersioning for usage\nand error information. See also, https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioning",
               "properties": {
                 "mfaDelete": {
-                  "description": "MFADelete specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.",
+                  "description": "MFADelete specifies whether MFA delete is enabled in the bucket versioning configuration.\nThis element is only returned if the bucket has been configured with MFA\ndelete. If the bucket has never been so configured, this element is not returned.",
                   "enum": [
                     "Enabled",
                     "Disabled"
@@ -2234,7 +2272,7 @@
               "additionalProperties": false
             },
             "websiteConfiguration": {
-              "description": "Specifies website configuration parameters for an Amazon S3 bucket. See the AWS API reference guide for Amazon Simple Storage Service's API operation PutBucketWebsite for usage and error information. See also, https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsite",
+              "description": "Specifies website configuration parameters for an Amazon S3 bucket.\nSee the AWS API reference guide for Amazon Simple Storage Service's API operation PutBucketWebsite for usage\nand error information. See also, https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsite",
               "properties": {
                 "errorDocument": {
                   "description": "The name of the error document for the website.",
@@ -2254,7 +2292,7 @@
                   "description": "The name of the index document for the website.",
                   "properties": {
                     "suffix": {
-                      "description": "A suffix that is appended to a request that is for a directory on the website endpoint (for example,if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.",
+                      "description": "A suffix that is appended to a request that is for a directory on the website\nendpoint (for example,if the suffix is index.html and you make a request\nto samplebucket/images/ the data that is returned will be for the object\nwith the key name images/index.html) The suffix must not be empty and must\nnot include a slash character.",
                       "type": "string"
                     }
                   },
@@ -2265,14 +2303,14 @@
                   "additionalProperties": false
                 },
                 "redirectAllRequestsTo": {
-                  "description": "The redirect behavior for every request to this bucket's website endpoint. If you specify this property, you can't specify any other property.",
+                  "description": "The redirect behavior for every request to this bucket's website endpoint.\nIf you specify this property, you can't specify any other property.",
                   "properties": {
                     "hostName": {
                       "description": "Name of the host where requests are redirected.",
                       "type": "string"
                     },
                     "protocol": {
-                      "description": "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+                      "description": "Protocol to use when redirecting requests. The default is the protocol that\nis used in the original request.",
                       "enum": [
                         "http",
                         "https"
@@ -2292,14 +2330,14 @@
                     "description": "RoutingRule specifies the redirect behavior and when a redirect is applied.",
                     "properties": {
                       "condition": {
-                        "description": "A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.",
+                        "description": "A container for describing a condition that must be met for the specified\nredirect to apply. For example, 1. If request is for pages in the /docs folder,\nredirect to the /documents folder. 2. If request results in HTTP error 4xx,\nredirect request to another host where you might process the error.",
                         "properties": {
                           "httpErrorCodeReturnedEquals": {
-                            "description": "The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied.",
+                            "description": "The HTTP error code when the redirect is applied. In the event of an error,\nif the error code equals this value, then the specified redirect is applied.\nRequired when parent element Condition is specified and sibling KeyPrefixEquals\nis not specified. If both are specified, then both must be true for the redirect\nto be applied.",
                             "type": "string"
                           },
                           "keyPrefixEquals": {
-                            "description": "The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied.",
+                            "description": "The object key name prefix when the redirect is applied. For example, to\nredirect requests for ExamplePage.html, the key prefix will be ExamplePage.html.\nTo redirect request for all pages with the prefix docs/, the key prefix will\nbe /docs, which identifies all objects in the docs/ folder. Required when\nthe parent element Condition is specified and sibling HttpErrorCodeReturnedEquals\nis not specified. If both conditions are specified, both must be true for\nthe redirect to be applied.",
                             "type": "string"
                           }
                         },
@@ -2307,10 +2345,10 @@
                         "additionalProperties": false
                       },
                       "redirect": {
-                        "description": "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
+                        "description": "Container for redirect information. You can redirect requests to another\nhost, to another page, or with another protocol. In the event of an error,\nyou can specify a different error code to return.",
                         "properties": {
                           "httpRedirectCode": {
-                            "description": "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
+                            "description": "The HTTP redirect code to use on the response. Not required if one of the\nsiblings is present.",
                             "type": "string"
                           },
                           "keyPrefixEquals": {
@@ -2318,15 +2356,15 @@
                             "type": "string"
                           },
                           "protocol": {
-                            "description": "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+                            "description": "Protocol to use when redirecting requests. The default is the protocol that\nis used in the original request.",
                             "type": "string"
                           },
                           "replaceKeyPrefixWith": {
-                            "description": "The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with KeyPrefixEquals set to docs/ and in the Redirect set ReplaceKeyPrefixWith to /documents. Not required if one of the siblings is present. Can be present only if ReplaceKeyWith is not provided.",
+                            "description": "The object key prefix to use in the redirect request. For example, to redirect\nrequests for all pages with prefix docs/ (objects in the docs/ folder) to\ndocuments/, you can set a condition block with KeyPrefixEquals set to docs/\nand in the Redirect set ReplaceKeyPrefixWith to /documents. Not required\nif one of the siblings is present. Can be present only if ReplaceKeyWith\nis not provided.",
                             "type": "string"
                           },
                           "replaceKeyWith": {
-                            "description": "The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the siblings is present. Can be present only if ReplaceKeyPrefixWith is not provided.",
+                            "description": "The specific object key to use in the redirect request. For example, redirect\nrequest to error.html. Not required if one of the siblings is present. Can\nbe present only if ReplaceKeyPrefixWith is not provided.",
                             "type": "string"
                           }
                         },
@@ -2357,9 +2395,9 @@
           "default": [
             "*"
           ],
-          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out through a Crossplane feature flag. ManagementPolicies specify the array of actions Crossplane is allowed to take on the managed and external resources. This field is planned to replace the DeletionPolicy field in a future release. Currently, both could be set independently and non-default values would be honored if the feature flag is enabled. If both are custom, the DeletionPolicy field will be ignored. See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223 and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
+          "description": "THIS IS A BETA FIELD. It is on by default but can be opted out\nthrough a Crossplane feature flag.\nManagementPolicies specify the array of actions Crossplane is allowed to\ntake on the managed and external resources.\nThis field is planned to replace the DeletionPolicy field in a future\nrelease. Currently, both could be set independently and non-default\nvalues would be honored if the feature flag is enabled. If both are\ncustom, the DeletionPolicy field will be ignored.\nSee the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223\nand this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md",
           "items": {
-            "description": "A ManagementAction represents an action that the Crossplane controllers can take on an external resource.",
+            "description": "A ManagementAction represents an action that the Crossplane controllers\ncan take on an external resource.",
             "enum": [
               "Observe",
               "Create",
@@ -2376,7 +2414,7 @@
           "default": {
             "name": "default"
           },
-          "description": "ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.",
+          "description": "ProviderConfigReference specifies how the provider that will be used to\ncreate, observe, update, and delete this managed resource should be\nconfigured.",
           "properties": {
             "name": {
               "description": "Name of the referenced object.",
@@ -2387,7 +2425,7 @@
               "properties": {
                 "resolution": {
                   "default": "Required",
-                  "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                  "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                   "enum": [
                     "Required",
                     "Optional"
@@ -2395,7 +2433,7 @@
                   "type": "string"
                 },
                 "resolve": {
-                  "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                  "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                   "enum": [
                     "Always",
                     "IfNotPresent"
@@ -2414,13 +2452,13 @@
           "additionalProperties": false
         },
         "publishConnectionDetailsTo": {
-          "description": "PublishConnectionDetailsTo specifies the connection secret config which contains a name, metadata and a reference to secret store config to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.",
+          "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
           "properties": {
             "configRef": {
               "default": {
                 "name": "default"
               },
-              "description": "SecretStoreConfigRef specifies which secret store config should be used for this ConnectionSecret.",
+              "description": "SecretStoreConfigRef specifies which secret store config should be used\nfor this ConnectionSecret.",
               "properties": {
                 "name": {
                   "description": "Name of the referenced object.",
@@ -2431,7 +2469,7 @@
                   "properties": {
                     "resolution": {
                       "default": "Required",
-                      "description": "Resolution specifies whether resolution of this reference is required. The default is 'Required', which means the reconcile will fail if the reference cannot be resolved. 'Optional' means this reference will be a no-op if it cannot be resolved.",
+                      "description": "Resolution specifies whether resolution of this reference is required.\nThe default is 'Required', which means the reconcile will fail if the\nreference cannot be resolved. 'Optional' means this reference will be\na no-op if it cannot be resolved.",
                       "enum": [
                         "Required",
                         "Optional"
@@ -2439,7 +2477,7 @@
                       "type": "string"
                     },
                     "resolve": {
-                      "description": "Resolve specifies when this reference should be resolved. The default is 'IfNotPresent', which will attempt to resolve the reference only when the corresponding field is not present. Use 'Always' to resolve the reference on every reconcile.",
+                      "description": "Resolve specifies when this reference should be resolved. The default\nis 'IfNotPresent', which will attempt to resolve the reference only when\nthe corresponding field is not present. Use 'Always' to resolve the\nreference on every reconcile.",
                       "enum": [
                         "Always",
                         "IfNotPresent"
@@ -2464,18 +2502,18 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Annotations are the annotations to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.annotations\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Annotations are the annotations to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.annotations\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "labels": {
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "Labels are the labels/tags to be added to connection secret. - For Kubernetes secrets, this will be used as \"metadata.labels\". - It is up to Secret Store implementation for others store types.",
+                  "description": "Labels are the labels/tags to be added to connection secret.\n- For Kubernetes secrets, this will be used as \"metadata.labels\".\n- It is up to Secret Store implementation for others store types.",
                   "type": "object"
                 },
                 "type": {
-                  "description": "Type is the SecretType for the connection secret. - Only valid for Kubernetes Secret Stores.",
+                  "description": "Type is the SecretType for the connection secret.\n- Only valid for Kubernetes Secret Stores.",
                   "type": "string"
                 }
               },
@@ -2494,7 +2532,7 @@
           "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
-          "description": "WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource. This field is planned to be replaced in a future release in favor of PublishConnectionDetailsTo. Currently, both could be set independently and connection details would be published to both without affecting each other.",
+          "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
           "properties": {
             "name": {
               "description": "Name of the secret.",
@@ -2526,7 +2564,7 @@
           "description": "BucketExternalStatus keeps the state for the external resource",
           "properties": {
             "arn": {
-              "description": "ARN is the Amazon Resource Name (ARN) specifying the S3 Bucket. For more information about ARNs and how to use them, see S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the Amazon Simple Storage Service guide.",
+              "description": "ARN is the Amazon Resource Name (ARN) specifying the S3 Bucket. For more information\nabout ARNs and how to use them, see S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)\nin the Amazon Simple Storage Service guide.",
               "type": "string"
             }
           },
@@ -2542,13 +2580,18 @@
             "description": "A Condition that may apply to a resource.",
             "properties": {
               "lastTransitionTime": {
-                "description": "LastTransitionTime is the last time this condition transitioned from one status to another.",
+                "description": "LastTransitionTime is the last time this condition transitioned from one\nstatus to another.",
                 "format": "date-time",
                 "type": "string"
               },
               "message": {
-                "description": "A Message containing details about this condition's last transition from one status to another, if any.",
+                "description": "A Message containing details about this condition's last transition from\none status to another, if any.",
                 "type": "string"
+              },
+              "observedGeneration": {
+                "description": "ObservedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.",
+                "format": "int64",
+                "type": "integer"
               },
               "reason": {
                 "description": "A Reason for this condition's last transition from one status to another.",
@@ -2559,7 +2602,7 @@
                 "type": "string"
               },
               "type": {
-                "description": "Type of this condition. At most one of each condition type may apply to a resource at any point in time.",
+                "description": "Type of this condition. At most one of each condition type may apply to\na resource at any point in time.",
                 "type": "string"
               }
             },
@@ -2577,6 +2620,11 @@
             "type"
           ],
           "x-kubernetes-list-type": "map"
+        },
+        "observedGeneration": {
+          "description": "ObservedGeneration is the latest metadata.generation\nwhich resulted in either a ready state, or stalled due to error\nit can not recover from without human intervention.",
+          "format": "int64",
+          "type": "integer"
         }
       },
       "type": "object",

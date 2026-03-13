@@ -38,6 +38,22 @@
               "description": "The AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.",
               "items": {
                 "properties": {
+                  "accountFilterType": {
+                    "description": "Limit deployment targets to individual accounts or include additional accounts with provided OUs. Valid values: INTERSECTION, DIFFERENCE, UNION, NONE.",
+                    "type": "string"
+                  },
+                  "accounts": {
+                    "description": "List of accounts to deploy stack set updates.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array",
+                    "x-kubernetes-list-type": "set"
+                  },
+                  "accountsUrl": {
+                    "description": "S3 URL of the file containing the list of accounts.",
+                    "type": "string"
+                  },
                   "organizationalUnitIds": {
                     "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
                     "items": {
@@ -56,6 +72,10 @@
               "description": "Preferences for how AWS CloudFormation performs a stack set operation.",
               "items": {
                 "properties": {
+                  "concurrencyMode": {
+                    "description": "Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.",
+                    "type": "string"
+                  },
                   "failureToleranceCount": {
                     "description": "The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.",
                     "type": "number"
@@ -211,6 +231,22 @@
               "description": "The AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.",
               "items": {
                 "properties": {
+                  "accountFilterType": {
+                    "description": "Limit deployment targets to individual accounts or include additional accounts with provided OUs. Valid values: INTERSECTION, DIFFERENCE, UNION, NONE.",
+                    "type": "string"
+                  },
+                  "accounts": {
+                    "description": "List of accounts to deploy stack set updates.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array",
+                    "x-kubernetes-list-type": "set"
+                  },
+                  "accountsUrl": {
+                    "description": "S3 URL of the file containing the list of accounts.",
+                    "type": "string"
+                  },
                   "organizationalUnitIds": {
                     "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
                     "items": {
@@ -229,6 +265,10 @@
               "description": "Preferences for how AWS CloudFormation performs a stack set operation.",
               "items": {
                 "properties": {
+                  "concurrencyMode": {
+                    "description": "Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.",
+                    "type": "string"
+                  },
                   "failureToleranceCount": {
                     "description": "The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.",
                     "type": "number"
@@ -545,6 +585,22 @@
               "description": "The AWS Organizations accounts to which StackSets deploys. StackSets doesn't deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization. Drift detection is not possible for this argument. See deployment_targets below.",
               "items": {
                 "properties": {
+                  "accountFilterType": {
+                    "description": "Limit deployment targets to individual accounts or include additional accounts with provided OUs. Valid values: INTERSECTION, DIFFERENCE, UNION, NONE.",
+                    "type": "string"
+                  },
+                  "accounts": {
+                    "description": "List of accounts to deploy stack set updates.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array",
+                    "x-kubernetes-list-type": "set"
+                  },
+                  "accountsUrl": {
+                    "description": "S3 URL of the file containing the list of accounts.",
+                    "type": "string"
+                  },
                   "organizationalUnitIds": {
                     "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
                     "items": {
@@ -567,6 +623,10 @@
               "description": "Preferences for how AWS CloudFormation performs a stack set operation.",
               "items": {
                 "properties": {
+                  "concurrencyMode": {
+                    "description": "Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.",
+                    "type": "string"
+                  },
                   "failureToleranceCount": {
                     "description": "The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.",
                     "type": "number"

@@ -63,7 +63,7 @@
               "type": "string"
             },
             "clusterMembers": {
-              "description": "– List of RDS Instances that are a part of this cluster",
+              "description": "\u2013 List of RDS Instances that are a part of this cluster",
               "items": {
                 "type": "string"
               },
@@ -71,7 +71,7 @@
               "x-kubernetes-list-type": "set"
             },
             "copyTagsToSnapshot": {
-              "description": "–  Copy all Cluster tags to snapshots. Default is false.",
+              "description": "\u2013  Copy all Cluster tags to snapshots. Default is false.",
               "type": "boolean"
             },
             "databaseName": {
@@ -114,13 +114,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbClusterParameterGroupNameSelector": {
               "description": "Selector for a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.",
@@ -157,10 +159,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbInstanceParameterGroupName": {
               "description": "Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.",
@@ -194,13 +198,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbInstanceParameterGroupNameSelector": {
               "description": "Selector for a ParameterGroup in rds to populate dbInstanceParameterGroupName.",
@@ -237,10 +243,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSubnetGroupName": {
               "description": "DB subnet group to associate with this DB cluster.\nNOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.",
@@ -274,13 +282,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSubnetGroupNameSelector": {
               "description": "Selector for a SubnetGroup in rds to populate dbSubnetGroupName.",
@@ -317,10 +327,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSystemId": {
               "description": "For use with RDS Custom.",
@@ -426,13 +438,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "kmsKeyIdSelector": {
               "description": "Selector for a Key in kms to populate kmsKeyId.",
@@ -469,10 +483,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "manageMasterUserPassword": {
               "description": "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if master_password is provided.",
@@ -499,7 +515,8 @@
                 "name",
                 "namespace"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "masterUserSecretKmsKeyId": {
               "description": "Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.",
@@ -533,13 +550,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "masterUserSecretKmsKeyIdSelector": {
               "description": "Selector for a Key in kms to populate masterUserSecretKmsKeyId.",
@@ -576,10 +595,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "masterUsername": {
               "description": "Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.",
@@ -664,13 +685,15 @@
                           "type": "string"
                         }
                       },
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": false
                     }
                   },
                   "required": [
                     "name"
                   ],
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 },
                 "sourceClusterIdentifierSelector": {
                   "description": "Selector for a Cluster in rds to populate sourceClusterIdentifier.",
@@ -707,10 +730,12 @@
                           "type": "string"
                         }
                       },
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": false
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 },
                 "sourceClusterResourceId": {
                   "description": "Cluster resource ID of the source database cluster from which to restore. To be used for restoring a deleted cluster in the same account which still has a retained automatic backup available.",
@@ -721,7 +746,8 @@
                   "type": "boolean"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "s3Import": {
               "description": "Port on which the DB accepts connections.",
@@ -758,13 +784,15 @@
                           "type": "string"
                         }
                       },
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": false
                     }
                   },
                   "required": [
                     "name"
                   ],
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 },
                 "bucketNameSelector": {
                   "description": "Selector for a Bucket in s3 to populate bucketName.",
@@ -801,10 +829,12 @@
                           "type": "string"
                         }
                       },
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": false
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 },
                 "bucketPrefix": {
                   "description": "Can be blank, but is the path to your backup",
@@ -823,7 +853,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "scalingConfiguration": {
               "description": "Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.",
@@ -853,7 +884,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "serverlessv2ScalingConfiguration": {
               "description": "Nested attribute with scaling properties for ServerlessV2. Only valid when engine_mode is set to provisioned. More details below.",
@@ -867,7 +899,8 @@
                   "type": "number"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "skipFinalSnapshot": {
               "description": "Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.",
@@ -927,13 +960,15 @@
                         "type": "string"
                       }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": false
                   }
                 },
                 "required": [
                   "name"
                 ],
-                "type": "object"
+                "type": "object",
+                "additionalProperties": false
               },
               "type": "array"
             },
@@ -972,10 +1007,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "vpcSecurityGroupIds": {
               "description": "List of VPC security groups to associate with the Cluster",
@@ -989,7 +1026,8 @@
           "required": [
             "region"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "initProvider": {
           "description": "THIS IS A BETA FIELD. It will be honored\nunless the Management Policies feature flag is disabled.\nInitProvider holds the same fields as ForProvider, with the exception\nof Identifier and other resource reference fields. The fields that are\nin InitProvider are merged into ForProvider when the resource is created.\nThe same fields are also added to the terraform ignore_changes hook, to\navoid updating them after creation. This is useful for fields that are\nrequired on creation, but we do not desire to update them after creation,\nfor example because of an external controller is managing them, like an\nautoscaler.",
@@ -1027,7 +1065,7 @@
               "type": "string"
             },
             "clusterMembers": {
-              "description": "– List of RDS Instances that are a part of this cluster",
+              "description": "\u2013 List of RDS Instances that are a part of this cluster",
               "items": {
                 "type": "string"
               },
@@ -1035,7 +1073,7 @@
               "x-kubernetes-list-type": "set"
             },
             "copyTagsToSnapshot": {
-              "description": "–  Copy all Cluster tags to snapshots. Default is false.",
+              "description": "\u2013  Copy all Cluster tags to snapshots. Default is false.",
               "type": "boolean"
             },
             "databaseName": {
@@ -1078,13 +1116,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbClusterParameterGroupNameSelector": {
               "description": "Selector for a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.",
@@ -1121,10 +1161,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbInstanceParameterGroupName": {
               "description": "Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.",
@@ -1158,13 +1200,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbInstanceParameterGroupNameSelector": {
               "description": "Selector for a ParameterGroup in rds to populate dbInstanceParameterGroupName.",
@@ -1201,10 +1245,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSubnetGroupName": {
               "description": "DB subnet group to associate with this DB cluster.\nNOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.",
@@ -1238,13 +1284,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSubnetGroupNameSelector": {
               "description": "Selector for a SubnetGroup in rds to populate dbSubnetGroupName.",
@@ -1281,10 +1329,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "dbSystemId": {
               "description": "For use with RDS Custom.",
@@ -1390,13 +1440,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "kmsKeyIdSelector": {
               "description": "Selector for a Key in kms to populate kmsKeyId.",
@@ -1433,10 +1485,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "manageMasterUserPassword": {
               "description": "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if master_password is provided.",
@@ -1463,7 +1517,8 @@
                 "name",
                 "namespace"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "masterUserSecretKmsKeyId": {
               "description": "Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.",
@@ -1497,13 +1552,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "masterUserSecretKmsKeyIdSelector": {
               "description": "Selector for a Key in kms to populate masterUserSecretKmsKeyId.",
@@ -1540,10 +1597,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "masterUsername": {
               "description": "Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.",
@@ -1624,13 +1683,15 @@
                           "type": "string"
                         }
                       },
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": false
                     }
                   },
                   "required": [
                     "name"
                   ],
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 },
                 "sourceClusterIdentifierSelector": {
                   "description": "Selector for a Cluster in rds to populate sourceClusterIdentifier.",
@@ -1667,10 +1728,12 @@
                           "type": "string"
                         }
                       },
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": false
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 },
                 "sourceClusterResourceId": {
                   "description": "Cluster resource ID of the source database cluster from which to restore. To be used for restoring a deleted cluster in the same account which still has a retained automatic backup available.",
@@ -1681,7 +1744,8 @@
                   "type": "boolean"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "s3Import": {
               "description": "Port on which the DB accepts connections.",
@@ -1718,13 +1782,15 @@
                           "type": "string"
                         }
                       },
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": false
                     }
                   },
                   "required": [
                     "name"
                   ],
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 },
                 "bucketNameSelector": {
                   "description": "Selector for a Bucket in s3 to populate bucketName.",
@@ -1761,10 +1827,12 @@
                           "type": "string"
                         }
                       },
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": false
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 },
                 "bucketPrefix": {
                   "description": "Can be blank, but is the path to your backup",
@@ -1783,7 +1851,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "scalingConfiguration": {
               "description": "Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.",
@@ -1813,7 +1882,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "serverlessv2ScalingConfiguration": {
               "description": "Nested attribute with scaling properties for ServerlessV2. Only valid when engine_mode is set to provisioned. More details below.",
@@ -1827,7 +1897,8 @@
                   "type": "number"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "skipFinalSnapshot": {
               "description": "Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.",
@@ -1887,13 +1958,15 @@
                         "type": "string"
                       }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": false
                   }
                 },
                 "required": [
                   "name"
                 ],
-                "type": "object"
+                "type": "object",
+                "additionalProperties": false
               },
               "type": "array"
             },
@@ -1932,10 +2005,12 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "vpcSecurityGroupIds": {
               "description": "List of VPC security groups to associate with the Cluster",
@@ -1946,7 +2021,8 @@
               "x-kubernetes-list-type": "set"
             }
           },
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "managementPolicies": {
           "default": [
@@ -1998,13 +2074,15 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             }
           },
           "required": [
             "name"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "publishConnectionDetailsTo": {
           "description": "PublishConnectionDetailsTo specifies the connection secret config which\ncontains a name, metadata and a reference to secret store config to\nwhich any connection details for this managed resource should be written.\nConnection details frequently include the endpoint, username,\nand password required to connect to the managed resource.",
@@ -2040,13 +2118,15 @@
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name"
               ],
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "metadata": {
               "description": "Metadata is the metadata for connection secret.",
@@ -2070,7 +2150,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "name": {
               "description": "Name is the name of the connection secret.",
@@ -2080,7 +2161,8 @@
           "required": [
             "name"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "writeConnectionSecretToRef": {
           "description": "WriteConnectionSecretToReference specifies the namespace and name of a\nSecret to which any connection details for this managed resource should\nbe written. Connection details frequently include the endpoint, username,\nand password required to connect to the managed resource.\nThis field is planned to be replaced in a future release in favor of\nPublishConnectionDetailsTo. Currently, both could be set independently\nand connection details would be published to both without affecting\neach other.",
@@ -2098,7 +2180,8 @@
             "name",
             "namespace"
           ],
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         }
       },
       "required": [
@@ -2110,7 +2193,8 @@
           "message": "spec.forProvider.engine is a required parameter",
           "rule": "!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engine) || (has(self.initProvider) && has(self.initProvider.engine))"
         }
-      ]
+      ],
+      "additionalProperties": false
     },
     "status": {
       "description": "ClusterStatus defines the observed state of Cluster.",
@@ -2154,11 +2238,11 @@
               "type": "string"
             },
             "caCertificateValidTill": {
-              "description": "Expiration date of the DB instance’s server certificate",
+              "description": "Expiration date of the DB instance\u2019s server certificate",
               "type": "string"
             },
             "clusterMembers": {
-              "description": "– List of RDS Instances that are a part of this cluster",
+              "description": "\u2013 List of RDS Instances that are a part of this cluster",
               "items": {
                 "type": "string"
               },
@@ -2170,7 +2254,7 @@
               "type": "string"
             },
             "copyTagsToSnapshot": {
-              "description": "–  Copy all Cluster tags to snapshots. Default is false.",
+              "description": "\u2013  Copy all Cluster tags to snapshots. Default is false.",
               "type": "boolean"
             },
             "databaseName": {
@@ -2314,7 +2398,8 @@
                     "type": "string"
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "additionalProperties": false
               },
               "type": "array"
             },
@@ -2386,7 +2471,8 @@
                   "type": "boolean"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "s3Import": {
               "description": "Port on which the DB accepts connections.",
@@ -2412,7 +2498,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "scalingConfiguration": {
               "description": "Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.",
@@ -2442,7 +2529,8 @@
                   "type": "string"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "serverlessv2ScalingConfiguration": {
               "description": "Nested attribute with scaling properties for ServerlessV2. Only valid when engine_mode is set to provisioned. More details below.",
@@ -2456,7 +2544,8 @@
                   "type": "number"
                 }
               },
-              "type": "object"
+              "type": "object",
+              "additionalProperties": false
             },
             "skipFinalSnapshot": {
               "description": "Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.",
@@ -2503,7 +2592,8 @@
               "x-kubernetes-list-type": "set"
             }
           },
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false
         },
         "conditions": {
           "description": "Conditions of the resource.",
@@ -2543,7 +2633,8 @@
               "status",
               "type"
             ],
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false
           },
           "type": "array",
           "x-kubernetes-list-map-keys": [
@@ -2557,7 +2648,8 @@
           "type": "integer"
         }
       },
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false
     }
   },
   "required": [

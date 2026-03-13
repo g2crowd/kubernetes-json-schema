@@ -1,5 +1,5 @@
 {
-  "description": "A CompositeResourceDefinition defines the schema for a new custom Kubernetes\nAPI.\n\n\nRead the Crossplane documentation for\n[more information about CustomResourceDefinitions](https://docs.crossplane.io/latest/concepts/composite-resource-definitions).",
+  "description": "A CompositeResourceDefinition defines the schema for a new custom Kubernetes\nAPI.\n\nRead the Crossplane documentation for\n[more information about CustomResourceDefinitions](https://docs.crossplane.io/latest/concepts/composite-resource-definitions).",
   "properties": {
     "apiVersion": {
       "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -23,7 +23,8 @@
               "items": {
                 "type": "string"
               },
-              "type": "array"
+              "type": "array",
+              "x-kubernetes-list-type": "atomic"
             },
             "kind": {
               "description": "kind is the serialized kind of the resource. It is normally CamelCase and singular.\nCustom resource instances will use this value as the `kind` attribute in API calls.",
@@ -42,7 +43,8 @@
               "items": {
                 "type": "string"
               },
-              "type": "array"
+              "type": "array",
+              "x-kubernetes-list-type": "atomic"
             },
             "singular": {
               "description": "singular is the singular name of the resource. It must be all lowercase. Defaults to lowercased `kind`.",
@@ -54,10 +56,24 @@
             "plural"
           ],
           "type": "object",
+          "x-kubernetes-validations": [
+            {
+              "message": "Value is immutable",
+              "rule": "self == oldSelf"
+            },
+            {
+              "message": "Plural name must be lowercase",
+              "rule": "self.plural == self.plural.lowerAscii()"
+            },
+            {
+              "message": "Singular name must be lowercase",
+              "rule": "!has(self.singular) || self.singular == self.singular.lowerAscii()"
+            }
+          ],
           "additionalProperties": false
         },
         "connectionSecretKeys": {
-          "description": "ConnectionSecretKeys is the list of keys that will be exposed to the end\nuser of the defined kind.\nIf the list is empty, all keys will be published.",
+          "description": "ConnectionSecretKeys is the list of connection secret keys the\ndefined XR can publish. If the list is empty, all keys will be\npublished. If the list isn't empty, any connection secret keys that\ndon't appear in the list will be filtered out. Only LegacyCluster XRs\nsupport connection secrets.",
           "items": {
             "type": "string"
           },
@@ -82,7 +98,7 @@
                       "type": "string"
                     },
                     "service": {
-                      "description": "service is a reference to the service for this webhook. Either\nservice or url must be specified.\n\n\nIf the webhook is running within the cluster, then you should use `service`.",
+                      "description": "service is a reference to the service for this webhook. Either\nservice or url must be specified.\n\nIf the webhook is running within the cluster, then you should use `service`.",
                       "properties": {
                         "name": {
                           "description": "name is the name of the service.\nRequired",
@@ -110,7 +126,7 @@
                       "additionalProperties": false
                     },
                     "url": {
-                      "description": "url gives the location of the webhook, in standard URL form\n(`scheme://host:port/path`). Exactly one of `url` or `service`\nmust be specified.\n\n\nThe `host` should not refer to a service running in the cluster; use\nthe `service` field instead. The host might be resolved via external\nDNS in some apiservers (e.g., `kube-apiserver` cannot resolve\nin-cluster DNS as that would be a layering violation). `host` may\nalso be an IP address.\n\n\nPlease note that using `localhost` or `127.0.0.1` as a `host` is\nrisky unless you take great care to run this webhook on all hosts\nwhich run an apiserver which might need to make calls to this\nwebhook. Such installs are likely to be non-portable, i.e., not easy\nto turn up in a new cluster.\n\n\nThe scheme must be \"https\"; the URL must begin with \"https://\".\n\n\nA path is optional, and if present may be any string permissible in\na URL. You may use the path to pass an arbitrary string to the\nwebhook, for example, a cluster identifier.\n\n\nAttempting to use a user or basic auth e.g. \"user:password@\" is not\nallowed. Fragments (\"#...\") and query parameters (\"?...\") are not\nallowed, either.",
+                      "description": "url gives the location of the webhook, in standard URL form\n(`scheme://host:port/path`). Exactly one of `url` or `service`\nmust be specified.\n\nThe `host` should not refer to a service running in the cluster; use\nthe `service` field instead. The host might be resolved via external\nDNS in some apiservers (e.g., `kube-apiserver` cannot resolve\nin-cluster DNS as that would be a layering violation). `host` may\nalso be an IP address.\n\nPlease note that using `localhost` or `127.0.0.1` as a `host` is\nrisky unless you take great care to run this webhook on all hosts\nwhich run an apiserver which might need to make calls to this\nwebhook. Such installs are likely to be non-portable, i.e., not easy\nto turn up in a new cluster.\n\nThe scheme must be \"https\"; the URL must begin with \"https://\".\n\nA path is optional, and if present may be any string permissible in\na URL. You may use the path to pass an arbitrary string to the\nwebhook, for example, a cluster identifier.\n\nAttempting to use a user or basic auth e.g. \"user:password@\" is not\nallowed. Fragments (\"#...\") and query parameters (\"?...\") are not\nallowed, either.",
                       "type": "string"
                     }
                   },
@@ -122,7 +138,8 @@
                   "items": {
                     "type": "string"
                   },
-                  "type": "array"
+                  "type": "array",
+                  "x-kubernetes-list-type": "atomic"
                 }
               },
               "required": [
@@ -136,6 +153,12 @@
             "strategy"
           ],
           "type": "object",
+          "x-kubernetes-validations": [
+            {
+              "message": "Webhook configuration is required when conversion strategy is Webhook",
+              "rule": "self.strategy == 'Webhook' && has(self.webhook)"
+            }
+          ],
           "additionalProperties": false
         },
         "defaultCompositeDeletePolicy": {
@@ -182,11 +205,23 @@
             "name"
           ],
           "type": "object",
+          "x-kubernetes-validations": [
+            {
+              "message": "Value is immutable",
+              "rule": "self == oldSelf"
+            }
+          ],
           "additionalProperties": false
         },
         "group": {
           "description": "Group specifies the API group of the defined composite resource.\nComposite resources are served under `/apis/<group>/...`. Must match the\nname of the XRD (in the form `<names.plural>.<group>`).",
-          "type": "string"
+          "type": "string",
+          "x-kubernetes-validations": [
+            {
+              "message": "Value is immutable",
+              "rule": "self == oldSelf"
+            }
+          ]
         },
         "metadata": {
           "description": "Metadata specifies the desired metadata for the defined composite resource and claim CRD's.",
@@ -217,7 +252,8 @@
               "items": {
                 "type": "string"
               },
-              "type": "array"
+              "type": "array",
+              "x-kubernetes-list-type": "atomic"
             },
             "kind": {
               "description": "kind is the serialized kind of the resource. It is normally CamelCase and singular.\nCustom resource instances will use this value as the `kind` attribute in API calls.",
@@ -236,7 +272,8 @@
               "items": {
                 "type": "string"
               },
-              "type": "array"
+              "type": "array",
+              "x-kubernetes-list-type": "atomic"
             },
             "singular": {
               "description": "singular is the singular name of the resource. It must be all lowercase. Defaults to lowercased `kind`.",
@@ -248,7 +285,37 @@
             "plural"
           ],
           "type": "object",
+          "x-kubernetes-validations": [
+            {
+              "message": "Value is immutable",
+              "rule": "self == oldSelf"
+            },
+            {
+              "message": "Plural name must be lowercase",
+              "rule": "self.plural == self.plural.lowerAscii()"
+            },
+            {
+              "message": "Singular name must be lowercase",
+              "rule": "!has(self.singular) || self.singular == self.singular.lowerAscii()"
+            }
+          ],
           "additionalProperties": false
+        },
+        "scope": {
+          "default": "LegacyCluster",
+          "description": "Scope of the defined composite resource. Namespaced composite resources\nare scoped to a single namespace. Cluster scoped composite resource exist\noutside the scope of any namespace. Neither can be claimed. Legacy\ncluster scoped composite resources are cluster scoped resources that can\nbe claimed.",
+          "enum": [
+            "LegacyCluster",
+            "Namespaced",
+            "Cluster"
+          ],
+          "type": "string",
+          "x-kubernetes-validations": [
+            {
+              "message": "Value is immutable",
+              "rule": "self == oldSelf"
+            }
+          ]
         },
         "versions": {
           "description": "Versions is the list of all API versions of the defined composite\nresource. Version names are used to compute the order in which served\nversions are listed in API discovery. If the version string is\n\"kube-like\", it will sort above non \"kube-like\" version strings, which\nare ordered lexicographically. \"Kube-like\" versions start with a \"v\",\nthen are followed by a number (the major version), then optionally the\nstring \"alpha\" or \"beta\" and another number (the minor version). These\nare sorted first by GA > beta > alpha (where GA is a version with no\nsuffix such as beta or alpha), and then by comparing major version, then\nminor version. An example sorted list of versions: v10, v2, v1, v11beta2,\nv10beta3, v3beta1, v12alpha1, v11alpha2, foo1, foo10.",
@@ -347,6 +414,16 @@
         "versions"
       ],
       "type": "object",
+      "x-kubernetes-validations": [
+        {
+          "message": "Only LegacyCluster composite resources can offer claims",
+          "rule": "self.scope == 'LegacyCluster' || !has(self.claimNames)"
+        },
+        {
+          "message": "Only LegacyCluster composite resources support connection secrets",
+          "rule": "self.scope == 'LegacyCluster' || !has(self.connectionSecretKeys)"
+        }
+      ],
       "additionalProperties": false
     },
     "status": {
@@ -365,6 +442,11 @@
               "message": {
                 "description": "A Message containing details about this condition's last transition from\none status to another, if any.",
                 "type": "string"
+              },
+              "observedGeneration": {
+                "description": "ObservedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.",
+                "format": "int64",
+                "type": "integer"
               },
               "reason": {
                 "description": "A Reason for this condition's last transition from one status to another.",
