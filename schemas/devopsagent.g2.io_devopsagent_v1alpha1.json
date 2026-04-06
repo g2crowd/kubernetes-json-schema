@@ -1,0 +1,110 @@
+{
+  "description": "DevOpsAgent is the Schema for the devopsagents API",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object.",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents.",
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "spec": {
+      "properties": {
+        "compositeDeletePolicy": {
+          "type": "string",
+          "description": "CompositeDeletePolicy defines the deletion policy for the Composite Resource this Claim creates."
+        },
+        "parameters": {
+          "type": "object",
+          "required": [
+            "region",
+            "agentSpaceName",
+            "awsAccountId",
+            "agentSpaceRoleArn",
+            "operatorRoleArn"
+          ],
+          "properties": {
+            "region": {
+              "type": "string",
+              "description": "AWS region to deploy into."
+            },
+            "agentSpaceName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255,
+              "description": "Name of the DevOps Agent Space."
+            },
+            "agentSpaceDescription": {
+              "type": "string",
+              "maxLength": 1000,
+              "description": "Optional description for the Agent Space."
+            },
+            "awsAccountId": {
+              "type": "string",
+              "pattern": "^\\d{12}$",
+              "description": "12-digit AWS account ID to register as monitor account."
+            },
+            "agentSpaceRoleArn": {
+              "type": "string",
+              "description": "ARN of the IAM role DevOps Agent assumes to access this account."
+            },
+            "operatorRoleArn": {
+              "type": "string",
+              "description": "ARN of the IAM role granting web app (operator) access."
+            },
+            "tags": {
+              "type": "array",
+              "description": "Additional tags to apply to the Agent Space.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "Key",
+                  "Value"
+                ],
+                "properties": {
+                  "Key": {
+                    "type": "string"
+                  },
+                  "Value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "type": "object"
+    },
+    "status": {
+      "properties": {
+        "agentSpaceId": {
+          "type": "string",
+          "description": "ID of the created Agent Space (populated after creation)."
+        },
+        "agentSpaceArn": {
+          "type": "string",
+          "description": "ARN of the created Agent Space."
+        },
+        "associationId": {
+          "type": "string",
+          "description": "ID of the monitor account Association."
+        },
+        "agentSpaceReady": {
+          "type": "boolean",
+          "description": "True once the Agent Space is provisioned and its ID is available."
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "object",
+  "x-kubernetes-group-version-kind": []
+}
