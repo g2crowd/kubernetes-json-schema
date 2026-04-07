@@ -55,6 +55,13 @@
               },
               "maxItems": 50,
               "type": "array"
+            },
+            "sourceDestCheck": {
+              "description": "SourceDestCheckDisabled disables source/destination check on a given ENI.\nWhen set to \"PrimaryENI\", the source/destination check will be disabled on the primary ENI of the node.",
+              "enum": [
+                "PrimaryENI"
+              ],
+              "type": "string"
             }
           },
           "type": "object",

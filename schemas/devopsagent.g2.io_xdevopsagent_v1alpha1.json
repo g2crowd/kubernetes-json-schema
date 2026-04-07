@@ -1,66 +1,142 @@
 {
-  "description": "XDevOpsAgent is the Schema for the xdevopsagents API",
   "properties": {
     "apiVersion": {
-      "description": "APIVersion defines the versioned schema of this representation of an object.",
       "type": "string"
     },
     "kind": {
-      "description": "Kind is a string value representing the REST resource this object represents.",
       "type": "string"
     },
     "metadata": {
-      "type": "object"
+      "properties": {
+        "name": {
+          "maxLength": 63,
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
     },
     "spec": {
       "properties": {
-        "parameters": {
-          "type": "object",
-          "required": [
-            "region",
-            "agentSpaceName",
-            "awsAccountId",
-            "agentSpaceRoleArn",
-            "operatorRoleArn"
-          ],
+        "claimRef": {
           "properties": {
-            "region": {
-              "type": "string",
-              "description": "AWS region to deploy into."
+            "apiVersion": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "namespace": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "apiVersion",
+            "kind",
+            "namespace",
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionRef": {
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionRevisionRef": {
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionRevisionSelector": {
+          "properties": {
+            "matchLabels": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "matchLabels"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionSelector": {
+          "properties": {
+            "matchLabels": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "matchLabels"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionUpdatePolicy": {
+          "default": "Automatic",
+          "enum": [
+            "Automatic",
+            "Manual"
+          ],
+          "type": "string"
+        },
+        "parameters": {
+          "properties": {
+            "agentSpaceDescription": {
+              "description": "Optional description for the Agent Space.",
+              "maxLength": 1000,
+              "type": "string"
             },
             "agentSpaceName": {
-              "type": "string",
-              "minLength": 1,
+              "description": "Name of the DevOps Agent Space.",
               "maxLength": 255,
-              "description": "Name of the DevOps Agent Space."
-            },
-            "agentSpaceDescription": {
-              "type": "string",
-              "maxLength": 1000,
-              "description": "Optional description for the Agent Space."
-            },
-            "awsAccountId": {
-              "type": "string",
-              "pattern": "^\\d{12}$",
-              "description": "12-digit AWS account ID to register as monitor account."
+              "minLength": 1,
+              "type": "string"
             },
             "agentSpaceRoleArn": {
-              "type": "string",
-              "description": "ARN of the IAM role DevOps Agent assumes to access this account."
+              "description": "ARN of the IAM role DevOps Agent assumes to access this account.",
+              "type": "string"
+            },
+            "awsAccountId": {
+              "description": "12-digit AWS account ID to register as monitor account.",
+              "pattern": "^\\d{12}$",
+              "type": "string"
             },
             "operatorRoleArn": {
-              "type": "string",
-              "description": "ARN of the IAM role granting web app (operator) access."
+              "description": "ARN of the IAM role granting web app (operator) access.",
+              "type": "string"
+            },
+            "region": {
+              "description": "AWS region to deploy into.",
+              "type": "string"
             },
             "tags": {
-              "type": "array",
               "description": "Additional tags to apply to the Agent Space.",
               "items": {
-                "type": "object",
-                "required": [
-                  "Key",
-                  "Value"
-                ],
                 "properties": {
                   "Key": {
                     "type": "string"
@@ -68,39 +144,158 @@
                   "Value": {
                     "type": "string"
                   }
-                }
-              }
+                },
+                "required": [
+                  "Key",
+                  "Value"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              },
+              "type": "array"
             }
-          }
+          },
+          "required": [
+            "region",
+            "agentSpaceName",
+            "awsAccountId",
+            "agentSpaceRoleArn",
+            "operatorRoleArn"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "resourceRefs": {
+          "items": {
+            "properties": {
+              "apiVersion": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "namespace": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "apiVersion",
+              "kind"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array",
+          "x-kubernetes-list-type": "atomic"
+        },
+        "writeConnectionSecretToRef": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "namespace": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "namespace"
+          ],
+          "type": "object",
+          "additionalProperties": false
         }
       },
       "required": [
         "parameters"
       ],
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false
     },
     "status": {
       "properties": {
-        "agentSpaceId": {
-          "type": "string",
-          "description": "ID of the created Agent Space (populated after creation)."
-        },
         "agentSpaceArn": {
-          "type": "string",
-          "description": "ARN of the created Agent Space."
+          "description": "ARN of the created Agent Space.",
+          "type": "string"
         },
-        "associationId": {
-          "type": "string",
-          "description": "ID of the monitor account Association."
+        "agentSpaceId": {
+          "description": "ID of the created Agent Space (populated after creation).",
+          "type": "string"
         },
         "agentSpaceReady": {
-          "type": "boolean",
-          "description": "True once the Agent Space is provisioned and its ID is available."
+          "description": "True once the Agent Space is provisioned and its ID is available.",
+          "type": "boolean"
+        },
+        "associationId": {
+          "description": "ID of the monitor account Association.",
+          "type": "string"
+        },
+        "claimConditionTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-kubernetes-list-type": "set"
+        },
+        "conditions": {
+          "description": "Conditions of the resource.",
+          "items": {
+            "properties": {
+              "lastTransitionTime": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "observedGeneration": {
+                "format": "int64",
+                "type": "integer"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "lastTransitionTime",
+              "reason",
+              "status",
+              "type"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array",
+          "x-kubernetes-list-map-keys": [
+            "type"
+          ],
+          "x-kubernetes-list-type": "map"
+        },
+        "connectionDetails": {
+          "properties": {
+            "lastPublishedTime": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
         }
       },
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false
     }
   },
-  "type": "object",
-  "x-kubernetes-group-version-kind": []
+  "required": [
+    "spec"
+  ],
+  "type": "object"
 }
