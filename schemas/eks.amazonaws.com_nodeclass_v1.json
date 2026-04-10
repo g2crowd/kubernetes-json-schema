@@ -57,9 +57,9 @@
               "type": "array"
             },
             "sourceDestCheck": {
-              "description": "SourceDestCheckDisabled disables source/destination check on a given ENI.\nWhen set to \"PrimaryENI\", the source/destination check will be disabled on the primary ENI of the node.",
+              "description": "SourceDestCheck controls source/destination check on a given ENI.\nWhen set to \"DisabledPrimaryENI\", the source/destination check will be disabled on the primary ENI of the node.",
               "enum": [
-                "PrimaryENI"
+                "DisabledPrimaryENI"
               ],
               "type": "string"
             }
