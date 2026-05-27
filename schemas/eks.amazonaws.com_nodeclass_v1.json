@@ -70,6 +70,18 @@
                     "format": "int32",
                     "minimum": 0,
                     "type": "integer"
+                  },
+                  "secondaryIPCount": {
+                    "description": "SecondaryIPCount is the number of secondary IP addresses to assign to the network interface.",
+                    "format": "int32",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "secondaryIPPrefixCount": {
+                    "description": "SecondaryIPPrefixCount is the number of IP prefixes to assign to the network interface.\nEach prefix provides 16 IP addresses.",
+                    "format": "int32",
+                    "minimum": 0,
+                    "type": "integer"
                   }
                 },
                 "required": [
@@ -78,6 +90,20 @@
                   "networkCardIndex"
                 ],
                 "type": "object",
+                "x-kubernetes-validations": [
+                  {
+                    "message": "Neither secondaryIPCount nor secondaryIPPrefixCount can be configured with EFA-only interfaces",
+                    "rule": "self.interfaceType != 'efa-only' || (!has(self.secondaryIPCount) && !has(self.secondaryIPPrefixCount))"
+                  },
+                  {
+                    "message": "secondaryIPCount and secondaryIPPrefixCount are only supported on network card index 0",
+                    "rule": "self.networkCardIndex == 0 || (!has(self.secondaryIPCount) && !has(self.secondaryIPPrefixCount))"
+                  },
+                  {
+                    "message": "secondaryIPCount and secondaryIPPrefixCount are mutually exclusive",
+                    "rule": "!(has(self.secondaryIPCount) && has(self.secondaryIPPrefixCount))"
+                  }
+                ],
                 "additionalProperties": false
               },
               "maxItems": 150,
