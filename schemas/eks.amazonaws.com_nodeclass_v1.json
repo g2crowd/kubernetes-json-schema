@@ -22,6 +22,40 @@
               "description": "AssociatePublicIPAddress controls whether public IP addresses are assigned to instances that are launched with the nodeclass.",
               "type": "boolean"
             },
+            "connectionTracking": {
+              "description": "ConnectionTracking controls connection tracking timeout configuration on the ENIs managed by Karpenter.",
+              "properties": {
+                "tcpEstablishedTimeout": {
+                  "description": "TcpEstablishedTimeout is the timeout (in seconds) for idle TCP connections in an established state.",
+                  "format": "int32",
+                  "maximum": 432000,
+                  "minimum": 60,
+                  "type": "integer"
+                },
+                "udpStreamTimeout": {
+                  "description": "UdpStreamTimeout is the timeout (in seconds) for idle UDP streams that have seen traffic in both directions.",
+                  "format": "int32",
+                  "maximum": 180,
+                  "minimum": 60,
+                  "type": "integer"
+                },
+                "udpTimeout": {
+                  "description": "UdpTimeout is the timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction.",
+                  "format": "int32",
+                  "maximum": 60,
+                  "minimum": 30,
+                  "type": "integer"
+                }
+              },
+              "type": "object",
+              "x-kubernetes-validations": [
+                {
+                  "message": "at least one of tcpEstablishedTimeout, udpStreamTimeout, or udpTimeout must be set",
+                  "rule": "has(self.tcpEstablishedTimeout) || has(self.udpStreamTimeout) || has(self.udpTimeout)"
+                }
+              ],
+              "additionalProperties": false
+            },
             "enableV4Egress": {
               "default": true,
               "description": "EnableV4Egress: When set to true or not set, enables IPv4 egress traffic from the Auto nodes in IPv6 cluster.",
