@@ -105,14 +105,14 @@
                     "minimum": 0,
                     "type": "integer"
                   },
-                  "secondaryIPCount": {
-                    "description": "SecondaryIPCount is the number of secondary IP addresses to assign to the network interface.",
+                  "secondaryIPv4Count": {
+                    "description": "SecondaryIPv4Count is the number of secondary IPv4 addresses to assign to the network interface.",
                     "format": "int32",
                     "minimum": 0,
                     "type": "integer"
                   },
-                  "secondaryIPPrefixCount": {
-                    "description": "SecondaryIPPrefixCount is the number of IP prefixes to assign to the network interface.\nEach prefix provides 16 IP addresses.",
+                  "secondaryIPv4PrefixCount": {
+                    "description": "SecondaryIPv4PrefixCount is the number of IPv4 prefixes to assign to the network interface.\nEach prefix provides 16 IP addresses.",
                     "format": "int32",
                     "minimum": 0,
                     "type": "integer"
@@ -126,16 +126,16 @@
                 "type": "object",
                 "x-kubernetes-validations": [
                   {
-                    "message": "Neither secondaryIPCount nor secondaryIPPrefixCount can be configured with EFA-only interfaces",
-                    "rule": "self.interfaceType != 'efa-only' || (!has(self.secondaryIPCount) && !has(self.secondaryIPPrefixCount))"
+                    "message": "Neither secondaryIPv4Count nor secondaryIPv4PrefixCount can be configured with EFA-only interfaces",
+                    "rule": "self.interfaceType != 'efa-only' || (!has(self.secondaryIPv4Count) && !has(self.secondaryIPv4PrefixCount))"
                   },
                   {
-                    "message": "secondaryIPCount and secondaryIPPrefixCount are only supported on network card index 0",
-                    "rule": "self.networkCardIndex == 0 || (!has(self.secondaryIPCount) && !has(self.secondaryIPPrefixCount))"
+                    "message": "secondaryIPv4Count and secondaryIPv4PrefixCount are only supported on network card index 0",
+                    "rule": "self.networkCardIndex == 0 || (!has(self.secondaryIPv4Count) && !has(self.secondaryIPv4PrefixCount))"
                   },
                   {
-                    "message": "secondaryIPCount and secondaryIPPrefixCount are mutually exclusive",
-                    "rule": "!(has(self.secondaryIPCount) && has(self.secondaryIPPrefixCount))"
+                    "message": "secondaryIPv4Count and secondaryIPv4PrefixCount are mutually exclusive",
+                    "rule": "!(has(self.secondaryIPv4Count) && has(self.secondaryIPv4PrefixCount))"
                   }
                 ],
                 "additionalProperties": false
