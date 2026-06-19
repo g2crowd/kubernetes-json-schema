@@ -137,6 +137,7 @@
           },
           "maxItems": 100,
           "type": "array",
+          "x-kubernetes-list-type": "atomic",
           "x-kubernetes-validations": [
             {
               "message": "requirements with operator 'In' must have a value defined",
@@ -176,7 +177,7 @@
           "additionalProperties": false
         },
         "startupTaints": {
-          "description": "StartupTaints are taints that are applied to nodes upon startup which are expected to be removed automatically\nwithin a short period of time, typically by a DaemonSet that tolerates the taint. These are commonly used by\ndaemonsets to allow initialization and enforce startup ordering.  StartupTaints are ignored for provisioning\npurposes in that pods are not required to tolerate a StartupTaint in order to have nodes provisioned for them.",
+          "description": "startupTaints are taints that are applied to nodes upon startup which are expected to be removed automatically\nwithin a short period of time, typically by a DaemonSet that tolerates the taint. These are commonly used by\ndaemonsets to allow initialization and enforce startup ordering.  StartupTaints are ignored for provisioning\npurposes in that pods are not required to tolerate a StartupTaint in order to have nodes provisioned for them.",
           "items": {
             "description": "The node this Taint is attached to has the \"effect\" on\nany pod that does not tolerate the Taint.",
             "properties": {
@@ -213,10 +214,11 @@
             "type": "object",
             "additionalProperties": false
           },
-          "type": "array"
+          "type": "array",
+          "x-kubernetes-list-type": "atomic"
         },
         "taints": {
-          "description": "Taints will be applied to the NodeClaim's node.",
+          "description": "taints will be applied to the NodeClaim's node.",
           "items": {
             "description": "The node this Taint is attached to has the \"effect\" on\nany pod that does not tolerate the Taint.",
             "properties": {
@@ -253,7 +255,8 @@
             "type": "object",
             "additionalProperties": false
           },
-          "type": "array"
+          "type": "array",
+          "x-kubernetes-list-type": "atomic"
         },
         "terminationGracePeriod": {
           "default": "24h",
@@ -369,7 +372,11 @@
             "type": "object",
             "additionalProperties": false
           },
-          "type": "array"
+          "type": "array",
+          "x-kubernetes-list-map-keys": [
+            "type"
+          ],
+          "x-kubernetes-list-type": "map"
         },
         "imageID": {
           "description": "ImageID is an identifier for the image that runs on the node",
