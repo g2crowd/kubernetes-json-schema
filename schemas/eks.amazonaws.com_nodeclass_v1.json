@@ -15,6 +15,62 @@
     "spec": {
       "description": "NodeClassSpec is the top level specification for the AWS Karpenter Provider.\nThis will contain configuration necessary to launch instances in AWS.",
       "properties": {
+        "advancedCompute": {
+          "description": "AdvancedCompute enables the configuration of compute behavior on Auto nodes, such as hugepage reservations.",
+          "properties": {
+            "hugepages": {
+              "description": "Hugepages configures explicit hugepage reservations on the node.",
+              "properties": {
+                "pages": {
+                  "description": "Pages is a list of hugepage size and count pairs to reserve on each node.",
+                  "items": {
+                    "description": "HugePageEntry defines a single hugepage reservation.",
+                    "properties": {
+                      "count": {
+                        "description": "Count is the number of hugepages of this size to reserve.",
+                        "format": "int32",
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "size": {
+                        "description": "Size is the hugepage size to reserve.",
+                        "enum": [
+                          "2Mi",
+                          "1Gi"
+                        ],
+                        "type": "string",
+                        "x-kubernetes-validations": [
+                          {
+                            "message": "1Gi hugepages are not currently supported",
+                            "rule": "self != '1Gi'"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "count",
+                      "size"
+                    ],
+                    "type": "object",
+                    "additionalProperties": false
+                  },
+                  "maxItems": 2,
+                  "type": "array",
+                  "x-kubernetes-validations": [
+                    {
+                      "message": "hugepages size must be unique",
+                      "rule": "self.all(x, self.filter(y, y.size == x.size).size() == 1)"
+                    }
+                  ]
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        },
         "advancedNetworking": {
           "description": "AdvancedNetworking enables the configuration of custom networking settings for Auto nodes, such as HTTP/HTTPS proxies and no-proxy rules.\nThis is useful in environments with restricted internet access or specific routing requirements, allowing nodes to communicate through proxies\nor bypass certain hosts and networks.",
           "properties": {
@@ -79,6 +135,79 @@
                 "Auto"
               ],
               "type": "string"
+            },
+            "networkInterfaces": {
+              "description": "NetworkInterfaces specifies the network interface configurations to be attached to provisioned instances.",
+              "items": {
+                "description": "NetworkInterface specifies the configuration for a network interface to be attached\nto provisioned instances.",
+                "properties": {
+                  "deviceIndex": {
+                    "description": "DeviceIndex is the device index for the network interface attachment.",
+                    "format": "int32",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "interfaceType": {
+                    "description": "InterfaceType is the type of network interface. Valid values are \"interface\" and \"efa-only\".",
+                    "enum": [
+                      "interface",
+                      "efa-only"
+                    ],
+                    "type": "string"
+                  },
+                  "networkCardIndex": {
+                    "description": "NetworkCardIndex is the index of the network card to attach the interface to.",
+                    "format": "int32",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "secondaryIPv4Count": {
+                    "description": "SecondaryIPv4Count is the number of secondary IPv4 addresses to assign to the network interface.",
+                    "format": "int32",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "secondaryIPv4PrefixCount": {
+                    "description": "SecondaryIPv4PrefixCount is the number of IPv4 prefixes to assign to the network interface.\nEach prefix provides 16 IP addresses.",
+                    "format": "int32",
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "deviceIndex",
+                  "interfaceType",
+                  "networkCardIndex"
+                ],
+                "type": "object",
+                "x-kubernetes-validations": [
+                  {
+                    "message": "Neither secondaryIPv4Count nor secondaryIPv4PrefixCount can be configured with EFA-only interfaces",
+                    "rule": "self.interfaceType != 'efa-only' || (!has(self.secondaryIPv4Count) && !has(self.secondaryIPv4PrefixCount))"
+                  },
+                  {
+                    "message": "secondaryIPv4Count and secondaryIPv4PrefixCount are only supported on network card index 0",
+                    "rule": "self.networkCardIndex == 0 || (!has(self.secondaryIPv4Count) && !has(self.secondaryIPv4PrefixCount))"
+                  },
+                  {
+                    "message": "secondaryIPv4Count and secondaryIPv4PrefixCount are mutually exclusive",
+                    "rule": "!(has(self.secondaryIPv4Count) && has(self.secondaryIPv4PrefixCount))"
+                  }
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 150,
+              "type": "array",
+              "x-kubernetes-validations": [
+                {
+                  "message": "networkInterfaces must include a primary interface with interfaceType='interface'",
+                  "rule": "self.size() == 0 || self.exists(x, x.deviceIndex == 0 && x.networkCardIndex == 0 && x.interfaceType == 'interface')"
+                },
+                {
+                  "message": "networkInterfaces must not have duplicate networkCardIndex and deviceIndex pairs, and can have at most one efa device per network card",
+                  "rule": "self.all(x, self.filter(y, x.networkCardIndex == y.networkCardIndex && x.deviceIndex == y.deviceIndex).size() == 1 && (x.interfaceType != 'efa-only' || self.filter(y, x.networkCardIndex == y.networkCardIndex && y.interfaceType == 'efa-only').size() == 1))"
+                }
+              ]
             },
             "noProxy": {
               "description": "A list of URLs that should be excluded from going through the HTTPS proxy. (max 50 entries)",
