@@ -262,7 +262,8 @@
                 "default": "interface",
                 "enum": [
                   "interface",
-                  "efa-only"
+                  "efa-only",
+                  "efa"
                 ],
                 "type": "string"
               },
