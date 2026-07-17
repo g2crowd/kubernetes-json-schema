@@ -703,6 +703,10 @@
         {
           "message": "podSubnetSelectorTerms cannot be empty when podSecurityGroupSelectorTerms is specified",
           "rule": "!has(self.podSecurityGroupSelectorTerms) || has(self.podSubnetSelectorTerms)"
+        },
+        {
+          "message": "hugepages cannot be configured together with EFA (efa-only) network interfaces",
+          "rule": "!(has(self.advancedCompute) && has(self.advancedCompute.hugepages) && has(self.advancedCompute.hugepages.pages) && self.advancedCompute.hugepages.pages.size() > 0 && has(self.advancedNetworking) && has(self.advancedNetworking.networkInterfaces) && self.advancedNetworking.networkInterfaces.exists(x, x.interfaceType == 'efa-only'))"
         }
       ],
       "additionalProperties": false
