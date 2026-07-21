@@ -150,6 +150,10 @@
           },
           "type": "array"
         },
+        "loadBalancerName": {
+          "description": "LoadBalancerName defines the name of the load balancer that will be created with this IngressClassParams.",
+          "type": "string"
+        },
         "minimumLoadBalancerCapacity": {
           "description": "MinimumLoadBalancerCapacity define the capacity reservation for LoadBalancers for all Ingress that belong to IngressClass with this IngressClassParams.",
           "properties": {
@@ -211,6 +215,13 @@
           "type": "object",
           "x-kubernetes-map-type": "atomic",
           "additionalProperties": false
+        },
+        "prefixListsIDs": {
+          "description": "PrefixListsIDs defines the security group prefix lists for all Ingresses that belong to IngressClass with this IngressClassParams.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "scheme": {
           "description": "Scheme defines the scheme for all Ingresses that belong to IngressClass with this IngressClassParams.",
