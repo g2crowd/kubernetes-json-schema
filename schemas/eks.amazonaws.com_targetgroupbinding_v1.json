@@ -15,6 +15,10 @@
     "spec": {
       "description": "TargetGroupBindingSpec defines the desired state of TargetGroupBinding",
       "properties": {
+        "multiClusterTargetGroup": {
+          "description": "MultiClusterTargetGroup Denotes if the TargetGroup is shared among multiple clusters",
+          "type": "boolean"
+        },
         "networking": {
           "description": "networking defines the networking rules to allow ELBv2 LoadBalancer to access targets in TargetGroup.",
           "properties": {
