@@ -49,13 +49,7 @@
               "description": "Region is which region the Configuration will be created.",
               "type": "string"
             },
-            "tags": {
-              "additionalProperties": {
-                "type": "string"
-              },
-              "description": "Create tags when creating the MSK configuration.",
-              "type": "object"
-            }
+            "additionalProperties": false
           },
           "required": [
             "properties",
