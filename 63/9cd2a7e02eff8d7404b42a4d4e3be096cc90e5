@@ -1,0 +1,14 @@
+schemas/kafka.aws.crossplane.io_configuration_v1alpha1.json
+  h_79dc56a40646e2 51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "639cd2a7e02eff8d7404b42a4d4e3be096cc90e5",
+  "prompts": {},
+  "humans": {
+    "h_79dc56a40646e2": {
+      "author": "DevOps <devops@g2.com>"
+    }
+  }
+}
