@@ -48,7 +48,8 @@
             "region": {
               "description": "Region is which region the Configuration will be created.",
               "type": "string"
-            }
+            },
+            "additionalProperties": false
           },
           "required": [
             "properties",
