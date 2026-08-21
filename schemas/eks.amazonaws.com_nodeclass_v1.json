@@ -66,6 +66,132 @@
               },
               "type": "object",
               "additionalProperties": false
+            },
+            "kubelet": {
+              "description": "Kubelet contains kubelet configuration overrides for Auto Mode nodes.",
+              "properties": {
+                "eviction": {
+                  "description": "Eviction configures kubelet eviction thresholds for resource pressure signals.",
+                  "properties": {
+                    "hard": {
+                      "additionalProperties": {
+                        "description": "EvictionThreshold is a string representing a percentage (e.g. \"10%\") or absolute quantity (e.g. \"100Mi\").",
+                        "maxLength": 20,
+                        "pattern": "^((0|[1-9][0-9]?|100)%|[1-9][0-9]*(Ki|Mi|Gi|Ti|Pi|Ei)?)$",
+                        "type": "string"
+                      },
+                      "description": "Hard eviction thresholds. When a signal crosses its threshold, pods are immediately evicted.\nValid keys: memory.available, nodefs.available, nodefs.inodesFree, imagefs.available, imagefs.inodesFree, pid.available.\nValues may be a percentage (e.g. \"10%\") or an absolute quantity (e.g. \"100Mi\").",
+                      "maxProperties": 6,
+                      "type": "object",
+                      "x-kubernetes-validations": [
+                        {
+                          "message": "valid keys for eviction.hard are ['memory.available','nodefs.available','nodefs.inodesFree','imagefs.available','imagefs.inodesFree','pid.available']",
+                          "rule": "self.all(x, x in ['memory.available','nodefs.available','nodefs.inodesFree','imagefs.available','imagefs.inodesFree','pid.available'])"
+                        }
+                      ]
+                    },
+                    "maxPodGracePeriod": {
+                      "description": "MaxPodGracePeriod is the maximum allowed grace period (in seconds) to use when terminating\npods in response to soft eviction thresholds being met. A value of 0 means each pod's\nterminationGracePeriodSeconds is used.",
+                      "format": "int32",
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "soft": {
+                      "additionalProperties": {
+                        "description": "EvictionThreshold is a string representing a percentage (e.g. \"10%\") or absolute quantity (e.g. \"100Mi\").",
+                        "maxLength": 20,
+                        "pattern": "^((0|[1-9][0-9]?|100)%|[1-9][0-9]*(Ki|Mi|Gi|Ti|Pi|Ei)?)$",
+                        "type": "string"
+                      },
+                      "description": "Soft eviction thresholds. Pods are evicted after the signal remains past its threshold for the configured grace period.\nSame key/value format as Hard.",
+                      "maxProperties": 6,
+                      "type": "object",
+                      "x-kubernetes-validations": [
+                        {
+                          "message": "valid keys for eviction.soft are ['memory.available','nodefs.available','nodefs.inodesFree','imagefs.available','imagefs.inodesFree','pid.available']",
+                          "rule": "self.all(x, x in ['memory.available','nodefs.available','nodefs.inodesFree','imagefs.available','imagefs.inodesFree','pid.available'])"
+                        }
+                      ]
+                    },
+                    "softGracePeriod": {
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "SoftGracePeriod maps eviction signal names to duration strings (e.g. \"1m30s\") defining\nhow long a signal must exceed its soft threshold before eviction occurs.\nRequired when soft eviction thresholds are set.",
+                      "maxProperties": 6,
+                      "type": "object",
+                      "x-kubernetes-validations": [
+                        {
+                          "message": "valid keys for eviction.softGracePeriod are ['memory.available','nodefs.available','nodefs.inodesFree','imagefs.available','imagefs.inodesFree','pid.available']",
+                          "rule": "self.all(x, x in ['memory.available','nodefs.available','nodefs.inodesFree','imagefs.available','imagefs.inodesFree','pid.available'])"
+                        },
+                        {
+                          "message": "softGracePeriod values must be valid durations (e.g. '30s', '1m30s', '2h')",
+                          "rule": "self.all(x, self[x].matches('^([0-9]+[hms])+$'))"
+                        }
+                      ]
+                    }
+                  },
+                  "type": "object",
+                  "x-kubernetes-validations": [
+                    {
+                      "message": "softGracePeriod is required when soft eviction thresholds are set",
+                      "rule": "!has(self.soft) || has(self.softGracePeriod)"
+                    },
+                    {
+                      "message": "each eviction soft signal must have a matching softGracePeriod",
+                      "rule": "!has(self.soft) || !has(self.softGracePeriod) || self.soft.all(x, x in self.softGracePeriod)"
+                    },
+                    {
+                      "message": "each softGracePeriod signal must have a matching eviction soft threshold",
+                      "rule": "!has(self.softGracePeriod) || !has(self.soft) || self.softGracePeriod.all(x, x in self.soft)"
+                    }
+                  ],
+                  "additionalProperties": false
+                },
+                "logging": {
+                  "description": "Logging configures container log rotation settings.",
+                  "properties": {
+                    "containerLogMaxFiles": {
+                      "description": "ContainerLogMaxFiles is the maximum number of rotated container log files to retain per container.\nTotal log retention per container = containerLogMaxSize x containerLogMaxFiles.",
+                      "format": "int32",
+                      "minimum": 2,
+                      "type": "integer"
+                    },
+                    "containerLogMaxSize": {
+                      "description": "ContainerLogMaxSize is the maximum size of a container log file before it is rotated (e.g. \"10Mi\", \"50Mi\", \"1Gi\").",
+                      "pattern": "^[1-9][0-9]*(Ki|Mi|Gi)$",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "maxPods": {
+                  "description": "MaxPods overrides the maximum number of pods that can run on a node.\nAt runtime, this is clamped to min(maxPods, available IPs for the instance type).",
+                  "format": "int32",
+                  "maximum": 110,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "podPidsLimit": {
+                  "description": "PodPidsLimit sets the maximum number of process IDs (PIDs) per pod.\nA value of -1 disables the limit entirely.",
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "singleProcessOOMKill": {
+                  "description": "SingleProcessOOMKill, if true, prevents the memory.oom.group flag from being set for\ncontainer cgroups. This causes processes in the container to be OOM killed individually\ninstead of as a group, aligning behavior with cgroups v1.",
+                  "type": "boolean"
+                }
+              },
+              "type": "object",
+              "x-kubernetes-validations": [
+                {
+                  "message": "podPidsLimit must be -1 (disabled) or >= 100",
+                  "rule": "!has(self.podPidsLimit) || self.podPidsLimit == -1 || self.podPidsLimit >= 100"
+                }
+              ],
+              "additionalProperties": false
             }
           },
           "type": "object",
