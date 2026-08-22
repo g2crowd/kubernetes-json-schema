@@ -38,13 +38,7 @@
                           "2Mi",
                           "1Gi"
                         ],
-                        "type": "string",
-                        "x-kubernetes-validations": [
-                          {
-                            "message": "1Gi hugepages are not currently supported",
-                            "rule": "self != '1Gi'"
-                          }
-                        ]
+                        "type": "string"
                       }
                     },
                     "required": [
@@ -62,6 +56,39 @@
                       "rule": "self.all(x, self.filter(y, y.size == x.size).size() == 1)"
                     }
                   ]
+                },
+                "transparent": {
+                  "description": "Transparent configures transparent hugepages (THP) on the node. THP is a kernel-wide policy\nrather than an allocatable resource, so it does not affect scheduling or node capacity.",
+                  "properties": {
+                    "defrag": {
+                      "description": "Defrag controls how aggressively the kernel compacts memory to satisfy a THP allocation.\nSetting Enabled to \"never\" forces defrag to \"never\" in the kernel, so any other value is\nrejected in that case. Defaults to the kernel default (\"madvise\") when unset.",
+                      "enum": [
+                        "always",
+                        "defer",
+                        "defer+madvise",
+                        "madvise",
+                        "never"
+                      ],
+                      "type": "string"
+                    },
+                    "enabled": {
+                      "description": "Enabled controls the THP allocation policy. \"always\" applies THP system-wide, \"madvise\"\napplies it only to regions that opt in via madvise(MADV_HUGEPAGE), and \"never\" disables it.\nDefaults to the kernel default (\"madvise\") when unset.",
+                      "enum": [
+                        "always",
+                        "madvise",
+                        "never"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "x-kubernetes-validations": [
+                    {
+                      "message": "defrag cannot be enabled when enabled is 'never'",
+                      "rule": "!(has(self.enabled) && self.enabled == 'never') || !has(self.defrag) || self.defrag == 'never'"
+                    }
+                  ],
+                  "additionalProperties": false
                 }
               },
               "type": "object",
