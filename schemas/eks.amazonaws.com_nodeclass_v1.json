@@ -94,6 +94,207 @@
               "type": "object",
               "additionalProperties": false
             },
+            "kernel": {
+              "description": "Kernel groups Linux-kernel-scoped configuration on the node.",
+              "properties": {
+                "sysctl": {
+                  "description": "Sysctl configures kernel sysctls on the node. Property names exactly match the\nname of the underlying sysctl.",
+                  "properties": {
+                    "fs.aio-max-nr": {
+                      "description": "The maximum number of asynchronous I/O requests.",
+                      "format": "int64",
+                      "maximum": 4194304,
+                      "minimum": 65536,
+                      "type": "integer"
+                    },
+                    "fs.inotify.max_user_instances": {
+                      "description": "The maximum number of inotify instances per real user ID.",
+                      "format": "int64",
+                      "maximum": 1048576,
+                      "minimum": 8192,
+                      "type": "integer"
+                    },
+                    "fs.inotify.max_user_watches": {
+                      "description": "The maximum number of inotify watches per real user ID.",
+                      "format": "int64",
+                      "maximum": 1048576,
+                      "minimum": 8192,
+                      "type": "integer"
+                    },
+                    "fs.nr_open": {
+                      "description": "The maximum number of file handles a process can allocate.",
+                      "format": "int64",
+                      "maximum": 2147483584,
+                      "minimum": 1048576,
+                      "type": "integer"
+                    },
+                    "kernel.perf_event_paranoid": {
+                      "description": "Controls unprivileged access to performance event systems.",
+                      "format": "int64",
+                      "maximum": 2,
+                      "minimum": -1,
+                      "type": "integer"
+                    },
+                    "net.core.netdev_max_backlog": {
+                      "description": "The maximum number of packets queued on the INPUT side per CPU.",
+                      "format": "int64",
+                      "maximum": 3240000,
+                      "minimum": 1000,
+                      "type": "integer"
+                    },
+                    "net.core.rmem_max": {
+                      "description": "The maximum receive socket buffer size, in bytes.",
+                      "format": "int64",
+                      "maximum": 134217728,
+                      "minimum": 212992,
+                      "type": "integer"
+                    },
+                    "net.core.somaxconn": {
+                      "description": "The maximum value for the backlog argument in the listen syscall.",
+                      "format": "int64",
+                      "maximum": 3240000,
+                      "minimum": 4096,
+                      "type": "integer"
+                    },
+                    "net.core.wmem_max": {
+                      "description": "The maximum send socket buffer size, in bytes.",
+                      "format": "int64",
+                      "maximum": 134217728,
+                      "minimum": 212992,
+                      "type": "integer"
+                    },
+                    "net.ipv4.neigh.default.gc_thresh1": {
+                      "description": "Minimum ARP-cache entries before garbage collection can run.",
+                      "format": "int64",
+                      "maximum": 262144,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "net.ipv4.neigh.default.gc_thresh2": {
+                      "description": "Soft maximum number of ARP-cache entries.",
+                      "format": "int64",
+                      "maximum": 524288,
+                      "minimum": 512,
+                      "type": "integer"
+                    },
+                    "net.ipv4.neigh.default.gc_thresh3": {
+                      "description": "Hard maximum number of ARP-cache entries.",
+                      "format": "int64",
+                      "maximum": 1048576,
+                      "minimum": 1024,
+                      "type": "integer"
+                    },
+                    "net.ipv4.tcp_congestion_control": {
+                      "description": "The TCP congestion-control algorithm for new connections.",
+                      "enum": [
+                        "cubic",
+                        "reno"
+                      ],
+                      "type": "string"
+                    },
+                    "net.ipv4.tcp_fin_timeout": {
+                      "description": "The length of time, in seconds, an orphaned (no longer referenced by any application)\nconnection will remain in the FIN_WAIT_2 state before it is aborted at the local end.",
+                      "format": "int64",
+                      "maximum": 120,
+                      "minimum": 5,
+                      "type": "integer"
+                    },
+                    "net.ipv4.tcp_keepalive_time": {
+                      "description": "How often, in seconds, TCP sends out keepalive messages when keepalive is enabled.",
+                      "format": "int64",
+                      "maximum": 432000,
+                      "minimum": 30,
+                      "type": "integer"
+                    },
+                    "net.ipv4.tcp_max_syn_backlog": {
+                      "description": "The maximum number of outstanding SYN requests that are allowed. Requests beyond this\nvalue are dropped by the kernel.",
+                      "format": "int64",
+                      "maximum": 3240000,
+                      "minimum": 128,
+                      "type": "integer"
+                    },
+                    "net.ipv4.tcp_tw_reuse": {
+                      "description": "Enable reuse of TIME-WAIT sockets for new connections when it is safe from a protocol\nviewpoint. Valid values are 0 (disable), 1 (global enable), or 2 (enable for loopback only).",
+                      "format": "int64",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "vm.dirty_background_ratio": {
+                      "description": "Percent of available memory at which kernel flusher threads begin\nwriting dirty pages back to disk.",
+                      "format": "int64",
+                      "maximum": 20,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "vm.dirty_expire_centisecs": {
+                      "description": "Hundredths of a second before a dirty page becomes eligible for writeback.",
+                      "format": "int64",
+                      "maximum": 6000,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "vm.dirty_ratio": {
+                      "description": "Percent of available memory at which writing programs are forced to block on writes.",
+                      "format": "int64",
+                      "maximum": 40,
+                      "minimum": 5,
+                      "type": "integer"
+                    },
+                    "vm.dirty_writeback_centisecs": {
+                      "description": "Hundredths of a second between flusher-thread invocations.",
+                      "format": "int64",
+                      "maximum": 1000,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "vm.max_map_count": {
+                      "description": "The maximum number of memory map areas a single process may have.",
+                      "format": "int64",
+                      "maximum": 2147483647,
+                      "minimum": 65530,
+                      "type": "integer"
+                    },
+                    "vm.swappiness": {
+                      "description": "Relative IO cost of swapping vs. filesystem paging.",
+                      "format": "int64",
+                      "maximum": 200,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "vm.watermark_scale_factor": {
+                      "description": "Memory reclaim watermark ratio in fractions of 10,000.",
+                      "format": "int64",
+                      "maximum": 3000,
+                      "minimum": 10,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object",
+                  "x-kubernetes-validations": [
+                    {
+                      "message": "'vm.dirty_background_ratio' and 'vm.dirty_ratio' must both be set or both be unset",
+                      "rule": "has(self.vm__dot__dirty_background_ratio) == has(self.vm__dot__dirty_ratio)"
+                    },
+                    {
+                      "message": "'vm.dirty_background_ratio' must be less than 'vm.dirty_ratio'",
+                      "rule": "!has(self.vm__dot__dirty_background_ratio) || self.vm__dot__dirty_background_ratio < self.vm__dot__dirty_ratio"
+                    },
+                    {
+                      "message": "'net.ipv4.neigh.default.gc_thresh1', 'net.ipv4.neigh.default.gc_thresh2', and 'net.ipv4.neigh.default.gc_thresh3' must all be set or all be unset",
+                      "rule": "(has(self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh1) == has(self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh2)) && (has(self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh2) == has(self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh3))"
+                    },
+                    {
+                      "message": "ARP-cache GC thresholds must satisfy 'net.ipv4.neigh.default.gc_thresh1' < 'net.ipv4.neigh.default.gc_thresh2' < 'net.ipv4.neigh.default.gc_thresh3'",
+                      "rule": "!has(self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh1) || (self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh1 < self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh2 && self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh2 < self.net__dot__ipv4__dot__neigh__dot__default__dot__gc_thresh3)"
+                    }
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
             "kubelet": {
               "description": "Kubelet contains kubelet configuration overrides for Auto Mode nodes.",
               "properties": {
