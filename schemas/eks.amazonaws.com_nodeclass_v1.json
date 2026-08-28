@@ -298,6 +298,16 @@
             "kubelet": {
               "description": "Kubelet contains kubelet configuration overrides for Auto Mode nodes.",
               "properties": {
+                "allowedUnsafeSysctls": {
+                  "description": "AllowedUnsafeSysctls is a list of unsafe sysctls (or namespaced patterns ending in \"*\")\nthat pods scheduled on this node are permitted to set.",
+                  "items": {
+                    "maxLength": 253,
+                    "pattern": "^(kernel\\.shm.*|kernel\\.msg.*|kernel\\.sem|fs\\.mqueue\\..+|net\\..+)$",
+                    "type": "string"
+                  },
+                  "maxItems": 64,
+                  "type": "array"
+                },
                 "eviction": {
                   "description": "Eviction configures kubelet eviction thresholds for resource pressure signals.",
                   "properties": {
