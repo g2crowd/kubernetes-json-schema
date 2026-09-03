@@ -308,6 +308,44 @@
                   "maxItems": 64,
                   "type": "array"
                 },
+                "cpuManager": {
+                  "description": "CpuManager configures the kubelet CPU manager policy.\nWhen policy is \"static\", whole-core CPU pinning is enabled for guaranteed QoS pods.",
+                  "properties": {
+                    "policy": {
+                      "description": "Policy is the CPU manager policy. \"static\" enables whole-core pinning for guaranteed QoS pods.",
+                      "enum": [
+                        "none",
+                        "static"
+                      ],
+                      "type": "string"
+                    },
+                    "policyOptions": {
+                      "description": "PolicyOptions is a list of CPU manager policy options to enable. Only valid when policy is\n\"static\". strict-cpu-reservation requires the CPUManagerPolicyBetaOptions kubelet feature gate.",
+                      "items": {
+                        "description": "CPUManagerPolicyOption is a supported kubelet CPU manager policy option. Limited to the options the\nBottlerocket settings SDK supports.",
+                        "enum": [
+                          "full-pcpus-only",
+                          "distribute-cpus-across-numa",
+                          "prefer-align-cpus-by-uncorecache",
+                          "strict-cpu-reservation"
+                        ],
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "policy"
+                  ],
+                  "type": "object",
+                  "x-kubernetes-validations": [
+                    {
+                      "message": "cpuManager.policyOptions can only be set when cpuManager.policy is 'static'",
+                      "rule": "!has(self.policyOptions) || self.policy == 'static'"
+                    }
+                  ],
+                  "additionalProperties": false
+                },
                 "eviction": {
                   "description": "Eviction configures kubelet eviction thresholds for resource pressure signals.",
                   "properties": {
@@ -420,6 +458,34 @@
                 "singleProcessOOMKill": {
                   "description": "SingleProcessOOMKill, if true, prevents the memory.oom.group flag from being set for\ncontainer cgroups. This causes processes in the container to be OOM killed individually\ninstead of as a group, aligning behavior with cgroups v1.",
                   "type": "boolean"
+                },
+                "topologyManager": {
+                  "description": "TopologyManager configures the kubelet topology manager policy.\nControls NUMA-aware resource alignment for pods.",
+                  "properties": {
+                    "policy": {
+                      "description": "Policy is the topology manager policy.\n\"single-numa-node\" enforces all resources for a pod to come from a single NUMA node.",
+                      "enum": [
+                        "none",
+                        "best-effort",
+                        "restricted",
+                        "single-numa-node"
+                      ],
+                      "type": "string"
+                    },
+                    "scope": {
+                      "description": "Scope is the granularity at which the topology manager applies its policy: \"container\"\naligns each container individually, \"pod\" aligns all containers in a pod together. Defaults\nto \"container\" when unset.",
+                      "enum": [
+                        "container",
+                        "pod"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "policy"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "type": "object",
@@ -427,6 +493,10 @@
                 {
                   "message": "podPidsLimit must be -1 (disabled) or >= 100",
                   "rule": "!has(self.podPidsLimit) || self.podPidsLimit == -1 || self.podPidsLimit >= 100"
+                },
+                {
+                  "message": "cpuManager.policyOptions 'distribute-cpus-across-numa' cannot be used with topologyManager.policy 'single-numa-node'",
+                  "rule": "!(has(self.cpuManager) && has(self.cpuManager.policyOptions) && 'distribute-cpus-across-numa' in self.cpuManager.policyOptions && has(self.topologyManager) && self.topologyManager.policy == 'single-numa-node')"
                 }
               ],
               "additionalProperties": false
