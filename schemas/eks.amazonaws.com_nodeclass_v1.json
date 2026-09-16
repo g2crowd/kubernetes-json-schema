@@ -546,6 +546,33 @@
               ],
               "additionalProperties": false
             },
+            "coredns": {
+              "description": "CoreDNS configures node-local CoreDNS customization on Auto Mode nodes.",
+              "properties": {
+                "configMapRef": {
+                  "description": "ConfigMapRef points at the ConfigMap in kube-system that carries the\ncustomer's Corefile in the `Corefile` data key. Namespace is fixed to\nkube-system and enforced by the agent's RBAC; only the name is customer-chosen.\nRequired when `coredns` is set; an empty block is not a valid opt-in.",
+                  "properties": {
+                    "name": {
+                      "description": "Name of the ConfigMap in kube-system. The ConfigMap must contain a\n`Corefile` data key. Presence of this field is the opt-in signal; absence\nkeeps the AMI-shipped baseline Corefile serving.",
+                      "maxLength": 253,
+                      "minLength": 1,
+                      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "configMapRef"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
             "enableV4Egress": {
               "default": true,
               "description": "EnableV4Egress: When set to true or not set, enables IPv4 egress traffic from the Auto nodes in IPv6 cluster.",
