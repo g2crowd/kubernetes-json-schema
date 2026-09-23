@@ -220,6 +220,13 @@
                       "minimum": 0,
                       "type": "integer"
                     },
+                    "user.max_user_namespaces": {
+                      "description": "The maximum number of user namespaces creatable by a user. A value of 0 disables user\nnamespaces.",
+                      "format": "int64",
+                      "maximum": 2147483647,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
                     "vm.dirty_background_ratio": {
                       "description": "Percent of available memory at which kernel flusher threads begin\nwriting dirty pages back to disk.",
                       "format": "int64",
@@ -425,6 +432,19 @@
                   ],
                   "additionalProperties": false
                 },
+                "idsPerPod": {
+                  "description": "IdsPerPod sets the number of UIDs/GIDs kubelet allocates to each pod's user namespace.\nRequires advancedCompute.kernel.sysctl.user.max_user_namespaces to be set to a positive value.",
+                  "format": "int64",
+                  "maximum": 4294967295,
+                  "minimum": 65536,
+                  "type": "integer",
+                  "x-kubernetes-validations": [
+                    {
+                      "message": "idsPerPod must be a multiple of 65536",
+                      "rule": "self % 65536 == 0"
+                    }
+                  ]
+                },
                 "logging": {
                   "description": "Logging configures container log rotation settings.",
                   "properties": {
@@ -503,6 +523,12 @@
             }
           },
           "type": "object",
+          "x-kubernetes-validations": [
+            {
+              "message": "advancedCompute.kubelet.idsPerPod requires advancedCompute.kernel.sysctl.user.max_user_namespaces to be set to a positive value",
+              "rule": "!has(self.kubelet) || !has(self.kubelet.idsPerPod) || (has(self.kernel) && has(self.kernel.sysctl) && has(self.kernel.sysctl.user__dot__max_user_namespaces) && self.kernel.sysctl.user__dot__max_user_namespaces > 0)"
+            }
+          ],
           "additionalProperties": false
         },
         "advancedNetworking": {
