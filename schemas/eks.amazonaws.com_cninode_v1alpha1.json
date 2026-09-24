@@ -263,7 +263,8 @@
                 "enum": [
                   "interface",
                   "efa-only",
-                  "efa"
+                  "efa",
+                  "trunk"
                 ],
                 "type": "string"
               },
