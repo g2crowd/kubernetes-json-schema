@@ -1014,8 +1014,8 @@
           ]
         },
         "role": {
-          "description": "Role is the AWS identity that nodes use. This field is immutable.\nThis field is mutually exclusive from instanceProfile.\nMarking this field as immutable avoids concerns around terminating managed instance profiles from running instances.\nThis field may be made mutable in the future, assuming the correct garbage collection and drift handling is implemented\nfor the old instance profiles on an update.",
-          "maxLength": 64,
+          "description": "Role is the AWS identity that nodes use. This field is immutable.\nThis field is mutually exclusive from instanceProfile.\nMarking this field as immutable avoids concerns around terminating managed instance profiles from running instances.\nThis field may be made mutable in the future, assuming the correct garbage collection and drift handling is implemented\nfor the old instance profiles on an update.\nThe role may include an IAM path without its leading '/' (e.g. \"my-path/my-role\"). IAM allows a path of up to\n512 characters, including its leading and trailing '/', and a role name of up to 64 characters, so the longest\nvalid value is 511 + 64 = 575 characters.",
+          "maxLength": 575,
           "type": "string",
           "x-kubernetes-validations": [
             {
@@ -1025,6 +1025,10 @@
             {
               "message": "immutable field changed",
               "rule": "self == oldSelf"
+            },
+            {
+              "message": "role name (final path segment) must be 1-64 characters and the path must not start or end with '/'",
+              "rule": "self.matches('^([^/]+/)*[^/]{1,64}$')"
             }
           ]
         },
