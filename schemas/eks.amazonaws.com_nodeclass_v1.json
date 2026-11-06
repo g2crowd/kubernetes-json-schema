@@ -833,7 +833,7 @@
               "default": 3000,
               "description": "The IOPS for ephemeral storage",
               "format": "int64",
-              "maximum": 16000,
+              "maximum": 80000,
               "minimum": 3000,
               "type": "integer"
             },
@@ -852,7 +852,7 @@
               "default": 125,
               "description": "The throughput for ephemeral storage",
               "format": "int64",
-              "maximum": 1000,
+              "maximum": 2000,
               "minimum": 125,
               "type": "integer"
             }
