@@ -1,0 +1,733 @@
+{
+  "description": "SandboxPool is the Schema for the sandboxpools API.",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "spec": {
+      "description": "SandboxPoolSpec defines the desired state of SandboxPool.",
+      "properties": {
+        "actionHandlers": {
+          "description": "ActionHandlers are Pod-local HTTP receivers used by ordered per-Sandbox\nAction Bindings.",
+          "items": {
+            "description": "ActionHandler declares one Pod-local HTTP receiver served on loopback.",
+            "properties": {
+              "hooks": {
+                "description": "Hooks selects the lifecycle checkpoints delivered to this Handler. An\nempty list makes the Handler config-only: it receives SetBinding and\nRemoveBinding but no lifecycle Hook calls.",
+                "items": {
+                  "description": "LifecycleHook is a versioned Fastlet-local Sandbox lifecycle checkpoint.\nIt is intentionally a string alias so future hooks do not require changing\nthe CRD shape. ValidateActionHandlers rejects names unsupported by this\nFastlet version instead of silently ignoring them.",
+                  "type": "string"
+                },
+                "maxItems": 16,
+                "type": "array",
+                "x-kubernetes-list-type": "set"
+              },
+              "name": {
+                "maxLength": 63,
+                "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+                "type": "string"
+              },
+              "targetHTTPPort": {
+                "format": "int32",
+                "maximum": 65535,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "name",
+              "targetHTTPPort"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "maxItems": 16,
+          "type": "array",
+          "x-kubernetes-list-map-keys": [
+            "name"
+          ],
+          "x-kubernetes-list-type": "map"
+        },
+        "capacity": {
+          "description": "PoolCapacity describes the sizing policy of the fastlet pool.",
+          "properties": {
+            "bufferMax": {
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "bufferMin": {
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "poolMax": {
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "poolMin": {
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "bufferMax",
+            "bufferMin",
+            "poolMax",
+            "poolMin"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "fastletTemplate": {
+          "description": "FastletTemplate is intentionally preserved as a Kubernetes-native pod\ntemplate. Fast Sandbox validates the platform-owned fields separately.",
+          "x-kubernetes-preserve-unknown-fields": true
+        },
+        "infraComponents": {
+          "description": "InfraComponents are compiled into an immutable revision. Updating this\nlist rolls Fastlets; existing Sandboxes remain on their admitted revision.",
+          "items": {
+            "description": "InfraComponent injects one artifact-backed managed process with one public\nnamed endpoint. host-process components are declared for revision,\nFastlet-side readiness probing, and routing purposes only: they carry no\nartifact and are deployed by fastletTemplate in the Pod network namespace.",
+            "properties": {
+              "artifact": {
+                "description": "Artifact is required unless delivery selects host-process.",
+                "properties": {
+                  "mappings": {
+                    "items": {
+                      "description": "InfraArtifactMapping maps one final file or directory from the verified\nartifact root to one final path in the Sandbox.",
+                      "properties": {
+                        "sourcePath": {
+                          "pattern": "^/",
+                          "type": "string"
+                        },
+                        "targetPath": {
+                          "pattern": "^/\\.fast/components/",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "sourcePath",
+                        "targetPath"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "maxItems": 64,
+                    "minItems": 1,
+                    "type": "array"
+                  },
+                  "source": {
+                    "description": "InfraArtifactSource contains exactly one immutable source.",
+                    "properties": {
+                      "archive": {
+                        "description": "InfraArtifactArchive selects one immutable gzip-compressed tar archive.",
+                        "properties": {
+                          "sha256": {
+                            "pattern": "^[a-f0-9]{64}$",
+                            "type": "string"
+                          },
+                          "url": {
+                            "pattern": "^https://",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "sha256",
+                          "url"
+                        ],
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      "image": {
+                        "description": "InfraArtifactImage selects an immutable OCI image or index as an artifact\ncarrier. Fast Sandbox injects mapped files and never starts this image.",
+                        "properties": {
+                          "reference": {
+                            "pattern": "^.+@sha256:[a-f0-9]{64}$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "reference"
+                        ],
+                        "type": "object",
+                        "additionalProperties": false
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "mappings",
+                  "source"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              },
+              "delivery": {
+                "description": "InfraDeliveryMode selects an explicit delivery path for one Infra Component.\nAn empty value selects the runtime-defaulted delivery mode. host-process is\nthe only explicitly selectable mode today.",
+                "enum": [
+                  "host-process"
+                ],
+                "type": "string"
+              },
+              "endpoint": {
+                "description": "InfraEndpoint is the single public endpoint of a component.",
+                "properties": {
+                  "port": {
+                    "format": "int32",
+                    "maximum": 65535,
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "protocol": {
+                    "enum": [
+                      "HTTP"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "port",
+                  "protocol"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              },
+              "name": {
+                "maxLength": 63,
+                "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+                "type": "string"
+              },
+              "process": {
+                "description": "InfraProcess defines the process supervised inside the user Sandbox.",
+                "properties": {
+                  "command": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                  },
+                  "env": {
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "type": "object"
+                  },
+                  "healthCheck": {
+                    "description": "InfraHealthCheck contains exactly one probe kind.",
+                    "properties": {
+                      "httpGet": {
+                        "description": "InfraHTTPGet is an HTTP readiness probe on the component endpoint.",
+                        "properties": {
+                          "path": {
+                            "pattern": "^/",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "path"
+                        ],
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      "tcpConnect": {
+                        "description": "InfraTCPConnect selects a TCP connect readiness probe.",
+                        "type": "object"
+                      },
+                      "timeoutSeconds": {
+                        "default": 10,
+                        "format": "int32",
+                        "maximum": 300,
+                        "minimum": 1,
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": false
+                  },
+                  "restartPolicy": {
+                    "default": "OnFailure",
+                    "description": "InfraRestartPolicy controls process restart after exit.",
+                    "enum": [
+                      "Never",
+                      "OnFailure",
+                      "Always"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "command",
+                  "healthCheck"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "endpoint",
+              "name",
+              "process"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "maxItems": 16,
+          "type": "array",
+          "x-kubernetes-list-map-keys": [
+            "name"
+          ],
+          "x-kubernetes-list-type": "map"
+        },
+        "maxSandboxesPerPod": {
+          "format": "int32",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "runtime": {
+          "description": "Runtime selects one immutable, platform-owned runtime profile.\nImmutability is convention-only: these CRDs ship without CEL\n(x-kubernetes-validations) so legacy (< 1.25) API servers can load\nthem, and enforcement lives in Go (pool reconciler validation).",
+          "enum": [
+            "container",
+            "gvisor",
+            "kata-qemu",
+            "kata-clh",
+            "kata-fc",
+            "kata-dragonball",
+            "firecracker"
+          ],
+          "type": "string"
+        },
+        "sandboxResources": {
+          "description": "SandboxResources is the immutable resource profile applied to each\nSandbox created from this Pool. As with Runtime, immutability is\nconvention-only: no CEL rule enforces it at the API server.",
+          "properties": {
+            "cpu": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "description": "CPU and Memory are runtime limits. ResourceAware Sandboxes may override\nthem per request; otherwise they are the defaults.",
+              "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+              "x-kubernetes-int-or-string": true
+            },
+            "memory": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+              "x-kubernetes-int-or-string": true
+            },
+            "mode": {
+              "enum": [
+                "LegacySlot",
+                "ResourceAware"
+              ],
+              "type": "string"
+            },
+            "overcommitRatio": {
+              "description": "OvercommitRatio derives commitment requests from runtime limits. It is\nrequired only in ResourceAware mode and remains separate for CPU and\nmemory because the resources have different pressure policies.",
+              "properties": {
+                "cpu": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+                  "x-kubernetes-int-or-string": true
+                },
+                "memory": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+                  "x-kubernetes-int-or-string": true
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "pids": {
+              "format": "int64",
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "pids"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "warmImages": {
+          "description": "WarmImages are asynchronously pulled and protected from ordinary cache GC.\nFastlet readiness does not wait for this list to finish warming.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 128,
+          "type": "array"
+        }
+      },
+      "required": [
+        "capacity",
+        "fastletTemplate",
+        "maxSandboxesPerPod",
+        "runtime",
+        "sandboxResources"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "status": {
+      "description": "SandboxPoolStatus defines the observed state of SandboxPool.",
+      "properties": {
+        "busyFastlets": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "conditions": {
+          "items": {
+            "description": "Condition contains details for one aspect of the current state of this API Resource.",
+            "properties": {
+              "lastTransitionTime": {
+                "description": "lastTransitionTime is the last time the condition transitioned from one status to another.\nThis should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.",
+                "format": "date-time",
+                "type": "string"
+              },
+              "message": {
+                "description": "message is a human readable message indicating details about the transition.\nThis may be an empty string.",
+                "maxLength": 32768,
+                "type": "string"
+              },
+              "observedGeneration": {
+                "description": "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.",
+                "format": "int64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "reason": {
+                "description": "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.",
+                "maxLength": 1024,
+                "minLength": 1,
+                "pattern": "^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$",
+                "type": "string"
+              },
+              "status": {
+                "description": "status of the condition, one of True, False, Unknown.",
+                "enum": [
+                  "True",
+                  "False",
+                  "Unknown"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "type of condition in CamelCase or in foo.example.com/CamelCase.",
+                "maxLength": 316,
+                "pattern": "^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "lastTransitionTime",
+              "message",
+              "reason",
+              "status",
+              "type"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array"
+        },
+        "currentPods": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fastletRevision": {
+          "type": "string"
+        },
+        "fastlets": {
+          "properties": {
+            "busy": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "current": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "desired": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "draining": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "idle": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "ready": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        },
+        "idleFastlets": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "infraRevision": {
+          "type": "string"
+        },
+        "observedGeneration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "preparedFastlets": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "readyPods": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resources": {
+          "description": "SandboxPoolResourceSummary reports request-based commitment accounting.\nFree is schedulable commitment, not host OS idle CPU or memory.",
+          "properties": {
+            "capacity": {
+              "description": "SandboxComputeResources is one CPU and memory resource vector.",
+              "properties": {
+                "cpu": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+                  "x-kubernetes-int-or-string": true
+                },
+                "memory": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+                  "x-kubernetes-int-or-string": true
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "committed": {
+              "description": "SandboxComputeResources is one CPU and memory resource vector.",
+              "properties": {
+                "cpu": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+                  "x-kubernetes-int-or-string": true
+                },
+                "memory": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+                  "x-kubernetes-int-or-string": true
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "free": {
+              "description": "SandboxComputeResources is one CPU and memory resource vector.",
+              "properties": {
+                "cpu": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+                  "x-kubernetes-int-or-string": true
+                },
+                "memory": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+                  "x-kubernetes-int-or-string": true
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "capacity",
+            "committed",
+            "free"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "runtimeRevision": {
+          "type": "string"
+        },
+        "sandboxes": {
+          "properties": {
+            "assigned": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "failed": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "paused": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "pending": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "running": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "terminating": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "total": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        },
+        "summaryObservedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "warmImages": {
+          "items": {
+            "description": "WarmImageStatus aggregates cache state for one configured warm image.",
+            "properties": {
+              "cachedFastlets": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "desiredFastlets": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "failedFastlets": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "image": {
+                "type": "string"
+              },
+              "lastError": {
+                "type": "string"
+              },
+              "observedGeneration": {
+                "format": "int64",
+                "type": "integer"
+              },
+              "pullingFastlets": {
+                "format": "int32",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "image"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "type": "object"
+}

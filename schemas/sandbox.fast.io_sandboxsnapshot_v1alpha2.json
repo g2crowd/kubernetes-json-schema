@@ -1,0 +1,225 @@
+{
+  "description": "SandboxSnapshot is a one-shot snapshot of a running Sandbox: the artifacts\n(rootfs, vmstate, memory) are published to the native artifact store or an\nOCI registry, addressable by status.manifestRef. Native snapshots also\npublish an image-name index under spec.templateName. The object is\ncreated by fastpath (CreateSandboxSnapshot) and driven to completion by\nthe controller; a Sandbox (or template name) with a non-terminal snapshot\nrejects further snapshot requests.",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "spec": {
+      "description": "SandboxSnapshotSpec defines the desired snapshot. The spec is immutable\nby convention: a snapshot is one-shot and re-snapshotting requires a new\nobject. These CRDs ship without CEL (x-kubernetes-validations) for legacy\n(< 1.25) API servers, so the API server will accept spec edits; do not\nrely on API-level rejection.",
+      "properties": {
+        "mode": {
+          "default": "Full",
+          "description": "Mode selects what the snapshot persists. RootfsOnly persists only the\nwritable rootfs layer (consumers boot from disk) and requires the\nOverlayBD artifact path; Full (default) also captures memory and\ndevice state. Immutable per the one-shot spec convention.",
+          "enum": [
+            "Full",
+            "RootfsOnly"
+          ],
+          "type": "string"
+        },
+        "sandboxRef": {
+          "description": "SandboxRef is the running Sandbox to snapshot. The Sandbox must be\nReady and assigned when the snapshot is triggered.",
+          "properties": {
+            "name": {
+              "maxLength": 253,
+              "minLength": 1,
+              "type": "string"
+            },
+            "namespace": {
+              "maxLength": 63,
+              "minLength": 1,
+              "type": "string"
+            },
+            "uid": {
+              "description": "UID fences the reference against a Sandbox recreated under the same\nname. Empty accepts the current Sandbox; fastpath fills it from the\nlive object it validated.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "namespace"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "templateName": {
+          "description": "TemplateName is required for native snapshots and selects the artifact-store\nindex key the artifact set is published under: publish writes index/<sha256(templateName)>.json, and\na later Sandbox create with image=TemplateName boots from the\nsnapshot through the standard pull/restore chain. Unlike a\nSandboxTemplate build, no default sha256(image) index is written.\nThe index key is global across namespaces: two concurrently running\nsnapshots with the same TemplateName overwrite each other's artifacts\n(last writer wins), and FastPath's pre-check therefore rejects a\nnon-terminal holder of a name cluster-wide.\nOCI snapshots may omit it: their two images use a random snapshotID,\nand new Sandboxes boot from status.manifestRef without a name index.",
+          "maxLength": 255,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*(/[a-zA-Z0-9._-]+)*(:[a-zA-Z0-9._-]{1,127})?$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sandboxRef"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "status": {
+      "description": "SandboxSnapshotStatus reports the observed state of one snapshot attempt.\nAll fields are projections written by the control plane; the artifact\nfacts come from the fastlet that executed the snapshot.",
+      "properties": {
+        "artifactDigest": {
+          "description": "ArtifactDigest is the sha256 of the published manifest document.",
+          "type": "string"
+        },
+        "completedAt": {
+          "description": "CompletedAt is when the snapshot reached a terminal phase.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "conditions": {
+          "items": {
+            "description": "Condition contains details for one aspect of the current state of this API Resource.",
+            "properties": {
+              "lastTransitionTime": {
+                "description": "lastTransitionTime is the last time the condition transitioned from one status to another.\nThis should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.",
+                "format": "date-time",
+                "type": "string"
+              },
+              "message": {
+                "description": "message is a human readable message indicating details about the transition.\nThis may be an empty string.",
+                "maxLength": 32768,
+                "type": "string"
+              },
+              "observedGeneration": {
+                "description": "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.",
+                "format": "int64",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "reason": {
+                "description": "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.",
+                "maxLength": 1024,
+                "minLength": 1,
+                "pattern": "^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$",
+                "type": "string"
+              },
+              "status": {
+                "description": "status of the condition, one of True, False, Unknown.",
+                "enum": [
+                  "True",
+                  "False",
+                  "Unknown"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "type of condition in CamelCase or in foo.example.com/CamelCase.",
+                "maxLength": 316,
+                "pattern": "^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "lastTransitionTime",
+              "message",
+              "reason",
+              "status",
+              "type"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array",
+          "x-kubernetes-list-map-keys": [
+            "type"
+          ],
+          "x-kubernetes-list-type": "map"
+        },
+        "fastletName": {
+          "description": "FastletName/FastletPodUID locate the fastlet the snapshot was\ntriggered on, resolved from the target Sandbox's assignment at\ntrigger time. The assignment annotation stays authoritative; these\nfields are a projection.",
+          "type": "string"
+        },
+        "fastletPodUID": {
+          "description": "UID is a type that holds unique ID values, including UUIDs.  Because we\ndon't ONLY use UUIDs, this is an alias to string.  Being a type captures\nintent and helps make sure that UIDs and names do not get conflated.",
+          "type": "string"
+        },
+        "manifestRef": {
+          "description": "ManifestRef is the published s3:// manifest.json or immutable oci://\nsnapfiles manifest reference. Set on Succeeded, and also on a Failed\nsnapshot whose publication already completed (e.g. a mode-drift\nrejection) so deletion retains ownership of remote cleanup.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Message is the latest progress or failure reason.",
+          "type": "string"
+        },
+        "mode": {
+          "description": "Mode is the artifact class the executing fastlet reported for the\nproduced snapshot (Full or RootfsOnly). It is the fastlet-confirmed\nproduced mode, not the request: a success observation whose produced\nmode drifts from spec.mode fails the snapshot instead of publishing.",
+          "enum": [
+            "Full",
+            "RootfsOnly"
+          ],
+          "type": "string"
+        },
+        "observedGeneration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "phase": {
+          "description": "Phase is the snapshot lifecycle.",
+          "enum": [
+            "Pending",
+            "Creating",
+            "Publishing",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string"
+        },
+        "sandboxUID": {
+          "description": "SandboxUID is the UID of the snapshotted Sandbox incarnation.",
+          "type": "string"
+        },
+        "sizeBytes": {
+          "description": "SizeBytes is the total logical size of the published artifact set.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "snapshotID": {
+          "description": "SnapshotID is the fastlet-side identity of the snapshot task.",
+          "type": "string"
+        },
+        "startedAt": {
+          "description": "StartedAt is when the fastlet accepted the snapshot.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "triggered": {
+          "description": "Triggered pins the full trigger-time placement (fastlet plus the\nSandbox identity fence) once the snapshot is accepted. Observations\nresolve against it, not the Sandbox's live assignment. Residual\nwindow: if the fastlet crashes exactly during the final index upload,\nthe object can be terminal Failed with the index still landed\n(last-writer-wins for the template name); every other failure path\npublishes nothing.",
+          "properties": {
+            "assignmentAttempt": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "fastletName": {
+              "description": "FastletName/FastletPodUID identify the fastlet that accepted the task.",
+              "type": "string"
+            },
+            "fastletPodUid": {
+              "type": "string"
+            },
+            "instanceGeneration": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "runtimeInstanceId": {
+              "description": "RuntimeInstanceID/InstanceGeneration/AssignmentAttempt are the Sandbox\nidentity fence captured at trigger time; observations replay them so\nthe fastlet-side claim check matches exactly.",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "type": "object"
+}
